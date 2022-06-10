@@ -4,6 +4,8 @@ import { FormStep } from "./components/MultiStepForm"
 import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
 
+import useFormUtils from './components/useFormUtils';
+
 import * as Yup from 'yup';
 import './App.css';
 
@@ -32,33 +34,47 @@ function App() {
     ],
   };
 
-  const [nextStep, setNextStep] = useState(stepFlow[1].name);
-
-  const getNextStep = (event: any, transitions: any) => {
-    const value = event.target.value;
-    const step = transitions.find((item: any) => item.response.toLowerCase() === value.toLowerCase());
-    return step.step;
+  const initialValues = {
+    name: "",
+    email: "",
+    street: "",
+    number: "",
+    patient: "yes",
+    patientName: "",
+    patientStreet: "",
+    company: "company a",
   };
+
+  const {
+    previous,
+    next,
+    getNextStep,
+    nextStep,
+    setNextStep,
+    stepNumber
+  } = useFormUtils(stepFlow, transitions.patient, initialValues);
+
+  // const [nextStep, setNextStep] = useState(stepFlow[1].name);
+
+  // const getNextStep = (event: any, transitions: any) => {
+  //   const value = event.target.value;
+  //   const step = transitions.find((item: any) => item.response.toLowerCase() === value.toLowerCase());
+  //   return step.step;
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
       <h1 className="text-center text-2xl font-medium text-gray-700">Multi Step Form</h1>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md h-96">
         <MultiStepForm
-          initialValues={{
-            name: "",
-            email: "",
-            street: "",
-            number: "",
-            patient: "yes",
-            patientName: "",
-            patientStreet: "",
-            company: "company a",
-          }}
+          initialValues={initialValues}
           onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
-          stepFlow={stepFlow}
-          nextStep={nextStep}
-          setNextStep={setNextStep}
+          previous={previous}
+          next={next}
+          stepNumber={stepNumber}
+          // stepFlow={stepFlow}
+          // nextStep={nextStep}
+          // setNextStep={setNextStep}
         >
           <FormStep
             stepName="Personal info"

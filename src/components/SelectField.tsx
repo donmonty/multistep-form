@@ -16,7 +16,7 @@ type OtherProps = {
   options: Array<Option>;
   transitions?: Array<Transition>; 
   setNextStep?: React.Dispatch<React.SetStateAction<string>>;
-  getNextStep?: (event: any, transitions: any) => string;
+  getNextStep?: (event: any, transitions: any) => string | undefined;
 }
 
 function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
@@ -45,7 +45,7 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
             helpers.setValue(event.target.value)
             if (props.transitions && props.getNextStep && props.setNextStep) {
               const transition = props.getNextStep(event, props.transitions);
-              props.setNextStep(transition);
+              transition && props.setNextStep(transition);
             }
           }
         }
