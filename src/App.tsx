@@ -54,14 +54,6 @@ function App() {
     stepNumber
   } = useFormUtils(stepFlow, transitions.patient, initialValues);
 
-  // const [nextStep, setNextStep] = useState(stepFlow[1].name);
-
-  // const getNextStep = (event: any, transitions: any) => {
-  //   const value = event.target.value;
-  //   const step = transitions.find((item: any) => item.response.toLowerCase() === value.toLowerCase());
-  //   return step.step;
-  // };
-
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
       <h1 className="text-center text-2xl font-medium text-gray-700">Multi Step Form</h1>
@@ -72,9 +64,6 @@ function App() {
           previous={previous}
           next={next}
           stepNumber={stepNumber}
-          // stepFlow={stepFlow}
-          // nextStep={nextStep}
-          // setNextStep={setNextStep}
         >
           <FormStep
             stepName="Personal info"

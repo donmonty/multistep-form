@@ -14,14 +14,18 @@ type Transition = {
 type OtherProps = {
   label: string;
   options: Array<Option>;
-  transitions?: Array<Transition>; 
-  setNextStep?: React.Dispatch<React.SetStateAction<string>>;
-  getNextStep?: (event: any, transitions: any) => string | undefined;
+  transitions?: Array<Transition>; // In case the next step to navigate to is determined by the value selected by the user
+  setNextStep?: React.Dispatch<React.SetStateAction<string>>; // In case the next step to navigate to is determined by the value selected by the user
+  getNextStep?: (event: any, transitions: any) => string | undefined; // In case the next step to navigate to is determined by the value selected by the user
 }
 
 function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
   const [field, meta, helpers] = useField(props);
 
+  /**
+   * If the next step is determined by the Select field's options, this function gets the default next step
+   * to navigate to. This step is the default value in the <Select/> element, provided by its first option.
+   */
   const getDefaultNextStep = () => {
     if (props.transitions && props.setNextStep) {
       const step = props.transitions.find((transition: any) => transition.response.toLowerCase() === meta.initialValue);
