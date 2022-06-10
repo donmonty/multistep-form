@@ -51,7 +51,8 @@ function App() {
     getNextStep,
     nextStep,
     setNextStep,
-    stepNumber
+    stepNumber,
+    snapshot
   } = useFormUtils(stepFlow, transitions.patient, initialValues);
 
   return (
@@ -59,7 +60,7 @@ function App() {
       <h1 className="text-center text-2xl font-medium text-gray-700">Multi Step Form</h1>
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md h-96">
         <MultiStepForm
-          initialValues={initialValues}
+          initialValues={snapshot}
           onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
           previous={previous}
           next={next}

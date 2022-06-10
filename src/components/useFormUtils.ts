@@ -119,6 +119,7 @@ function useFormUtils(
     nextStep,
     setNextStep,
     stepNumber,
+    snapshot,
   };
 }
 
