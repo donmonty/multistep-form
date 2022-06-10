@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useField, Form, Formik, FormikConfig, FormikValues, FormikHelpers } from 'formik';
+import React, { useEffect, useState } from 'react';
+import { Form, Formik, FormikConfig, FormikValues, FormikHelpers } from 'formik';
 import FormNavigation from "./FormNavigation";
 
 
@@ -13,9 +13,6 @@ interface Props extends FormikConfig<FormikValues> {
 function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, setNextStep }: Props) {
   const [stepNumber, setStepNumber] = useState(0);
   const [snapshot, setSnapshot] = useState(initialValues);
-  // const [nextStep, setNextStep] = useState("");
-
-  console.log("stepNumber", stepNumber);
 
   // const stepFlow = [
   //   { index: 0, name: "user", prev: null, next: "address" },
@@ -29,31 +26,14 @@ function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, 
   const totalSteps = steps.length;
   const isLastStep = stepNumber === totalSteps - 1;
 
-
-  const previousStep = 0;
-  // const previousStep = useRef<any>(0);
-  console.log("This is previousStep:", previousStep);
-  // const previousStep = useRef<any>(stepFlow[stepNumber]);
-  // console.log("previousStep:", previousStep.current);
-  // console.log(`The current step is ${stepNumber} and it was ${ previousStep.current}`);
-
-  // useEffect(() => {
-  //   // if (previousStep.current !== stepNumber) {
-  //   //   previousStep.current = stepNumber;
-  //   // }
-  //   previousStep.current = stepNumber;
-  // }, [stepNumber])
-
   useEffect(() => {
     localStorage.removeItem("prevStep");
   }, []);
 
   const nextFlow = () => {
-    console.log("nextStep:", nextStep);
     const currentStep = stepFlow[stepNumber];
     if (currentStep.next.includes(nextStep)) {
       const destination = stepFlow.find((step: any) => step.name === nextStep)
-      console.log("destination:", destination);
       const diff = destination.index - currentStep.index;
       if (diff > 1) {
         // If the destination is not the next immediate step in the flow (diff > 1)
@@ -73,19 +53,13 @@ function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, 
       return prevStep;
     }
     return null;
-    // const currentStep = stepFlow[stepNumber];
-    // const destination = currentStep.prev;
-    // return destination.index;
   };
 
   const next = (values: FormikValues) => {
-    console.log("outside stepFlow!")
     if (stepFlow) {
-      console.log("In next function!");
       const destination = nextFlow();
       setSnapshot(values);
       setStepNumber(destination);
-      // console.log("previousStep:", previousStep.current);
     } else {
       setSnapshot(values);
       setStepNumber(stepNumber + 1);
@@ -95,12 +69,10 @@ function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, 
   const previous = (values: FormikValues) => {
     if (stepFlow) {
       const destination = prevFlow();
-      console.log("prev destination:", destination);
       if (destination !== null) {
         setSnapshot(values);
         setStepNumber(destination);
       } else {
-        console.log("destionation is NULL");
         setSnapshot(values);
         setStepNumber(stepNumber - 1);
       }
@@ -113,15 +85,12 @@ function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, 
     }
 
     if (isLastStep) {
-      console.log("LAST STEP!");
       return onSubmit(values, actions);
     } else {
-      console.log("NOT LAST STEP!");
       actions.setTouched({});
       next(values);
     }
   };
-
 
   return (
     <div className="bg-white py-8 px-6 shadow rounded-lg sm:px-10 h-full">
@@ -130,18 +99,36 @@ function MultiStepForm({ children, initialValues, onSubmit, stepFlow, nextStep, 
         onSubmit= {handleSubmit}
         validationSchema={step.props.validationSchema}
       >
-        {(formik) => (
-          <div>
-            <Form>
+        <div className="h-full">
+          <Form className="h-full flex-col justify-between">
+            <div>
               {step}
+            </div>
+            <div>
               <FormNavigation
                 isLastStep={isLastStep}
                 hasPrevious={stepNumber > 0}
-                onBackClick={() => previous(formik.values)}
+                onBackClick={(values) => previous(values)}
               />
+            </div>
+          </Form>
+        </div> 
+        {/* {(formik) => (
+          <div className="h-full">
+            <Form className="h-full flex-col justify-between">
+              <div>
+                {step}
+              </div>
+              <div>
+                <FormNavigation
+                  isLastStep={isLastStep}
+                  hasPrevious={stepNumber > 0}
+                  onBackClick={() => previous(formik.values)}
+                />
+              </div>
             </Form>
           </div> 
-        )}
+        )} */}
       </Formik>
     </div>
   );

@@ -6,19 +6,27 @@ type Option = {
   value: string | number;
 }
 
+type Transition = {
+  response: string;
+  step: string;
+}
+
 type OtherProps = {
   label: string;
   options: Array<Option>;
-  setNextStep: React.Dispatch<React.SetStateAction<string>>;
-  getSelectedOption: (event: any, options: any) => string;
+  transitions?: Array<Transition>; 
+  setNextStep?: React.Dispatch<React.SetStateAction<string>>;
+  getNextStep?: (event: any, transitions: any) => string;
 }
 
 function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
-  const [field, meta] = useField(props);
+  const [field, meta, helpers] = useField(props);
 
   const getDefaultNextStep = () => {
-    const option = props.options.find((item: any) => item.value.toLowerCase() === meta.initialValue);
-    option && props.setNextStep(option.key);
+    if (props.transitions && props.setNextStep) {
+      const step = props.transitions.find((transition: any) => transition.response.toLowerCase() === meta.initialValue);
+      step && props.setNextStep(step.step);
+    }
   };
 
   useEffect(() => {
@@ -30,17 +38,21 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
       <label className="block text-sm font-medium text-gray-700">{props.label}</label>
       <Field
         as="select"
+        className="mt-2"
         {...field}
         onChange={
           (event: any) => {
-            const option = props.getSelectedOption(event, props.options);
-            props.setNextStep(option);
+            helpers.setValue(event.target.value)
+            if (props.transitions && props.getNextStep && props.setNextStep) {
+              const transition = props.getNextStep(event, props.transitions);
+              props.setNextStep(transition);
+            }
           }
         }
       >
         {props.options.map((item) => {
           return (
-            <option key={item.key} value={item.value}>{item.value} </option>
+            <option key={item.key} value={item.value}>{item.value}</option>
           )
         })}
       </Field>

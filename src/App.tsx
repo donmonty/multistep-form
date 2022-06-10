@@ -1,19 +1,17 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import MultiStepForm from "./components/MultiStepForm"
 import { FormStep } from "./components/MultiStepForm"
 import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
-// import Checkbox from "./components/Checkbox";
 
 import * as Yup from 'yup';
 import './App.css';
 
 function App() {
-  // const [nextStep, setNextStep] = useState("");
   const insuranceCompanies = [
-    { key: "company", value: "Company A"},
-    { key: "company", value: "Company B"},
-    { key: "company", value: "Company C"},
+    { key: "company a", value: "Company A"},
+    { key: "company b", value: "Company B"},
+    { key: "company c", value: "Company C"},
   ];
   const isPatient = [
     { key: "company", value: "Yes"},
@@ -35,20 +33,11 @@ function App() {
   };
 
   const [nextStep, setNextStep] = useState(stepFlow[1].name);
-  console.log("nextStep:", nextStep);
 
   const getNextStep = (event: any, transitions: any) => {
     const value = event.target.value;
-    const step = transitions.find((item: any) => item.response === value);
+    const step = transitions.find((item: any) => item.response.toLowerCase() === value.toLowerCase());
     return step.step;
-  };
-
-  const getSelectedOption = (event: any, options: any) => {
-    const value = event.target.value;
-    console.log("value:", value);
-    const option = options.find((item: any) => item.value === value);
-    console.log("option:",option);
-    return option.key;
   };
 
   return (
@@ -62,7 +51,9 @@ function App() {
             street: "",
             number: "",
             patient: "yes",
-            company: "",
+            patientName: "",
+            patientStreet: "",
+            company: "company a",
           }}
           onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
           stepFlow={stepFlow}
@@ -100,8 +91,9 @@ function App() {
               name="patient"
               label="Are you the patient?"
               options={isPatient}
+              transitions={transitions.patient}
               setNextStep={setNextStep}
-              getSelectedOption={getSelectedOption}
+              getNextStep={getNextStep}
             />
           </FormStep>
           
@@ -110,8 +102,8 @@ function App() {
             onSubmit={() => console.log("Step 3")}
             validationSchema={
               Yup.object({
-                patientName: Yup.string().required(),
-                patientStreet: Yup.string().required(),
+                patientName: Yup.string().required("Name is required"),
+                patientStreet: Yup.string().required("Street is required"),
               })
             }
           >
@@ -132,8 +124,6 @@ function App() {
               name="company"
               label="Company"
               options={insuranceCompanies}
-              setNextStep={setNextStep}
-              getSelectedOption={getSelectedOption}
             />
           </FormStep>
 
