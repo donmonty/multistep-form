@@ -3,6 +3,7 @@ import MultiStepForm from "./components/MultiStepForm"
 import { FormStep } from "./components/MultiStepForm"
 import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
+import RadioGroup from './components/RadioGroup';
 
 import useFormUtils from './components/useFormUtils';
 
@@ -92,15 +93,25 @@ function App() {
           >
             <InputField name="street" label="Street"/>
             <InputField name="number" label="Number"/>
+
+            <RadioGroup
+              name="patient"
+              label="Are you the patient?"
+              align="horizontal"
+              options={isPatient}
+              transitions={transitions.patient}
+              setNextStep={setNextStep}
+              getNextStep={getNextStep}
+            />
             
-            <SelectField
+            {/* <SelectField
               name="patient"
               label="Are you the patient?"
               options={isPatient}
               transitions={transitions.patient}
               setNextStep={setNextStep}
               getNextStep={getNextStep}
-            />
+            /> */}
           </FormStep>
           
           <FormStep
