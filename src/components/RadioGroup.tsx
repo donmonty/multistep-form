@@ -37,11 +37,12 @@ function RadioGroup({ ...props }: OtherProps & FieldHookConfig<string>) {
   return (
     <div>
       <div role="group" >
-        {props.options.map((item: Option) => (
-          <label className={style()}>
+        {props.options.map((item: Option, index: number) => (
+          <label key={item.key} className={style()}>
             <Field
               className="mr-2"
               type="radio"
+              checked={field.value.toLowerCase() === item.value.toLowerCase()}
               name={props.name}
               value={item.value}
               onClick={

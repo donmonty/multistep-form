@@ -36,3 +36,53 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.custom-field {
+  position: relative;
+  font-size: 14px;
+  min-width: 300px;
+  /* border-top: 20px solid transparent; */
+  /* margin-bottom: 5px; */
+  --field-padding: 12px;
+}
+
+.custom-field input {
+  border: none;
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #f2f2f2;
+  padding: var(--field-padding);
+  padding-bottom: var(--field-padding) - 6;
+  border-radius: 3px;
+  width: 100%;
+  outline: none;
+  font-size: 14px;
+  min-height: 45px;
+}
+
+.custom-field .placeholder {
+  position: absolute;
+  left: var(--field-padding);
+  width: calc(100% - (var(--field-padding) * 2));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  top: 22px;
+  line-height: 100%;
+  transform: translateY(-50%);
+  color: #aaa;
+  transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+}
+
+.custom-field input:valid + .placeholder,
+.custom-field input:focus + .placeholder {
+  top: 14px;
+  font-size: 10px;
+  /* color: #222; */
+}
+
+

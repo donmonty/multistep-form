@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { parse, isDate } from "date-fns";
 import MultiStepForm from "./components/MultiStepForm"
 import { FormStep } from "./components/MultiStepForm"
 import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
 import RadioGroup from './components/RadioGroup';
+import DatePicker from './components/DatePicker';
+import BirthdateField from './components/BirthdateField';
 
 import useFormUtils from './components/useFormUtils';
+import { dateMask } from "./components/masks";
 
+import * as dateFns from "date-fns";
 import * as Yup from 'yup';
 import './App.css';
 
@@ -38,8 +43,13 @@ function App() {
   const initialValues = {
     name: "",
     email: "",
+    // rbday: "",
+    // rbmonth: "",
+    // rbyear: "",
     street: "",
     number: "",
+    birthDate: "",
+    dateOfBirth: "",
     patient: "yes",
     patientName: "",
     patientStreet: "",
@@ -57,9 +67,9 @@ function App() {
   } = useFormUtils(stepFlow, transitions.patient, initialValues);
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col justify-center py-12 px-6 lg:px-8">
-      <h1 className="text-center text-2xl font-medium text-gray-700">Multi Step Form</h1>
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md h-96">
+    <div className="min-h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
+      {/* <h1 className="text-center text-2xl font-medium text-gray-700">Multi Step Form</h1> */}
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full">
         <MultiStepForm
           initialValues={snapshot}
           onSubmit={(values) => alert(JSON.stringify(values, null, 2))}
@@ -73,12 +83,33 @@ function App() {
             validationSchema={
               Yup.object({
                 name: Yup.string().required("Name is required"),
-                email: Yup.string().email().required("Email is required")
+                email: Yup.string().email().required("Email is required"),
+                // rbday: Yup.number(),
+                // rbmonth: Yup.number(),
+                // rbyear: Yup.number()
+                //   .min(1920)
+                //   .max(2010)
+                //   .test("test-date", "Please enter a valid date", function(value) {
+                //     const { rbday, rbmonth } = this.parent;
+                //     const dateString = `${rbday}-${rbmonth}-${value}`;
+                //     const parsedDate=  parse(dateString, "dd-MM-yyy", new Date());
+                //     return isDate(parsedDate);
+                //   }),
+                dateOfBirth: Yup
+                  .string()
+                  .transform(dateMask.transform)
+                  .required()
+                  .test("validateDate", "Invalid date", (value) => {
+                    return dateFns.isValid(dateFns.parse(value as string, "yyyy-MM-dd", new Date()))
+                  })
               })
             }
           >
-            <InputField name="name" label="Name"/>
-            <InputField name="email" label="Email"/>
+            <h1 className="text-3xl font-extrabold mb-8">Your details</h1>
+            <InputField name="name" label="Name" required={true}/>
+            <InputField name="email" label="Email"required={true}/>
+            {/* <DatePicker name="birthDate" placeHolders={["DD", "MM", "YYYY"]} /> */}
+            <BirthdateField name="dateOfBirth" label="Date of birth"/>
           </FormStep>
 
           <FormStep
@@ -91,8 +122,8 @@ function App() {
               })
             }
           >
-            <InputField name="street" label="Street"/>
-            <InputField name="number" label="Number"/>
+            <InputField name="street" label="Street" required={true}/>
+            <InputField name="number" label="Number" required={true}/>
 
             <RadioGroup
               name="patient"
@@ -124,8 +155,8 @@ function App() {
               })
             }
           >
-            <InputField name="patientName" label="Patient name"/>
-            <InputField name="patientStreet" label="Street"/>
+            <InputField name="patientName" label="Patient name" required={true}/>
+            <InputField name="patientStreet" label="Street" required={true}/>
           </FormStep>
 
           <FormStep

@@ -1,3 +1,6 @@
+import { HTMLInputTypeAttribute } from "react";
+import { CSSProperties } from "react";
+
 
 export type FlowStep = {
   index: number;
@@ -21,3 +24,16 @@ export type Option = {
 }
 
 export type Options = Array<Option>;
+
+export interface InputProps extends React.HTMLProps<HTMLInputElement> {
+  handleChange?: (value: string, name: string) => void;
+}
+
+export interface DatePickerOptions {
+  placeHolders?: [string, string, string];
+  style?: CSSProperties;
+  inputStyle?: CSSProperties;
+  className?: string;
+  onChange?: (value: string | null) => void;
+  value?: [string, string, string];
+}
