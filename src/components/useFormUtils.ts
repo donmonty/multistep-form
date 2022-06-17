@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { FormikConfig, FormikHelpers, FormikValues } from 'formik';
+import React, { useState } from "react";
+import { FormikValues } from 'formik';
 
 import {
   FlowStep,
   FlowSteps,
-  Option,
-  Options,
   Transition,
-  Transitions
+  TransitionsObject
 } from "../types";
 
 /**
@@ -25,7 +23,7 @@ import {
  */
 function useFormUtils(
   stepFlow: FlowSteps,
-  transitions: Transitions,
+  transitions: TransitionsObject,
   initialValues: FormikValues,
 
 ) {
@@ -38,9 +36,10 @@ function useFormUtils(
    * @param event: the event triggered by the <option/> HTML element in a <Select/> field 
    * @returns the name of the step to transition to next
    */
-  const getNextStep = (event: any) => {
+  const getNextStep = (event: any, transitionName: string) => {
     const value = event.target.value;
-    const step = transitions.find((item: Transition) => item.response.toLowerCase() === value.toLowerCase());
+    const selectedTransitions = transitions[transitionName];
+    const step = selectedTransitions.find((item: Transition) => item.response.toLowerCase() === value.toLowerCase());
     return step && step.step;
   };
 

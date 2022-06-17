@@ -1,11 +1,9 @@
 import React, { useState } from 'react';
-import { parse, isDate } from "date-fns";
 import MultiStepForm from "./components/MultiStepForm"
 import { FormStep } from "./components/MultiStepForm"
 import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
 import RadioGroup from './components/RadioGroup';
-import DatePicker from './components/DatePicker';
 import BirthdateField from './components/BirthdateField';
 
 import useFormUtils from './components/useFormUtils';
@@ -16,6 +14,12 @@ import * as Yup from 'yup';
 import './App.css';
 
 function App() {
+
+  const [isPolicyHolderVisible, setIsPolicyHolderVisible] = useState(false);
+
+  // -------------------------------------------
+  // Options
+  // -------------------------------------------
   const insuranceCompanies = [
     { key: "company a", value: "Company A"},
     { key: "company b", value: "Company B"},
@@ -25,35 +29,82 @@ function App() {
     { key: "company", value: "Yes"},
     { key: "patient", value: "No"},
   ];
+  const paymentType = [
+    { key: "provider", value: "yes" },
+    { key: "selfPay", value: "no"}
+  ];
+  const isPolicyHolder = [
+    { key: "yes", value: "yes" },
+    { key: "no", value: "no" }
+  ];
+  const states = [
+    { key: "CA", value: "CA" },
+    { key: "AZ", value: "AZ" },
+    { key: "TX", value: "TX" },
+  ];
 
   const stepFlow = [
-    { index: 0, name: "user", prev: [null], next: ["address"] },
-    { index: 1, name: "address", prev: ["user"], next: ["patient", "company"] },
-    { index: 2, name: "patient", prev: ["address"] , next: ["company"] },
-    { index: 3, name: "company", prev: ["patient"] , next: [null] },
+    { index: 0, name: "user", prev: [null], next: ["patient", "insurance"] },
+    { index: 1, name: "patient", prev: ["user"] , next: ["insurance"] },
+    { index: 2, name: "insurance", prev: ["user", "patient"], next: ["policyHolder", "selfPay"] },
+    { index: 3, name: "policyHolder", prev: ["insurance"] , next: [null] },
+    { index: 4, name: "selfPay", prev: ["insurance"] , next: [null] },
   ];
 
   const transitions = {
     patient: [
-      { response: "yes", step: "company" },
+      { response: "yes", step: "insurance" },
       { response: "no", step: "patient" },
     ],
+    paymentType: [
+      { response: "yes", step: "policyHolder" },
+      { response: "selfPay", step: "selfPay" },
+    ]
+  };
+
+  const policyHolderValidation = {
+    isPolicyHolder: Yup.object({
+      policyHolderName: Yup.string().notRequired(),
+      policyHolderLastName: Yup.string().notRequired(),
+      policyHolderDateOfBirth: Yup.string().notRequired(),
+      policyHolderAddress: Yup.string().required("Address is required"),
+      policyHolderCity: Yup.string().required("City is required"),
+      policyHolderState: Yup.string(),
+      insuranceCompany: Yup.string(),
+    }),
+
+    isNotPolicyHolder: Yup.object({
+      policyHolderName: Yup.string().required("Name is required"),
+      policyHolderLastName: Yup.string().required("Last name is required"),
+      policyHolderDateOfBirth: Yup.string().required("Date of birth is required"),
+      policyHolderAddress: Yup.string().required("Address is required"),
+      policyHolderCity: Yup.string().required("City is required"),
+      policyHolderState: Yup.string(),
+      insuranceCompany: Yup.string(),
+    })
+    
   };
 
   const initialValues = {
     name: "",
+    lastName: "",
     email: "",
-    // rbday: "",
-    // rbmonth: "",
-    // rbyear: "",
     street: "",
     number: "",
     birthDate: "",
     dateOfBirth: "",
     patient: "yes",
     patientName: "",
-    patientStreet: "",
-    company: "company a",
+    patientLastName: "",
+    patientDateOfBirth: "",
+    paymentType: "yes",
+    isPolicyHolder: "yes",
+    policyHolderName: "",
+    policyHolderLastName: "",
+    policyHolderAddress: "",
+    policyHolderCity: "",
+    policyHolderState: "CA",
+    insuranceCompany: "company a",
   };
 
   const {
@@ -64,7 +115,15 @@ function App() {
     setNextStep,
     stepNumber,
     snapshot
-  } = useFormUtils(stepFlow, transitions.patient, initialValues);
+  } = useFormUtils(stepFlow, transitions, initialValues);
+
+  const handlePolicyHolderVisible = (value: string) => {
+    if (value.toLocaleLowerCase() === "yes") {
+      setIsPolicyHolderVisible(false);
+    } else {
+      setIsPolicyHolderVisible(true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
@@ -83,18 +142,8 @@ function App() {
             validationSchema={
               Yup.object({
                 name: Yup.string().required("Name is required"),
+                lastName: Yup.string().required("Last name is required"),
                 email: Yup.string().email().required("Email is required"),
-                // rbday: Yup.number(),
-                // rbmonth: Yup.number(),
-                // rbyear: Yup.number()
-                //   .min(1920)
-                //   .max(2010)
-                //   .test("test-date", "Please enter a valid date", function(value) {
-                //     const { rbday, rbmonth } = this.parent;
-                //     const dateString = `${rbday}-${rbmonth}-${value}`;
-                //     const parsedDate=  parse(dateString, "dd-MM-yyy", new Date());
-                //     return isDate(parsedDate);
-                //   }),
                 dateOfBirth: Yup
                   .string()
                   .transform(dateMask.transform)
@@ -106,25 +155,11 @@ function App() {
             }
           >
             <h1 className="text-3xl font-extrabold mb-8">Your details</h1>
-            <InputField name="name" label="Name" required={true}/>
+            <InputField name="name" label="First name" required={true}/>
+            <InputField name="lastName" label="Last name" required={true}/>
             <InputField name="email" label="Email"required={true}/>
-            {/* <DatePicker name="birthDate" placeHolders={["DD", "MM", "YYYY"]} /> */}
             <BirthdateField name="dateOfBirth" label="Date of birth"/>
-          </FormStep>
-
-          <FormStep
-            stepName="Address"
-            onSubmit={() => console.log("Step 2")}
-            validationSchema={
-              Yup.object({
-                street: Yup.string().required("Street is required"),
-                number: Yup.number().positive().integer().required("Number is required"),
-              })
-            }
-          >
-            <InputField name="street" label="Street" required={true}/>
-            <InputField name="number" label="Number" required={true}/>
-
+            <h5 className="mb-4 mt-8 text-base text-gray-400">Is this appointment for you?</h5>
             <RadioGroup
               name="patient"
               label="Are you the patient?"
@@ -132,34 +167,108 @@ function App() {
               options={isPatient}
               transitions={transitions.patient}
               setNextStep={setNextStep}
-              getNextStep={getNextStep}
+              getNextStep={(e) => getNextStep(e, "patient")}
             />
-            
-            {/* <SelectField
-              name="patient"
-              label="Are you the patient?"
-              options={isPatient}
-              transitions={transitions.patient}
-              setNextStep={setNextStep}
-              getNextStep={getNextStep}
-            /> */}
-          </FormStep>
-          
-          <FormStep
-            stepname="Patient"
-            onSubmit={() => console.log("Step 3")}
-            validationSchema={
-              Yup.object({
-                patientName: Yup.string().required("Name is required"),
-                patientStreet: Yup.string().required("Street is required"),
-              })
-            }
-          >
-            <InputField name="patientName" label="Patient name" required={true}/>
-            <InputField name="patientStreet" label="Street" required={true}/>
           </FormStep>
 
           <FormStep
+            stepname="Patient"
+            onSubmit={() => console.log("Patient")}
+            validationSchema={
+              Yup.object({
+                patientName: Yup.string().required("Name is required"),
+                patientLastName: Yup.string().required("Last name is required"),
+                patientDateOfBirth: Yup
+                  .string()
+                  .transform(dateMask.transform)
+                  .required()
+                  .test("validateDate", "Invalid date", (value) => {
+                    return dateFns.isValid(dateFns.parse(value as string, "yyyy-MM-dd", new Date()))
+                  })
+              })
+            }
+          >
+            <h1 className="text-3xl font-extrabold mb-8">Patient details</h1>
+            <InputField name="patientName" label="Patient's name" required={true}/>
+            <InputField name="patientLastName" label="Patient's last name" required={true}/>
+            <BirthdateField name="patientDateOfBirth" label="Patient's date of birth"/>
+          </FormStep>
+
+          <FormStep
+            stepName="Insurance"
+            onSubmit={() => console.log("Insurance")}
+            validationSchema={
+              Yup.object({})
+            }
+          >
+            <h1 className="text-3xl font-extrabold mb-8">We partner with insurance</h1>
+            <RadioGroup
+              name="paymentType"
+              label="Is any of the above your provider?"
+              align="vertical"
+              options={paymentType}
+              transitions={transitions.paymentType}
+              setNextStep={setNextStep}
+              getNextStep={(e) => getNextStep(e, "paymentType")}
+            />
+          </FormStep>
+
+          <FormStep
+            stepName="Policy holder"
+            onSubmit={() => console.log("Policy holder")}
+            validationSchema={
+              isPolicyHolderVisible
+                ? policyHolderValidation.isNotPolicyHolder
+                : policyHolderValidation.isPolicyHolder
+            }
+          >
+            <h1 className="text-3xl font-extrabold mb-8">Your details</h1>
+            <h3 className="mb-3">Are you the policy holder?</h3>
+            <RadioGroup
+              name="isPolicyHolder"
+              label="Are you the policy holder?"
+              align="horizontal"
+              options={isPolicyHolder}
+              handleChange={handlePolicyHolderVisible}
+            />
+            {isPolicyHolderVisible ? (
+              <>
+                <InputField
+                  name="policyHolderName"
+                  label="Policy holder's name"
+                  required={true}
+                />
+                <InputField
+                  name="policyHolderLastName"
+                  label="Policy holder's last name"
+                  required={true}
+                />
+                <BirthdateField name="policyHolderDateOfBirth" label="Policy holder's DOB"/>
+              </>
+            ) : null}
+            <InputField
+              name="policyHolderAddress"
+              label={isPolicyHolderVisible ? "Policy holder's address" : "Address"}
+              required={true}
+            />
+            <InputField
+              name="policyHolderCity"
+              label="City"
+              required={true}
+            />
+            <SelectField
+              name="policyHolderState"
+              label="State"
+              options={states}
+            />
+            <SelectField
+              name="insuranceCompany"
+              label="Insurance company"
+              options={insuranceCompanies}
+            />
+          </FormStep>
+
+          {/* <FormStep
             stepName="Company"
             onSubmit={() => console.log("Step 4")}
             validationSchema={
@@ -173,7 +282,7 @@ function App() {
               label="Company"
               options={insuranceCompanies}
             />
-          </FormStep>
+          </FormStep> */}
 
         </MultiStepForm>
       </div>

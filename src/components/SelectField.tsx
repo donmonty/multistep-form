@@ -38,7 +38,7 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
   }, []);
 
   return (
-    <div>
+    <div className="mb-3">
       <label className="block text-sm font-medium text-gray-700">{props.label}</label>
       <Field
         as="select"

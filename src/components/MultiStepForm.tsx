@@ -22,6 +22,7 @@ function MultiStepForm({ children, initialValues, onSubmit, previous, next, step
   }, []);
 
   const handleSubmit = async (values: FormikValues, actions: FormikHelpers<FormikValues>) => {
+    console.log("Executing handleSubmit!");
     if (step.props.onSubmit) {
       await step.props.onSubmit(values);
     }
@@ -29,6 +30,7 @@ function MultiStepForm({ children, initialValues, onSubmit, previous, next, step
     if (isLastStep) {
       return onSubmit(values, actions);
     } else {
+      console.log("Not last step!");
       actions.setTouched({});
       next(values);
     }

@@ -1,6 +1,4 @@
-import { HTMLInputTypeAttribute } from "react";
 import { CSSProperties } from "react";
-
 
 export type FlowStep = {
   index: number;
@@ -17,6 +15,10 @@ export type Transition = {
 }
 
 export type Transitions = Array<Transition>;
+
+export type TransitionsObject = {
+  [key: string]: Transitions;
+}
 
 export type Option = {
   key: string;
