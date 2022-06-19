@@ -5,14 +5,22 @@ import "../App.css";
 type OtherProps = {
   label: string;
   required?: boolean;
+  mask?: any;
 }
 
 function InputField({ ...props }: OtherProps & FieldHookConfig<string>) {
-  const [field, meta] = useField(props);
+  const [field, meta, helpers] = useField(props);
   return (
     <div className="flex flex-col mb-4" >
       <label className="custom-field">
-        <input required={props.required ? props.required: false} {...field}/>
+        <input
+          required={props.required ? props.required: false}
+          {...field}
+          onChange={(e) => {
+            props.mask && props.mask.onChange(e);
+            helpers.setValue(e.target.value);
+          }}
+        />
         <span className="placeholder">{props.label}</span>
         {meta.touched && meta.error ? (
         <span  className="block mt-2 text-sm font-medium text-red-600">{meta.error}</span>

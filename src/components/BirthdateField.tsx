@@ -5,6 +5,8 @@ import { dateMask } from "./masks";
 type OtherProps = {
   label: string;
   required?: boolean;
+  placeholder?: string;
+  mask?: any;
 }
 
 function BirthdateField({ ...props }: OtherProps & FieldHookConfig<string>){
@@ -16,10 +18,10 @@ function BirthdateField({ ...props }: OtherProps & FieldHookConfig<string>){
         <input
           { ...field }
           onChange={(e) => {
-            dateMask.onChange(e);
+            props.mask && props.mask.onChange(e);
             helpers.setValue(e.target.value);
           }}
-          placeholder="DD/MM/YYYY"
+          placeholder={props.placeholder ? props.placeholder : "DD/MM/YYYY"}
         />
         <span className="placeholder">{props.label}</span>
         {meta.touched && meta.error ? (

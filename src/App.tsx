@@ -7,11 +7,21 @@ import RadioGroup from './components/RadioGroup';
 import BirthdateField from './components/BirthdateField';
 
 import useFormUtils from './components/useFormUtils';
-import { dateMask } from "./components/masks";
+import {
+  dateMask,
+  expirationDateMask,
+  monthYearMask,
+  cvcMask,
+  cardNumberMask,
+  dateOfBirthMask,
+  phoneMask,
+} from "./components/masks";
 
 import * as dateFns from "date-fns";
 import * as Yup from 'yup';
+import valid from "card-validator";
 import './App.css';
+import moment from 'moment';
 
 function App() {
 
@@ -42,13 +52,19 @@ function App() {
     { key: "AZ", value: "AZ" },
     { key: "TX", value: "TX" },
   ];
+  const aboutUsOptions = [
+    { key: "socialMedia", value: "Social media" },
+    { key: "friend", value: "Friend" },
+    { key: "other", value: "Other" },
+  ];
 
   const stepFlow = [
     { index: 0, name: "user", prev: [null], next: ["patient", "insurance"] },
     { index: 1, name: "patient", prev: ["user"] , next: ["insurance"] },
     { index: 2, name: "insurance", prev: ["user", "patient"], next: ["policyHolder", "selfPay"] },
-    { index: 3, name: "policyHolder", prev: ["insurance"] , next: [null] },
-    { index: 4, name: "selfPay", prev: ["insurance"] , next: [null] },
+    { index: 3, name: "policyHolder", prev: ["insurance"] , next: ["phoneNumber"] },
+    { index: 4, name: "selfPay", prev: ["insurance"] , next: ["phoneNumber"] },
+    { index: 5, name: "phoneNumber", prev: ["selfPay", "policyHolder"], next: [null] }
   ];
 
   const transitions = {
@@ -58,7 +74,7 @@ function App() {
     ],
     paymentType: [
       { response: "yes", step: "policyHolder" },
-      { response: "selfPay", step: "selfPay" },
+      { response: "no", step: "selfPay" },
     ]
   };
 
@@ -101,10 +117,17 @@ function App() {
     isPolicyHolder: "yes",
     policyHolderName: "",
     policyHolderLastName: "",
+    policyHolderDateOfBirth: "",
     policyHolderAddress: "",
     policyHolderCity: "",
     policyHolderState: "CA",
     insuranceCompany: "company a",
+    cardHolder: "",
+    cardNumber: "",
+    cardExpirationDate: "",
+    cardCVC: "",
+    phoneNumber: "",
+    hearAboutUs: "social media",
   };
 
   const {
@@ -144,12 +167,17 @@ function App() {
                 name: Yup.string().required("Name is required"),
                 lastName: Yup.string().required("Last name is required"),
                 email: Yup.string().email().required("Email is required"),
-                dateOfBirth: Yup
-                  .string()
-                  .transform(dateMask.transform)
+                dateOfBirth: Yup.string()
+                  .transform(dateOfBirthMask.transform)
                   .required()
                   .test("validateDate", "Invalid date", (value) => {
-                    return dateFns.isValid(dateFns.parse(value as string, "yyyy-MM-dd", new Date()))
+                    const date = moment(value, "DD-MM-YYYY");
+                    if (date.isValid()) {
+                      const today = moment();
+                      const difference = today.diff(date, "years");
+                      return difference >= 120 ? false : true
+                    }
+                    return false;
                   })
               })
             }
@@ -158,7 +186,7 @@ function App() {
             <InputField name="name" label="First name" required={true}/>
             <InputField name="lastName" label="Last name" required={true}/>
             <InputField name="email" label="Email"required={true}/>
-            <BirthdateField name="dateOfBirth" label="Date of birth"/>
+            <BirthdateField name="dateOfBirth" label="Date of birth" mask={dateOfBirthMask}/>
             <h5 className="mb-4 mt-8 text-base text-gray-400">Is this appointment for you?</h5>
             <RadioGroup
               name="patient"
@@ -178,20 +206,28 @@ function App() {
               Yup.object({
                 patientName: Yup.string().required("Name is required"),
                 patientLastName: Yup.string().required("Last name is required"),
-                patientDateOfBirth: Yup
-                  .string()
-                  .transform(dateMask.transform)
-                  .required()
-                  .test("validateDate", "Invalid date", (value) => {
-                    return dateFns.isValid(dateFns.parse(value as string, "yyyy-MM-dd", new Date()))
-                  })
+                patientDateOfBirth: Yup.string()
+                .test("validateDate", "Invalid date", (value) => {
+                  const date = moment(value, "DD-MM-YYYY");
+                  if (date.isValid()) {
+                    const today = moment();
+                    const difference = today.diff(date, "years");
+                    console.log("difference:", difference);
+                    return difference >= 120 ? false : true
+                  }
+                  return false;
+                })
               })
             }
           >
             <h1 className="text-3xl font-extrabold mb-8">Patient details</h1>
-            <InputField name="patientName" label="Patient's name" required={true}/>
+            <InputField name="patientName" label="Patient's first name" required={true}/>
             <InputField name="patientLastName" label="Patient's last name" required={true}/>
-            <BirthdateField name="patientDateOfBirth" label="Patient's date of birth"/>
+            <BirthdateField
+              name="patientDateOfBirth"
+              label="Patient's date of birth"
+              mask={dateOfBirthMask}
+            />
           </FormStep>
 
           <FormStep
@@ -235,7 +271,7 @@ function App() {
               <>
                 <InputField
                   name="policyHolderName"
-                  label="Policy holder's name"
+                  label="Policy holder's first name"
                   required={true}
                 />
                 <InputField
@@ -243,7 +279,11 @@ function App() {
                   label="Policy holder's last name"
                   required={true}
                 />
-                <BirthdateField name="policyHolderDateOfBirth" label="Policy holder's DOB"/>
+                <BirthdateField
+                  name="policyHolderDateOfBirth"
+                  label="Policy holder's DOB"
+                  mask={dateOfBirthMask}
+                />
               </>
             ) : null}
             <InputField
@@ -268,21 +308,88 @@ function App() {
             />
           </FormStep>
 
-          {/* <FormStep
-            stepName="Company"
-            onSubmit={() => console.log("Step 4")}
+          <FormStep
+            stepName="Credit card"
+            onSubmit={() => console.log("Credit card")}
             validationSchema={
               Yup.object({
-                company: Yup.string().required()
+                cardHolder: Yup.string().max(255).required("Name is required"),
+                cardNumber: Yup.string()
+                  .test(
+                    "test-number",
+                    "Credit card number is invalid",
+                    (value) => valid.number(value).isValid
+                  ),
+                cardExpirationDate: Yup.string()
+                  .transform(monthYearMask.transform)
+                  .required()
+                  .test("validateDate", "Invalid date", (value) => {
+                    return valid.expirationDate(value).isValid
+                  }),
+                  // .test("validateDate", "Invalid date", (value) => {
+                  //   return dateFns.isValid(dateFns.parse(value as string, "yyyy-MM-dd", new Date()))
+                  // }),
+                cardCVC: Yup.string()
+                  .transform(cvcMask.transform)
+                  .required()
+                  .test("validateCvc", "Invalid CVC", (value) => {
+                    return valid.cvv(value).isValid
+                  })
               })
             }
           >
-            <SelectField
-              name="company"
-              label="Company"
-              options={insuranceCompanies}
+            <h1 className="text-3xl font-extrabold mb-8">Your details</h1>
+            <InputField
+              name="cardHolder"
+              label="Name on the card"
+              required={true}
             />
-          </FormStep> */}
+            <InputField
+              name="cardNumber"
+              label="Number on the card"
+              required={true}
+              mask={cardNumberMask}
+            />
+            <BirthdateField
+              name="cardExpirationDate"
+              label="Exp date"
+              placeholder="MM/YY"
+              mask={monthYearMask}  
+            />
+            <InputField
+              name="cardCVC"
+              label="CVC"
+              required={true}
+              mask={cvcMask}
+            />
+          </FormStep>
+
+          <FormStep
+            stepName="Confirm phone number"
+            onSubmit={() => console.log("Confirm phone number")}
+            validationSchema={
+              Yup.object({
+                phoneNumber: Yup.string()
+                  .transform(phoneMask.transform)
+                  .max(10)
+                  .required("Phone number is required")
+              })
+            }
+          >
+            <h1 className="text-3xl font-extrabold mb-8">Lastly</h1>
+            <h5 className="mb-4 mt-8 text-base text-gray-400">Confirm the number for the RD to contact you on your appointment</h5>
+            <InputField
+              name="phoneNumber"
+              label="Your phone number"
+              required={true}
+              mask={phoneMask}
+            />
+            <SelectField
+              name="hearAboutUs"
+              label="How did you hear about us?"
+              options={aboutUsOptions}
+            />
+          </FormStep>
 
         </MultiStepForm>
       </div>
