@@ -9,7 +9,7 @@ type OtherProps = {
   align: string; // if the radio buttons should align horizontally or vertically
   handleChange?: any; // An optional callback to execute whenever the field value changes
   transitions?: Array<Transition>; // In case the next step to navigate to is determined by the value selected by the user
-  setNextStep?: React.Dispatch<React.SetStateAction<string>>; // In case the next step to navigate to is determined by the value selected by the user
+  setNextStep?: React.Dispatch<React.SetStateAction<string | null>>; // In case the next step to navigate to is determined by the value selected by the user
   getNextStep?: (event: any, transitions: any) => string | undefined; // In case the next step to navigate to is determined by the value selected by the user
 }
 

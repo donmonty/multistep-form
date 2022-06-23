@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { FormikValues } from 'formik';
 
 import {
@@ -27,9 +27,22 @@ function useFormUtils(
   initialValues: FormikValues,
 
 ) {
-  const [nextStep, setNextStep] = useState(stepFlow[1].name);
+  const [nextStep, setNextStep] = useState<string | null>(stepFlow[1].name);
   const [stepNumber, setStepNumber] = useState(0);
   const [snapshot, setSnapshot] = useState(initialValues);
+
+  // const isSameNextStep = useRef(stepFlow[1].name);
+  // console.log("isSameNextStep:", isSameNextStep.current);
+
+  // useEffect(() => {
+  //   if (isSameNextStep.current === nextStep && stepNumber !== 0) {
+  //     console.log("isSameNextStep.current === nextStep");
+  //     setNextStep(stepFlow[stepNumber].next[0] || null);
+  //     isSameNextStep.current = nextStep;
+  //   }
+  // }, [stepNumber]);
+
+  // console.log("nextStep:", nextStep);
 
   /**
    * Returns the name of the next transition to navigate next when different select options have different routes
@@ -52,15 +65,17 @@ function useFormUtils(
     const currentStep = stepFlow[stepNumber];
     if (currentStep.next.includes(nextStep)) {
       const destination = stepFlow.find((step: FlowStep) => step.name === nextStep)
-      let diff: number;
-      destination ? diff = destination.index - currentStep.index : diff = 1;
-      if (diff > 1) {
-        // If the destination is not the next immediate step in the flow (diff > 1)
-        // we save the current stepNumber in case we want to navigate back later
-        localStorage.setItem("prevStep", String(stepNumber));
-      }
+      // let diff: number;
+      // destination ? diff = destination.index - currentStep.index : diff = 1;
+      // if (diff > 1) {
+      //   // If the destination is not the next immediate step in the flow (diff > 1)
+      //   // we save the current stepNumber in case we want to navigate back later
+      //   localStorage.setItem("prevStep", String(stepNumber));
+      // }
+      localStorage.setItem("prevStep", String(stepNumber));
       return destination && destination.index;
     }
+    localStorage.setItem("prevStep", String(stepNumber));
     return stepFlow[stepNumber].index + 1;
   };
 
@@ -101,10 +116,13 @@ function useFormUtils(
   const previous = (values: FormikValues) => {
     if (stepFlow) {
       const destination = prevFlow();
+      console.log("destination:", destination);
       if (destination !== null) {
         setSnapshot(values);
         setStepNumber(destination);
       } else {
+        console.log("No prev value in localStorage!");
+        console.log("stepNumber:", stepNumber);
         setSnapshot(values);
         setStepNumber(stepNumber - 1);
       }

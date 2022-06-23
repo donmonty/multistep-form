@@ -5,6 +5,7 @@ import InputField from './components/InputField';
 import SelectField from "./components/SelectField";
 import RadioGroup from './components/RadioGroup';
 import BirthdateField from './components/BirthdateField';
+import ImageUploadField from './components/FileUploadField';
 
 import useFormUtils from './components/useFormUtils';
 import {
@@ -62,9 +63,10 @@ function App() {
     { index: 0, name: "user", prev: [null], next: ["patient", "insurance"] },
     { index: 1, name: "patient", prev: ["user"] , next: ["insurance"] },
     { index: 2, name: "insurance", prev: ["user", "patient"], next: ["policyHolder", "selfPay"] },
-    { index: 3, name: "policyHolder", prev: ["insurance"] , next: ["phoneNumber"] },
+    { index: 3, name: "policyHolder", prev: ["insurance"], next: ["cardImages"] },
     { index: 4, name: "selfPay", prev: ["insurance"] , next: ["phoneNumber"] },
-    { index: 5, name: "phoneNumber", prev: ["selfPay", "policyHolder"], next: [null] }
+    { index: 5, name: "cardImages", prev: ["insurance"], next: ["phoneNumber"] },
+    { index: 6, name: "phoneNumber", prev: ["selfPay", "policyHolder"], next: [null] },
   ];
 
   const transitions = {
@@ -75,6 +77,10 @@ function App() {
     paymentType: [
       { response: "yes", step: "policyHolder" },
       { response: "no", step: "selfPay" },
+    ],
+    policyHolder: [
+      { response: "yes", step: "cardImages" },
+      { response: "no", step: "cardImages" },
     ]
   };
 
@@ -126,6 +132,8 @@ function App() {
     cardNumber: "",
     cardExpirationDate: "",
     cardCVC: "",
+    cardImageFront: "",
+    cardImageBack: "",
     phoneNumber: "",
     hearAboutUs: "social media",
   };
@@ -266,6 +274,9 @@ function App() {
               align="horizontal"
               options={isPolicyHolder}
               handleChange={handlePolicyHolderVisible}
+              transitions={transitions.policyHolder}
+              setNextStep={setNextStep}
+              getNextStep={(e) => getNextStep(e, "policyHolder")}
             />
             {isPolicyHolderVisible ? (
               <>
@@ -365,6 +376,27 @@ function App() {
           </FormStep>
 
           <FormStep
+            stepName="Insurance card image upload"
+            onSubmit={() => console.log("Image upload")}
+            validationSchema={
+              Yup.object({
+                cardImageFront: Yup.string().required("Front image is required")
+              })
+            }
+          >
+            <h1 className="text-3xl font-extrabold mb-8">Your insurance card</h1>
+            <h5 className="mb-4 mt-8 text-base text-gray-400">Upload the front and back of your insurance card so you insurance verifies how many free sessions you have covered</h5>
+            <ImageUploadField
+              label="Choose front image"
+              name="cardImageFront"
+            />
+            <ImageUploadField
+              label="Choose back image"
+              name="cardImageBack"
+            />
+          </FormStep>
+
+          <FormStep
             stepName="Confirm phone number"
             onSubmit={() => console.log("Confirm phone number")}
             validationSchema={
@@ -390,7 +422,7 @@ function App() {
               options={aboutUsOptions}
             />
           </FormStep>
-
+          
         </MultiStepForm>
       </div>
     </div>
