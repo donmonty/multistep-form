@@ -39,3 +39,13 @@ export interface DatePickerOptions {
   onChange?: (value: string | null) => void;
   value?: [string, string, string];
 }
+
+export type Slot = {
+  practitioner_id: number;
+  slots_id: number;
+  time: string;
+}
+
+export type DateRows = {
+  [key: string]: Slot[];
+}
