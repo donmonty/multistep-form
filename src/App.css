@@ -85,4 +85,20 @@
   /* color: #222; */
 }
 
+.hidden {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+}
+
+input[type=checkbox]+label {
+  color: #ccc;
+  font-style: italic;
+}
+
+input[type=checkbox]:checked+label {
+  color: #f00;
+  font-style: normal;
+}
+
 

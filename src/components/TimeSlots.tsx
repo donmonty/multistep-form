@@ -3,15 +3,36 @@ import React, { useState } from "react";
 import { useDateUtilsContext } from "../components/DateUtilsContext";
 import { Slot } from "../types";
 
+import { FormData } from "../types";
+import { useFormikContext } from "formik";
 
-export default function TimeSlot() {
+export type TimeSlotsProps = {
+  handleChange?: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export default function TimeSlot(props: TimeSlotsProps) {
   const { amSlots, pmSlots } = useDateUtilsContext();
   const [isAM, setIsAM] = useState<boolean>(true);
   const [selectedSlot, setSelectedSlot] = useState<Slot>(amSlots[0] || pmSlots[0]);
+  const { setFieldValue, values } = useFormikContext<FormData>();
+
+  console.log("callTime", values.callTime);
+  console.log("practitionerId", values.practitionerId);
+  console.log("callSlotId", values.callSlotId);
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
   }
+
+  const handleSlotChange = (slot: Slot) => {
+    setSelectedSlot(slot);
+    setFieldValue("callTime", slot.time);
+    setFieldValue("practitionerId", String(slot.practitioner_id));
+    setFieldValue("callSlotId", slot.slots_id);
+    if (props.handleChange) {
+      props.handleChange(true);
+    }
+  };
 
   return (
     <div className="flex-col">
@@ -45,7 +66,10 @@ export default function TimeSlot() {
           amSlots.length > 0 ? (
             amSlots.map((slot: Slot) => (
               <button
-                onClick={() => setSelectedSlot(slot)}
+                onClick={() => {
+                  setSelectedSlot(slot);
+                  handleSlotChange(slot);
+                }}
                 key={slot.time}
                 className={classNames(
                   (slot.time === selectedSlot?.time) && 'bg-indigo-600 text-white',
@@ -54,7 +78,7 @@ export default function TimeSlot() {
                 )}
                 // className="p-3 m-1 w-24 bg-slate-200 rounded-full text-sm"
               >
-                {`${slot.time}:00am`}
+                {`${slot.time}am`}
               </button>
             ))
           ): (<span>No time slots available.</span>)
@@ -64,7 +88,10 @@ export default function TimeSlot() {
             pmSlots.map((slot: Slot) => (
               <button
                 key={slot.time}
-                onClick={() => setSelectedSlot(slot)}
+                onClick={() => {
+                  setSelectedSlot(slot)
+                  handleSlotChange(slot);
+                }}
                 className={classNames(
                   (slot.time === selectedSlot?.time) && 'bg-indigo-600 text-white',
                   (slot.time !== selectedSlot?.time) && "bg-slate-200",
@@ -72,7 +99,7 @@ export default function TimeSlot() {
                 )}
                 // className="p-3 m-1 w-24 bg-slate-200 rounded-full text-sm"
               >
-                {`${slot.time}:00pm`}
+                {`${slot.time}pm`}
               </button>
             ))
           ): (<span>No time slots available.</span>)

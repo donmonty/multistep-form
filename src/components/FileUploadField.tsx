@@ -1,6 +1,7 @@
 import { useField, FieldHookConfig } from 'formik';
 import React, { useCallback, useEffect, useState } from 'react';
 import { FileError, FileRejection, useDropzone } from 'react-dropzone';
+import { PhotographIcon } from '@heroicons/react/solid'
 import { nanoid } from "nanoid";
 
 const thumbsContainer = {
@@ -153,9 +154,11 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
   }, []);
 
   const imagePlaceholder = (
-    <div className="w-60 h-32 bg-slate-100 rounded-lg border-2 border-dashed border-slate-500 flex-col justify-center items-center">
-      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>
-      <p>Click to add image</p>
+    <div className="w-60 h-32 bg-slate-100 rounded-lg border-2 border-dashed border-slate-500">
+      <div className='flex-col justify-center items-center pt-6'>
+        <PhotographIcon className="block m-auto w-14 h-14 self-center" />
+        <p className='m-auto text-center text-sm'>{props.label}</p>
+      </div>
     </div>
   );
 
@@ -163,7 +166,7 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
     <>
       <div {...getRootProps({ className: "max-w-xs"})}>
         <input {...getInputProps()}/>
-        <div className="flex flex-wrap mt-8">
+        <div className="flex flex-wrap mt-4">
           {files[0] && files[0]?.url ? (
             imagePreview
           ): imagePlaceholder}

@@ -33,6 +33,7 @@ export type DateUtilsContextProps = {
   currentMonth: string;
   selectedDay: Date;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date>> | null;
+  firstDayCurrentMonth: Date;
 };
 
 const DateUtilsContext = React.createContext<DateUtilsContextProps>({
@@ -50,6 +51,7 @@ const DateUtilsContext = React.createContext<DateUtilsContextProps>({
   currentMonth: format(startOfToday(), "MMMM yyyy"),
   selectedDay: startOfToday(),
   setSelectedDay: null,
+  firstDayCurrentMonth: parse(format(startOfToday(), 'MMM-yyyy'), 'MMM-yyyy', new Date()), 
 });
 
 // Custom hooks
@@ -74,6 +76,7 @@ export function DateUtilsProvider({ children }: { children: any}) {
     currentMonth,
     selectedDay,
     setSelectedDay,
+    firstDayCurrentMonth,
   } = useDateUtils();
 
   return (
@@ -92,7 +95,8 @@ export function DateUtilsProvider({ children }: { children: any}) {
         nextMonth,
         currentMonth,
         selectedDay,
-        setSelectedDay
+        setSelectedDay,
+        firstDayCurrentMonth,
       }}
     >
       {children}

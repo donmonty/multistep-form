@@ -31,6 +31,7 @@ export default function useDateUtils() {
 
   const [today, setToday] = useState<Date>(startOfToday());
   let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
+  const [firstDayCurrentMonth, setFirstDayCurrentMonth] = useState<Date>(parse(currentMonth, 'MMM-yyyy', new Date()))
   const [calendarDays, setCalendarDays] = useState<Date[]>([]);
   // const [selectedDate, setSelectedDate] = useState<string>(format(startOfToday(), 'yyyy/MM/dd'));
   const [selectedDate, setSelectedDate] = useState<string>("2022/05/17");
@@ -41,7 +42,7 @@ export default function useDateUtils() {
 
   // let today = startOfToday();
   // const currentMonth = format(today, 'MMM-yyyy'); // string
-  let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date()); // Date object
+  // let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date()); // Date object
 
   function previousMonth() {
     const firstDayPrevMonth = add(firstDayCurrentMonth, { months: -1 });
@@ -118,11 +119,11 @@ export default function useDateUtils() {
     if (dateRows.hasOwnProperty(dayString)) {
       const allSlots = dateRows[dayString];
       morningSlots = allSlots.map(slot => {
-        const parsedHour = slot.time.slice(0, 2);
+        const parsedHour = slot.time.slice(0, 5);
         // return parsedHour;
         return { ...slot, time: parsedHour };
       })
-      .filter(slot => parseInt(slot.time) < 12);
+      .filter(slot => parseInt(slot.time.slice(0, 2)) < 12);
     }
     setAmSlots(morningSlots);
   };
@@ -138,11 +139,11 @@ export default function useDateUtils() {
     if (dateRows.hasOwnProperty(dayString)) {
       const allSlots = dateRows[dayString];
       afternoonSlots = allSlots.map(slot => {
-        const parsedHour = slot.time.slice(0, 2);
+        const parsedHour = slot.time.slice(0, 5);
         // return parsedHour;
         return { ...slot, time: parsedHour };
       })
-      .filter(slot => parseInt(slot.time) > 12);
+      .filter(slot => parseInt(slot.time.slice(0, 2)) > 12);
     }
     setPmSlots(afternoonSlots);
   };
@@ -169,6 +170,7 @@ export default function useDateUtils() {
     nextMonth,
     selectedDay,
     setSelectedDay,
+    firstDayCurrentMonth,
   }
 }
 

@@ -16,6 +16,9 @@ import {
   startOfToday,
 } from 'date-fns';
 
+import { FormData } from "../types";
+import { useFormikContext } from "formik";
+
 type DayPillProps = {
   day: Date;
   selectedDay: Date;
@@ -24,6 +27,9 @@ type DayPillProps = {
 }
 
 function DayPill(props: DayPillProps) {
+
+  const { setFieldValue, values } = useFormikContext<FormData>();
+  console.log("callDdate", values.callDate);
 
   /**
    * Check if the day button should be disabled
@@ -78,7 +84,10 @@ function DayPill(props: DayPillProps) {
       )}
     >
       <button
-        onClick={() => props.setSelectedDay(props.day)}
+        onClick={() => {
+          props.setSelectedDay(props.day);
+          setFieldValue("callDate", format(props.day, 'yyyy-MM-dd'));
+        }}
         disabled={isButtonDisabled(props.day)}
       >
         <time

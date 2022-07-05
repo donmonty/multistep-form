@@ -22,7 +22,7 @@ export type TransitionsObject = {
 
 export type Option = {
   key: string;
-  value: string;
+  value: any;
 }
 
 export type Options = Array<Option>;
@@ -48,4 +48,43 @@ export type Slot = {
 
 export type DateRows = {
   [key: string]: Slot[];
+}
+
+export interface FormData {
+  isAppointmentForYou: string;
+  weightloss: boolean;
+  sustainableHabits: boolean;
+  lowEnergy: boolean;
+  balancedDiet: boolean;
+  goals: string[];
+  firstName: string;
+  lastName: string;
+  birthDate: string;
+  email: string;
+  patientRelationship: string;
+  patientFirstName: string;
+  patientLastName: string;
+  patientBirthDate: string;
+  patientEmail: string;
+  callDate: string;
+  callTime: string;
+  practitionerId: string;
+  callSlotId: string;
+  hasInsurance: string;
+  isPolicyHolder: string;
+  policyHolderFirstName: string;
+  policyHolderLastName: string;
+  policyHolderBirthDate: string;
+  policyHolderAddress: string;
+  policyHolderCity: string;
+  policyHolderState: string;
+  insuranceCompany: string;
+  cardName: string;
+  cardNumber: string;
+  cardExpirationDate: string;
+  cardCvc: string;
+  insuranceCardFront: string;
+  insuranceCardBack: string;
+  phoneNumber: string;
+  aboutUs: string;
 }
