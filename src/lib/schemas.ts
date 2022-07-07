@@ -52,6 +52,8 @@ export const initialValues = {
   cardNumber: "",
   cardExpirationDate: "",
   cardCvc: "",
+  paymentMethidId: "",
+  stripeCustomerId: "",
   // Insurance card data
   insuranceCardFront: "",
   insuranceCardBack: "",

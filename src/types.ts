@@ -83,6 +83,8 @@ export interface FormData {
   cardNumber: string;
   cardExpirationDate: string;
   cardCvc: string;
+  paymentMethodId: string;
+  stripeCustomerId: string;
   insuranceCardFront: string;
   insuranceCardBack: string;
   phoneNumber: string;

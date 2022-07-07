@@ -4,6 +4,9 @@ import { DateUtilsProvider } from './components/DateUtilsContext';
 import { useSchemaContext } from "./components/SchemaContext";
 import { initialValues } from "./lib/schemas";
 
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+
 import { Formik } from 'formik';
 
 import IsPatient from "./routes/IsPatient";
@@ -17,6 +20,9 @@ import CreditCard from "./routes/CreditCard";
 import InsuranceCard from "./routes/InsuranceCard";
 import PhoneNumber from "./routes/PhoneNumber";
 import Confirmation from "./routes/Confirmation";
+import StripeCard from "./routes/StripeCard";
+
+const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
 
 
 export default function App() {
@@ -30,21 +36,24 @@ export default function App() {
       onSubmit={onSubmit}
       validationSchema={currentSchema}
     >
-      <BrowserRouter>
-        <Routes>
-          <Route path="is-patient" element={<IsPatient />} />
-          <Route path="user-details" element={<UserDetails />} />
-          <Route path="patient-details" element={<PatientDetails />} />
-          <Route path="select-time" element={<Calendar />}/>
-          <Route path="insurance-provider" element={<Insurance />}/>
-          <Route path="policy-info" element={<PolicyInfo />}/>
-          <Route path="credit-card" element={<CreditCard />}/>
-          <Route path="insurance-card" element={<InsuranceCard />}/>
-          <Route path="phone-number" element={<PhoneNumber />}/>
-          <Route path="confirmation" element={<Confirmation />}/>
-          <Route path="page3" element={<Page3 />} />
-        </Routes>
-      </BrowserRouter>
+      <Elements stripe={stripePromise}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="is-patient" element={<IsPatient />} />
+            <Route path="user-details" element={<UserDetails />} />
+            <Route path="patient-details" element={<PatientDetails />} />
+            <Route path="select-time" element={<Calendar />}/>
+            <Route path="insurance-provider" element={<Insurance />}/>
+            <Route path="policy-info" element={<PolicyInfo />}/>
+            <Route path="credit-card" element={<CreditCard />}/>
+            <Route path="insurance-card" element={<InsuranceCard />}/>
+            <Route path="phone-number" element={<PhoneNumber />}/>
+            <Route path="confirmation" element={<Confirmation />}/>
+            <Route path="stripe-card" element={<StripeCard />}/>
+            <Route path="page3" element={<Page3 />} />
+          </Routes>
+        </BrowserRouter>
+      </Elements>
     </Formik>
   );
 }

@@ -23,6 +23,7 @@ import {
   phoneMask,
 } from "../components/masks";
 import BirthdateField from "../components/BirthdateField";
+import { ChevronLeftIcon } from "@heroicons/react/solid";
 
 
 export default function UserDetails() {
@@ -53,6 +54,9 @@ export default function UserDetails() {
     <div className="min-h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
       <Form>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full">
+          <button className="align-self-start" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
+          </button>
           <h1 className="text-3xl font-extrabold mb-8">Your details</h1>
 
           <InputField name="firstName" label="First name" required={true}/>

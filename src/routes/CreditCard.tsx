@@ -13,6 +13,7 @@ import {
 import InputField from "../components/InputField";
 import { cardNumberMask, cvcMask, monthYearMask } from "../components/masks";
 import BirthdateField from "../components/BirthdateField";
+import { ChevronLeftIcon } from "@heroicons/react/solid";
 
 export default function CreditCard() {
   let navigate = useNavigate();
@@ -47,6 +48,9 @@ export default function CreditCard() {
     <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
         <div>
+          <button className="align-self-start" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
+          </button>
           <h1 className="text-3xl font-extrabold mb-4">Credit card info</h1>
           <InputField
             name="cardName"

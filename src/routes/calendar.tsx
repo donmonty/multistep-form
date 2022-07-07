@@ -60,6 +60,9 @@ export default function Calendar() {
     <main className="h-screen bg-gray- flex-col items-center py-12 px-6 lg:px-8">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
         <div>
+          <button className="align-self-start" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
+          </button>
           <h1 className="text-3xl font-extrabold mb-2">Book a discovery call</h1>
           <h3 className="text-lg font-extrabold mb-6">15 mins</h3>
           

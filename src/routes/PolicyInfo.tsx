@@ -15,6 +15,7 @@ import BirthdateField from "../components/BirthdateField";
 import { dateOfBirthMask } from "../components/masks";
 import SelectField from "../components/SelectField";
 import { handleNav } from "../lib/utils";
+import { ChevronLeftIcon } from "@heroicons/react/solid";
 
 export default function PolicyInfo() {
   let navigate = useNavigate();
@@ -60,6 +61,9 @@ export default function PolicyInfo() {
     <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
         <div className="mb-4">
+          <button className="align-self-start" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
+          </button>
           <h1 className="text-3xl font-extrabold mb-4">Policy info</h1>
           <p className="mb-3 text-sm font-bold">Are you the policy holder?</p>
           <RadioGroup
