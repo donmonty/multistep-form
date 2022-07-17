@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDateUtilsContext } from "../components/DateUtilsContext";
 import { Slot } from "../types";
@@ -10,16 +10,23 @@ export type TimeSlotsProps = {
   handleChange?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function TimeSlot(props: TimeSlotsProps) {
-  const { amSlots, pmSlots } = useDateUtilsContext();
+export default function TimeSlots(props: TimeSlotsProps) {
+  const { amSlots, pmSlots, selectedDay } = useDateUtilsContext();
   const [isAM, setIsAM] = useState<boolean>(true);
-  const [selectedSlot, setSelectedSlot] = useState<Slot>(amSlots[0] || pmSlots[0]);
-  const { setFieldValue, values } = useFormikContext<FormData>();
+  const [selectedSlot, setSelectedSlot] = useState<Slot | Record<string, number | string>>({});
+  const { setFieldValue } = useFormikContext<FormData>();
 
-  console.log("callTime", values.callTime);
-  console.log("practitionerId", values.practitionerId);
-  console.log("callSlotId", values.callSlotId);
+  // console.log("callTime", values.callTime);
+  // console.log("practitionerId", values.practitionerId);
+  // console.log("callSlotId", values.callSlotId);
+  // console.log("amSlots:", amSlots);
+  // console.log("props.morningSlots", props.morningSlots);
 
+  /**
+   * Applies a series of classes depending on a set of conditions
+   * @param classes boleans ans classes
+   * @returns the classes to apply
+   */
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ');
   }
@@ -34,8 +41,21 @@ export default function TimeSlot(props: TimeSlotsProps) {
     }
   };
 
+  /**
+   * If the selected day changes, we must reset the selected time slot to
+   * an empty object and disable the "Next" button. Otherwise the UI persists
+   * the selected time slot for different days and this may cause users to
+   * select a time slot for the wrong day.
+   */
+  useEffect(() => {
+    setSelectedSlot({});
+    props.handleChange && props.handleChange(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedDay]);
+
   return (
-    <div className="flex-col">
+    <div className="flex flex-col">
+      <h3 className="text-base font-extrabold mb-2 ml-2">Available times</h3>
       <div className="flex mb-4">
         <button
           className={classNames(
@@ -60,8 +80,8 @@ export default function TimeSlot(props: TimeSlotsProps) {
           PM
         </button>
       </div>
-
-      <div className="flex flex-wrap">
+      
+      <div className="grid-cols-3 max-w-[320px]">
         {isAM ? (
           amSlots.length > 0 ? (
             amSlots.map((slot: Slot) => (
@@ -105,6 +125,7 @@ export default function TimeSlot(props: TimeSlotsProps) {
           ): (<span>No time slots available.</span>)
         ): null}
       </div>
+
     </div>
   );
 }

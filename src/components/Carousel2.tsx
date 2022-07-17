@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import DayPill from ".//DayPill";
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 
-import useDateUtils from "../lib/useDateUtils";
+import { useDateUtilsContext } from "../components/DateUtilsContext";
 
 type CarouselProps = {
   days: Date[];
@@ -15,21 +15,10 @@ type CarouselProps = {
 export default function Carousel(props: CarouselProps) {
   const [position, setPosition] = useState(props.initialPosition || 0);
   const {
-    today,
-    todayNumber,
-    calendarDays,
-    setToday,
-    getCalendarDays,
-    getDates,
-    getDaySlots,
-    amSlots,
-    pmSlots,
-    nextMonth,
-    previousMonth,
     currentMonth,
     selectedDay,
     setSelectedDay,
-  } = useDateUtils();
+  } = useDateUtilsContext();
 
   const onRight = () => {
     if (position < props.days.length - 6) {
@@ -43,8 +32,8 @@ export default function Carousel(props: CarouselProps) {
   };
 
   return (
-    <div className="flex sm:mx-auto sm:w-full sm:max-w-md h-20 mb-8">
-      <button className="z-10" onClick={onLeft}>
+    <div className="flex justify-center sm:mx-auto sm:w-full sm:max-w-md h-20 mb-8">
+      <button className="text-gray-400" onClick={onLeft}>
         <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
       </button>
 
@@ -54,7 +43,7 @@ export default function Carousel(props: CarouselProps) {
             return (
               <motion.div
                 key={index}
-                className="bg-slate-100 absolute w-12 h-20 flex justify-center items-center"
+                className="bg-slate-50 absolute w-12 h-20 flex justify-center items-center"
                 initial={{ scale: 0 }}
                 animate={{
                   rotate: 0,
@@ -74,7 +63,7 @@ export default function Carousel(props: CarouselProps) {
         </div>
       </div>
 
-      <button onClick={onRight}>
+      <button className="text-gray-400" onClick={onRight}>
         <ChevronRightIcon className="w-8 h-8" aria-hidden="true" />
       </button>
        

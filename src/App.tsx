@@ -22,7 +22,8 @@ import PhoneNumber from "./routes/PhoneNumber";
 import Confirmation from "./routes/Confirmation";
 import StripeCard from "./routes/StripeCard";
 
-const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
+// const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
+const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
 
 
 export default function App() {

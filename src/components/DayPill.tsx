@@ -1,10 +1,10 @@
 import React from "react";
 import {
-  add,
-  eachDayOfInterval,
+  // add,
+  // eachDayOfInterval,
   endOfMonth,
   format,
-  getDay,
+  // getDay,
   isAfter,
   isBefore,
   isEqual,
@@ -12,24 +12,25 @@ import {
   isSameMonth,
   isToday,
   parse,
-  parseISO,
+  // parseISO,
   startOfToday,
 } from 'date-fns';
 
 import { FormData } from "../types";
 import { useFormikContext } from "formik";
+import { useDateUtilsContext } from "../components/DateUtilsContext";
 
 type DayPillProps = {
   day: Date;
   selectedDay: Date;
-  setSelectedDay: React.Dispatch<React.SetStateAction<Date>>;
+  setSelectedDay: React.Dispatch<React.SetStateAction<Date>> | null;
   currentMonth: string;
 }
 
 function DayPill(props: DayPillProps) {
 
-  const { setFieldValue, values } = useFormikContext<FormData>();
-  console.log("callDdate", values.callDate);
+  const { setFieldValue } = useFormikContext<FormData>();
+  const { datesWithSlots, firstDayCurrentMonth } = useDateUtilsContext();
 
   /**
    * Check if the day button should be disabled
@@ -55,11 +56,8 @@ function DayPill(props: DayPillProps) {
     return classes.filter(Boolean).join(' ')
   }
 
-  let firstDayCurrentMonth = parse(props.currentMonth, 'MMM-yyyy', new Date());
-
   return (
     <div
-      // className="bg-slate-300 h-16 w-9 rounded-full flex justify-center items-center"
       className={classNames(
         isEqual(props.day, props.selectedDay) && 'text-white',
         !isEqual(props.day, props.selectedDay) &&
@@ -85,7 +83,8 @@ function DayPill(props: DayPillProps) {
     >
       <button
         onClick={() => {
-          props.setSelectedDay(props.day);
+          console.log("props.day is: ", props.day);
+          props.setSelectedDay && props.setSelectedDay(props.day);
           setFieldValue("callDate", format(props.day, 'yyyy-MM-dd'));
         }}
         disabled={isButtonDisabled(props.day)}
@@ -101,6 +100,12 @@ function DayPill(props: DayPillProps) {
             {format(props.day, 'EEE')}
           </div>
         </time>
+        <div className="w-1 h-1 mx-auto mt-1">
+          {(datesWithSlots.some((item: string) => isSameDay(parse(item, "yyyy/MM/dd", new Date()), props.day))
+          ) && (
+            <div className="w-1 h-1 rounded-full bg-sky-500"></div>
+          )}
+        </div>
       </button>
     </div>
   );

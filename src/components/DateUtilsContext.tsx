@@ -23,6 +23,7 @@ export type DateUtilsContextProps = {
   todayNumber: number;
   setToday: React.Dispatch<React.SetStateAction<Date>> | null;
   calendarDays: Date[];
+  calendarDaysDesktop: Date[];
   getCalendarDays: any; 
   getDates: (() => string[]) | null;
   getDaySlots: ((dayString: string) => Slot[]) | null;
@@ -34,12 +35,15 @@ export type DateUtilsContextProps = {
   selectedDay: Date;
   setSelectedDay: React.Dispatch<React.SetStateAction<Date>> | null;
   firstDayCurrentMonth: Date;
+  datesWithSlots: string[];
+  setSelectedDate: React.Dispatch<React.SetStateAction<string>> | null;
 };
 
 const DateUtilsContext = React.createContext<DateUtilsContextProps>({
   today: startOfToday(),
   todayNumber: parseInt(format(startOfToday(), "dd")),
   calendarDays: [],
+  calendarDaysDesktop: [],
   setToday: null,
   getCalendarDays: [],
   getDates: null,
@@ -51,7 +55,9 @@ const DateUtilsContext = React.createContext<DateUtilsContextProps>({
   currentMonth: format(startOfToday(), "MMMM yyyy"),
   selectedDay: startOfToday(),
   setSelectedDay: null,
-  firstDayCurrentMonth: parse(format(startOfToday(), 'MMM-yyyy'), 'MMM-yyyy', new Date()), 
+  firstDayCurrentMonth: parse(format(startOfToday(), 'MMM-yyyy'), 'MMM-yyyy', new Date()),
+  datesWithSlots: [],
+  setSelectedDate: null, 
 });
 
 // Custom hooks
@@ -65,6 +71,7 @@ export function DateUtilsProvider({ children }: { children: any}) {
     today,
     todayNumber,
     calendarDays,
+    calendarDaysDesktop,
     setToday,
     getCalendarDays,
     getDates,
@@ -77,6 +84,8 @@ export function DateUtilsProvider({ children }: { children: any}) {
     selectedDay,
     setSelectedDay,
     firstDayCurrentMonth,
+    datesWithSlots,
+    setSelectedDate
   } = useDateUtils();
 
   return (
@@ -85,6 +94,7 @@ export function DateUtilsProvider({ children }: { children: any}) {
         today,
         todayNumber,
         calendarDays,
+        calendarDaysDesktop,
         setToday,
         getCalendarDays,
         getDates,
@@ -97,6 +107,8 @@ export function DateUtilsProvider({ children }: { children: any}) {
         selectedDay,
         setSelectedDay,
         firstDayCurrentMonth,
+        datesWithSlots,
+        setSelectedDate
       }}
     >
       {children}
