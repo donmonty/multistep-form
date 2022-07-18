@@ -101,4 +101,9 @@ input[type=checkbox]:checked+label {
   font-style: normal;
 }
 
+input:checked + span {
+  background-color: rgb(79 70 229);
+  color: white;
+}
+
 

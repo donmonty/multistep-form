@@ -29,10 +29,12 @@ export default function Checkbox({ ...props }: OtherProps & FieldHookConfig<stri
 export function CheckboxSingle({ ...props }: CheckboxSingleProps & FieldHookConfig<string>) {
   const [field] = useField({ name: props.name, type: "checkbox" });
   return (
-    <div>
+    <div className="rounded-lg bg-slate-100 border-2 border-slate-300 overflow-hidden ">
       <label>
-        <input {...field} className="mr-2 leading-tight" type="checkbox" />
-        <span className="text-sm">{props.label}</span>
+        <input {...field} className="mr-2 leading-tight hidden" type="checkbox" />
+        <span className="flex items-center justify-center w-full text-base px-3 py-4 text-center h-16">
+          {props.label}
+        </span>
       </label>
     </div>
   );

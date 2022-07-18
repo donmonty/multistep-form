@@ -34,20 +34,20 @@ export default function IsPatient() {
     setIsAppointmentForUser(!isAppointmentForUser);
   }
 
-  const setButtonState = () => {
-    if (values.isAppointmentForYou === "yes") {
-      if (
-        !values.weightloss  &&
-        !values.sustainableHabits &&
-        !values.lowEnergy &&
-        !values.balancedDiet
-      ) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
+  // const setButtonState = () => {
+  //   if (values.isAppointmentForYou === "yes") {
+  //     if (
+  //       !values.weightloss  &&
+  //       !values.sustainableHabits &&
+  //       !values.lowEnergy &&
+  //       !values.balancedDiet
+  //     ) {
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+  //   return false;
+  // };
 
   useEffect(() => {
     if (values.isAppointmentForYou === "yes") {
@@ -55,10 +55,12 @@ export default function IsPatient() {
     } else {
       setIsAppointmentForUser(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
     loadPageSchema(location.pathname, values.isAppointmentForYou.toLowerCase());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.isAppointmentForYou]);
 
   const options = [{ key: "yes", value: "yes" }, { key: "no", value: "no" }];
@@ -80,8 +82,8 @@ export default function IsPatient() {
           
           {isAppointmentForUser ? (
             <>
-              <p className="mb-4 mt-8 text-sm font-bold">Now let's learn about your primary goals with Culina Health. Select all that apply:</p>
-              <div className="mb-6">
+              <p className="mb-6 mt-8 text-sm font-bold">Now let's learn about your primary goals with Culina Health. Select all that apply:</p>
+              <div className="grid grid-cols-2 gap-2 place-items-stretch">
                 <CheckboxSingle
                   name="weightloss"
                   label="Weightloss" 
