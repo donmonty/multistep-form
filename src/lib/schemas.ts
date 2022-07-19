@@ -14,7 +14,7 @@ import {
 
 export const initialValues = {
   // Appointment details
-  isAppointmentForYou: "yes",
+  isAppointmentForYou: "me",
   weightloss: false,
   sustainableHabits: false,
   lowEnergy: false,

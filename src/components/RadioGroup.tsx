@@ -33,12 +33,13 @@ function RadioGroup({ ...props }: OtherProps & FieldHookConfig<string>) {
 
   useEffect(() => {
     getDefaultNextStep();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div className="mb-6">
       <div role="group" >
-        {props.options.map((item: Option, index: number) => (
+        {props.options.map((item: Option) => (
           <label key={item.key} className={style()}>
             <Field
               className="mr-2"
@@ -50,7 +51,7 @@ function RadioGroup({ ...props }: OtherProps & FieldHookConfig<string>) {
                 (event: any) => {
                   helpers.setValue(event.target.value)
                   if (props.handleChange) {
-                    props.handleChange(event.target.value);
+                    props.handleChange(event);
                   }
                   if (props.transitions && props.getNextStep && props.setNextStep) {
                     const transition = props.getNextStep(event, props.transitions);
