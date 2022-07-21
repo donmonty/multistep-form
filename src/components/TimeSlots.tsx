@@ -5,16 +5,19 @@ import { Slot } from "../types";
 
 import { FormData } from "../types";
 import { useFormikContext } from "formik";
+import { Oval } from "react-loader-spinner";
 
 export type TimeSlotsProps = {
   handleChange?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function TimeSlots(props: TimeSlotsProps) {
-  const { amSlots, pmSlots, selectedDay } = useDateUtilsContext();
+  const { amSlots, pmSlots, selectedDay, loadingCalendar } = useDateUtilsContext();
   const [isAM, setIsAM] = useState<boolean>(true);
   const [selectedSlot, setSelectedSlot] = useState<Slot | Record<string, number | string>>({});
   const { setFieldValue } = useFormikContext<FormData>();
+
+  const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent rounded-xl text-indigo-600 mb-3 mt-4 w-full h-96";
 
   // console.log("callTime", values.callTime);
   // console.log("practitionerId", values.practitionerId);

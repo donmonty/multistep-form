@@ -15,7 +15,8 @@ import {
 } from 'date-fns';
 
 import { dummyDates } from '../mocks/dummyDates';
-import { Slot, DateRows } from '../types';
+import { getAvailableSlots } from "./utils";
+import { Slot, DateRows, AvailableDates, SlotsAPIResponse } from '../types';
 
 /**
  * Custom hook for managing all booking calls logic
@@ -47,21 +48,48 @@ export default function useDateUtils() {
   const [calendarDaysDesktop, setCalendarDaysDesktop] = useState<Date[]>([]);
   // const [selectedDate, setSelectedDate] = useState<string>(format(startOfToday(), 'yyyy/MM/dd'));
   const [selectedDate, setSelectedDate] = useState<string>("2022/07/17");
+
+  const [dateRows, setDateRows] = useState<DateRows | Record<string, Slot[]>>({});
+  const [availableDates, setAvailableDates] = useState<AvailableDates>([]);
   const [amSlots, setAmSlots] = useState<Slot[]>([]);
   const [pmSlots, setPmSlots] = useState<Array<Slot>>([]);
   const [todayNumber, setTodayNumber] = useState<number>(parseInt(format(today, "dd")) - 1);
   const [selectedDay, setSelectedDay] = useState<Date>(() => startOfToday());
   const [datesWithSlots, setDatesWithSlots] = useState<Array<string>>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loadingCalendar, setLoadingCalendar] = useState<boolean>(true);
+
+  let firstDay = parse(currentMonth, 'MMM-yyyy', new Date())
 
   function previousMonth() {
-    const firstDayPrevMonth = add(firstDayCurrentMonth, { months: -1 });
+    const firstDayPrevMonth = add(firstDay, { months: -1 });
+    // const firstDayPrevMonth = add(firstDayCurrentMonth, { months: -1 });
     setCurrentMonth(format(firstDayPrevMonth, 'MMM-yyyy'));
   }
 
   function nextMonth() {
-    const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
+    console.log("Clicked next month!");
+    const firstDayNextMonth = add(firstDay, { months: 1 });
+    // const firstDayNextMonth = add(firstDayCurrentMonth, { months: 1 });
     setCurrentMonth(format(firstDayNextMonth, 'MMM-yyyy'));
+    // setFirstDayCurrentMonth(parse(currentMonth, 'MMM-yyyy', new Date()));
   }
+
+  /**
+   * Loads date data from the API
+   */
+  const getAllDatesData = async () => {
+    const dates = await getAvailableSlots();
+    setAvailableDates([...dates.dates]);
+    setDateRows({...dates.dates_rows});
+    // if (dates) {
+    //   setAvailableDates([...dates.dates]);
+    //   setDateRows({...dates.dates_rows});
+    // } else {
+    //   setAvailableDates([]);
+    //   setDateRows({});
+    // }
+  };
 
   /**
    * Loads all the days for the current month as Date objects
@@ -69,20 +97,21 @@ export default function useDateUtils() {
    */
   const getCalendarDays = () => {
     const days = eachDayOfInterval({
-      start: firstDayCurrentMonth,
-      end: endOfMonth(firstDayCurrentMonth),
+      start: firstDay,
+      end: endOfMonth(firstDay),
     });
     setCalendarDaysDesktop(days);
 
     const daysDelta = eachDayOfInterval({
-      start: today,
-      end: endOfMonth(firstDayCurrentMonth)
+      start: firstDay,
+      // start: today,
+      end: endOfMonth(firstDay)
     });
 
     // If daysDelta.length < 6, add extra days from the next month to the end of the array
     // This way we make sure the carousel has 6 days in display at all times
     if (daysDelta.length < 6) {
-      const nextExtraDay = add(endOfMonth(firstDayCurrentMonth), { days: 1 });
+      const nextExtraDay = add(endOfMonth(firstDay), { days: 1 });
       const lastExtraDay = add(nextExtraDay, { days: 6 - daysDelta.length });
       const extraDays = eachDayOfInterval({
         start: nextExtraDay,
@@ -98,7 +127,8 @@ export default function useDateUtils() {
    * @returns - a list of Date objects
    */
   const getDates = () => {
-    const dates = dummyDates.dates;
+    const dates = availableDates;
+    // const dates = dummyDates.dates;
     dates.map(date => parse(date, 'yyyy/MM/dd', new Date()));
     setDatesWithSlots(dates);
     return dates;
@@ -110,10 +140,16 @@ export default function useDateUtils() {
    * @returns Time slots for a given day
    */
   const getDaySlots = (dayString: string) => {
-    const dateRows: DateRows = dummyDates.dates_rows;
+    // Commented code is for real API calls when it's ready
+    // const dates = await getAvailableSlots();
+    // if (!dates) setAvailableSlots([]);
+    // const dateRows = dates.dates_rows;
+    const dateRows: DateRows = dummyDates.dates_rows; // <-- Delete when real API is ready
     if (dateRows.hasOwnProperty(dayString)) {
+      // setAvailableSlots(dateRows[dayString]);
       return dateRows[dayString];
     }
+    // setAvailableSlots([])
     return [];
   };
 
@@ -124,7 +160,7 @@ export default function useDateUtils() {
    */
   const getAmSlots = (day: Date) => {
     const dateString = format(day, 'yyyy/MM/dd');
-    const dateRows: DateRows = dummyDates.dates_rows;
+    // const dateRows: DateRows = dummyDates.dates_rows;
     let morningSlots: Slot[] = [];
     if (dateRows.hasOwnProperty(dateString)) {
       const allSlots = dateRows[dateString];
@@ -144,7 +180,7 @@ export default function useDateUtils() {
    */
   const getPmSlots = (day: Date) => {
     const dateString = format(day, 'yyyy/MM/dd');
-    const dateRows: DateRows = dummyDates.dates_rows;
+    // const dateRows: DateRows = dummyDates.dates_rows;
     let afternoonSlots: Slot[] = [];
     if (dateRows.hasOwnProperty(dateString)) {
       const allSlots = dateRows[dateString];
@@ -157,14 +193,25 @@ export default function useDateUtils() {
     setPmSlots([...afternoonSlots]);
   };
 
-  useEffect(() => {
-    getAmSlots(selectedDay);
-    getPmSlots(selectedDay);
-  }, [selectedDay]);
+  const handleAllDates = async () => {
+    setLoadingCalendar(true);
+    await getAllDatesData();
+    getCalendarDays();
+    setLoadingCalendar(false);
+  };
 
   useEffect(() => {
+    // handleAllDates();
     getDates();
-    getCalendarDays();
+    getAmSlots(selectedDay);
+    getPmSlots(selectedDay);
+  }, [selectedDay, availableDates, currentMonth]);
+
+  useEffect(() => {
+    handleAllDates();
+    // await getAllDatesData();
+    // getDates();
+    // getCalendarDays();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMonth])
 
@@ -188,6 +235,8 @@ export default function useDateUtils() {
     firstDayCurrentMonth,
     datesWithSlots,
     setSelectedDate,
+    loading,
+    loadingCalendar,
   }
 }
 

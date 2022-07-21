@@ -37,6 +37,8 @@ export type DateUtilsContextProps = {
   firstDayCurrentMonth: Date;
   datesWithSlots: string[];
   setSelectedDate: React.Dispatch<React.SetStateAction<string>> | null;
+  loading: boolean;
+  loadingCalendar: boolean;
 };
 
 const DateUtilsContext = React.createContext<DateUtilsContextProps>({
@@ -57,7 +59,9 @@ const DateUtilsContext = React.createContext<DateUtilsContextProps>({
   setSelectedDay: null,
   firstDayCurrentMonth: parse(format(startOfToday(), 'MMM-yyyy'), 'MMM-yyyy', new Date()),
   datesWithSlots: [],
-  setSelectedDate: null, 
+  setSelectedDate: null,
+  loading: true,
+  loadingCalendar: true,
 });
 
 // Custom hooks
@@ -85,7 +89,9 @@ export function DateUtilsProvider({ children }: { children: any}) {
     setSelectedDay,
     firstDayCurrentMonth,
     datesWithSlots,
-    setSelectedDate
+    setSelectedDate,
+    loading,
+    loadingCalendar,
   } = useDateUtils();
 
   return (
@@ -108,7 +114,9 @@ export function DateUtilsProvider({ children }: { children: any}) {
         setSelectedDay,
         firstDayCurrentMonth,
         datesWithSlots,
-        setSelectedDate
+        setSelectedDate,
+        loading,
+        loadingCalendar,
       }}
     >
       {children}

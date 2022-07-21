@@ -50,6 +50,7 @@ type OtherProps = {
   label: string;
   required?: boolean;
   mask?: any;
+  handleFile?: React.Dispatch<React.SetStateAction<File | null>>;
 }
 
 export interface FileWithPreview extends File {
@@ -106,14 +107,20 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
 
   useEffect(() => {
     if (files && files[0]) {
-      if (files[0].url) {
-        helpers.setValue(files[0].url);
-        console.log("field.value:", field.value);
-      } else {
-        helpers.setValue(files[0].id);
-        console.log("field.value:", field.value);
-      }
+      props.handleFile && props.handleFile(files[0].file);
     }
+    // if (files && files[0]) {
+    //   if (files[0].url) {
+    //     console.log("Entering if...");
+    //     console.log("files[0].url:", files[0].url);
+    //     helpers.setValue(files[0].url);
+    //     props.handleFile && props.handleFile(files[0].file);
+    //     // console.log("field.value:", field.value);
+    //   } else {
+    //     helpers.setValue(files[0].id);
+    //     console.log("field.value:", field.value);
+    //   }
+    // }
   }, [files]);
 
   // useEffect(() => {
@@ -155,7 +162,7 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
 
   const imagePlaceholder = (
     <div className="w-60 h-32 bg-slate-100 rounded-lg border-2 border-dashed border-slate-500">
-      <div className='flex-col justify-center items-center pt-6'>
+      <div className='flex flex-col justify-center items-center pt-6'>
         <PhotographIcon className="block m-auto w-14 h-14 self-center" />
         <p className='m-auto text-center text-sm'>{props.label}</p>
       </div>
@@ -170,6 +177,9 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
           {files[0] && files[0]?.url ? (
             imagePreview
           ): imagePlaceholder}
+          {fileRejections.length > 0 && (
+            <span className="block mt-2 text-sm font-medium text-red-600">Please try another file</span>
+          )}
         </div>
       </div>
     </>

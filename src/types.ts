@@ -50,6 +50,13 @@ export type DateRows = {
   [key: string]: Slot[];
 }
 
+export type AvailableDates = string[];
+
+export type SlotsAPIResponse = {
+  dates: AvailableDates;
+  dates_rows: DateRows;
+}
+
 export interface FormData {
   isAppointmentForYou: string;
   weightloss: boolean;

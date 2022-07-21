@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StripeCardNumberElement } from "@stripe/stripe-js";
-import client from "../lib/api"
+import { client } from "../lib/api"
 import { FormData } from "../types";
 import { useFormikContext } from "formik";
 

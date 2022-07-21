@@ -1,18 +1,18 @@
 export const dummyDates = {
   "dates": [
-    "2022/07/17", 
-    "2022/07/18", 
-    "2022/07/19", 
     "2022/07/20", 
+    "2022/07/21", 
+    "2022/07/22", 
     "2022/07/23", 
+    "2022/07/24", 
     "2022/07/25", 
+    "2022/07/26", 
     "2022/07/27", 
-    "2022/07/31", 
-    "2022/08/02", 
-    "2022/08/03"
+    "2022/08/28", 
+    "2022/08/29"
   ], 
   "dates_rows": {
-    "2022/07/17": [
+    "2022/07/20": [
       {
         "practitioner_id": 1, 
         "slots_id": 111, 
@@ -59,7 +59,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/18": [
+    "2022/07/21": [
       {
         "practitioner_id": 1, 
         "slots_id": 120, 
@@ -101,7 +101,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/19": [
+    "2022/07/22": [
       {
         "practitioner_id": 1, 
         "slots_id": 128, 
@@ -148,7 +148,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/20": [
+    "2022/07/23": [
       {
         "practitioner_id": 1, 
         "slots_id": 137, 
@@ -195,7 +195,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/23": [
+    "2022/07/24": [
       {
         "practitioner_id": 1, 
         "slots_id": 146, 
@@ -284,7 +284,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/27": [
+    "2022/07/26": [
       {
         "practitioner_id": 1, 
         "slots_id": 163, 
@@ -326,7 +326,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/07/31": [
+    "2022/07/27": [
       {
         "practitioner_id": 1, 
         "slots_id": 171, 
@@ -378,7 +378,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/08/02": [
+    "2022/08/28": [
       {
         "practitioner_id": 1, 
         "slots_id": 181, 
@@ -425,7 +425,7 @@ export const dummyDates = {
         "time": "18:00:00"
       }
     ], 
-    "2022/08/03": [
+    "2022/08/29": [
       {
         "practitioner_id": 1, 
         "slots_id": 190, 

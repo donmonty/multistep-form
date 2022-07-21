@@ -30,7 +30,8 @@ type DayPillProps = {
 function DayPill(props: DayPillProps) {
 
   const { setFieldValue } = useFormikContext<FormData>();
-  const { datesWithSlots, firstDayCurrentMonth } = useDateUtilsContext();
+  const { datesWithSlots, firstDayCurrentMonth, currentMonth, selectedDay } = useDateUtilsContext();
+  let firstDay = parse(currentMonth, 'MMM-yyyy', new Date())
 
   /**
    * Check if the day button should be disabled
@@ -65,11 +66,11 @@ function DayPill(props: DayPillProps) {
           'text-red-500',
         !isEqual(props.day, props.selectedDay) &&
           !isToday(props.day) &&
-          isSameMonth(props.day, firstDayCurrentMonth) &&
+          isSameMonth(props.day, firstDay) &&
           'text-gray-900',
         !isEqual(props.day, props.selectedDay) &&
           !isToday(props.day) &&
-          !isSameMonth(props.day, firstDayCurrentMonth) &&
+          !isSameMonth(props.day, firstDay) &&
           'text-gray-400',
         isEqual(props.day, props.selectedDay) && isToday(props.day) && 'bg-red-500',
         isEqual(props.day, props.selectedDay) &&
@@ -83,7 +84,6 @@ function DayPill(props: DayPillProps) {
     >
       <button
         onClick={() => {
-          console.log("props.day is: ", props.day);
           props.setSelectedDay && props.setSelectedDay(props.day);
           setFieldValue("callDate", format(props.day, 'yyyy-MM-dd'));
         }}
