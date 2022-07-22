@@ -165,7 +165,7 @@ export const appointmentSchema01 = Yup.object({
 //   return true;
 // })
 
-export const appointmentSchema02 = Yup.object({
+export const appointmentSchema = Yup.object({
   isAppointmentForYou: Yup.string().required(),
 });
 

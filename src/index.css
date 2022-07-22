@@ -31,10 +31,10 @@
   [multiple],
   textarea,
   select {
-    @apply w-full border-gray-300 rounded-lg shadow-sm focus:border-indigo-500 focus:ring-indigo-500;
+    @apply w-full border-gray-300 bg-figGray-300 p-5 shadow-sm focus:border-figOrange-700 focus:ring-figOrange-700;
   }
   [type="checkbox"],
   [type="radio"] {
-    @apply border-gray-300 rounded text-indigo-600 focus:ring-indigo-500;
+    @apply border-gray-700 rounded-full text-black;
   }
 }

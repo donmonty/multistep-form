@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 
 import {
-  appointmentSchema01,
-  appointmentSchema02,
+  appointmentSchema,
   reasonsSchema,
   userSchema,
   patientSchema,
@@ -18,20 +17,21 @@ import {
 
 export default function useSchemaContext() {
 
-  const [currentSchema, setCurrentSchema] = useState<any>(appointmentSchema01);
+  const [currentSchema, setCurrentSchema] = useState<any>(appointmentSchema);
 
   const loadPageSchema = (page: string, option?: string) => {
     switch (page) {
       case "/is-patient":
-        if (option) {
-          if (option === "yes") {
-            setCurrentSchema(appointmentSchema01);
-          } else {
-            setCurrentSchema(appointmentSchema02);
-          }
-        } else {
-          setCurrentSchema(appointmentSchema01);
-        }
+        setCurrentSchema(appointmentSchema);
+        // if (option) {
+        //   if (option === "yes") {
+        //     setCurrentSchema(appointmentSchema01);
+        //   } else {
+        //     setCurrentSchema(appointmentSchema02);
+        //   }
+        // } else {
+        //   setCurrentSchema(appointmentSchema01);
+        // }
         break;
       case "/reasons":
         setCurrentSchema(reasonsSchema);
