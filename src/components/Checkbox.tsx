@@ -29,10 +29,10 @@ export default function Checkbox({ ...props }: OtherProps & FieldHookConfig<stri
 export function CheckboxSingle({ ...props }: CheckboxSingleProps & FieldHookConfig<string>) {
   const [field] = useField({ name: props.name, type: "checkbox" });
   return (
-    <div className="rounded-lg bg-slate-100 border-2 border-slate-300 overflow-hidden ">
+    <div className="rounded-lg bg-white overflow-hidden lg:border-figGray-400 lg:border-2">
       <label>
         <input {...field} className="mr-2 leading-tight hidden" type="checkbox" />
-        <span className="flex items-center justify-center w-full text-base px-3 py-4 text-center h-16">
+        <span className="flex items-center justify-center w-full text-figGray-800 font-Montserrat font-semibold leading-4 text-sm px-3 py-4 text-center h-16">
           {props.label}
         </span>
       </label>

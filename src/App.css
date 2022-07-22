@@ -102,7 +102,7 @@ input[type=checkbox]:checked+label {
 }
 
 input:checked + span {
-  background-color: rgb(79 70 229);
+  background-color: black;
   color: white;
 }
 

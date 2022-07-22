@@ -5,6 +5,16 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Capri Sans";
+  src: url("./fonts/CapriSans.otf");
+}
+
+@font-face {
+  font-family: "Osaka Regular";
+  src: url("./fonts/Osaka.ttf");
+}
+
 @layer base {
   [type="text"],
   [type="email"],

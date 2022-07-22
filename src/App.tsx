@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { DateUtilsProvider } from './components/DateUtilsContext';
 import { useSchemaContext } from "./components/SchemaContext";
 import { initialValues } from "./lib/schemas";
 
@@ -10,6 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { Formik } from 'formik';
 
 import IsPatient from "./routes/IsPatient";
+import Reasons from "./routes/Reasons";
 import UserDetails from "./routes/UserDetails";
 import Page3 from "./routes/page3";
 import PatientDetails from "./routes/PatientDetails";
@@ -24,7 +24,6 @@ import StripeCard from "./routes/StripeCard";
 
 // const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
 const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
-
 
 export default function App() {
 
@@ -41,6 +40,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="is-patient" element={<IsPatient />} />
+            <Route path="reasons" element={<Reasons />} />
             <Route path="user-details" element={<UserDetails />} />
             <Route path="patient-details" element={<PatientDetails />} />
             <Route path="select-time" element={<Calendar />}/>

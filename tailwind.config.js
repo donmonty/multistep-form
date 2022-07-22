@@ -28,10 +28,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        MontserratRegular: ["Montserrat", "sans-serif"],
-        MontserratMedium: ["Montserrat", "sans-serif"],
-        MontserratSemiBold: ["Montserrat", "sans-serif"],
-        MontserratBold: ["Montserrat", "sans-serif"],
+        Montserrat: ["Montserrat", "sans-serif"],
+        CapriSans: ['"Capri Sans"', "sans-serif"],
+        Osaka: ["Osaka\\ Regular", "sans-serif"],
       }
     },
     screens: {

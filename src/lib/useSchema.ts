@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import {
   appointmentSchema01,
   appointmentSchema02,
+  reasonsSchema,
   userSchema,
   patientSchema,
   callDetailsSchema,
@@ -31,6 +32,9 @@ export default function useSchemaContext() {
         } else {
           setCurrentSchema(appointmentSchema01);
         }
+        break;
+      case "/reasons":
+        setCurrentSchema(reasonsSchema);
         break;
       case "/user-details":
         setCurrentSchema(userSchema);

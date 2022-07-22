@@ -15,10 +15,19 @@ import {
 export const initialValues = {
   // Appointment details
   isAppointmentForYou: "me",
-  weightloss: false,
-  sustainableHabits: false,
-  lowEnergy: false,
-  balancedDiet: false,
+  // Reasons for visit
+  healthyEating: false,
+  weightManagement: false,
+  heartHealth: false,
+  hormonalDisorders: false,
+  diabetes: false,
+  fertilityNutrition: false,
+  sportsNutrition: false,
+  foodAllergies: false,
+  relationshipFood: false,
+  oncology: false,
+  gutLiverKidney: false,
+  otherReason: false,
   goalSelection: "",
   // User details
   firstName: "",
@@ -61,6 +70,67 @@ export const initialValues = {
   phoneNumber: "",
   aboutUs: "social media",
 };
+
+export const reasonsSchema = Yup.object({
+  healthyEating: Yup.boolean(),
+  weightManagement: Yup.boolean(),
+  heartHealth: Yup.boolean(),
+  hormonalDisorders: Yup.boolean(),
+  diabetes: Yup.boolean(),
+  fertilityNutrition: Yup.boolean(),
+  sportsNutrition: Yup.boolean(),
+  foodAllergies: Yup.boolean(),
+  relationshipFood: Yup.boolean(),
+  oncology: Yup.boolean(),
+  gutLiverKidney: Yup.boolean(),
+  otherReason: Yup.boolean(),
+  reasonSelection: Yup.string().when([
+    "healthyEating",
+    "weightManagement",
+    "heartHealth",
+    "hormonalDisorders",
+    "diabetes",
+    "fertilityNutrition",
+    "sportsNutrition",
+    "foodAllergies",
+    "relationshipFood",
+    "oncology",
+    "gutLiverKidney",
+    "otherReason",
+  ], {
+    is: (
+      healthyEating: boolean,
+      weightManagement: boolean,
+      heartHealth: boolean,
+      hormonalDisorders: boolean,
+      diabetes: boolean,
+      fertilityNutrition: boolean,
+      sportsNutrition: boolean,
+      foodAllergies: boolean,
+      relationshipFood: boolean,
+      oncology: boolean,
+      gutLiverKidney: boolean,
+      otherReason: boolean,
+    ) => {
+      return (
+        !healthyEating &&
+        !weightManagement &&
+        !heartHealth &&
+        !hormonalDisorders &&
+        !diabetes &&
+        !fertilityNutrition &&
+        !sportsNutrition &&
+        !foodAllergies &&
+        !relationshipFood &&
+        !oncology &&
+        !gutLiverKidney &&
+        !otherReason 
+      )
+    },
+    then: Yup.string().required("Please select a reason"),
+    otherwise: Yup.string().notRequired(),
+  })
+});
 
 export const appointmentSchema01 = Yup.object({
   // isAppointmentForYou: Yup.string().required("Please select an option"),
