@@ -25,6 +25,12 @@ import {
 import BirthdateField from "../components/BirthdateField";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 
+const states = [
+  { key: "CA", value: "CA" },
+  { key: "AZ", value: "AZ" },
+  { key: "TX", value: "TX" },
+];
+
 
 export default function UserDetails() {
   let navigate = useNavigate();
@@ -32,17 +38,17 @@ export default function UserDetails() {
 
   const { values, setFieldValue, validateForm, setTouched, errors } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const patientRelationships = [
-    { key: "dependant", value: "Dependant" },
-    { key: "other", value: "Other" },
-  ];
-  const nextStep = "/select-time";
+  // const patientRelationships = [
+  //   { key: "dependant", value: "Dependant" },
+  //   { key: "other", value: "Other" },
+  // ];
+  const nextStep = "/patient-details";
 
-  const validateEmptyFields = () => {
-    if (values.firstName === "" && values.lastName === "") {
-      return true;
-    }
-  };
+  // const validateEmptyFields = () => {
+  //   if (values.firstName === "" && values.lastName === "") {
+  //     return true;
+  //   }
+  // };
 
   useEffect(() => {
     loadPageSchema(location.pathname);
@@ -67,14 +73,22 @@ export default function UserDetails() {
             mask={dateOfBirthMask}
           />
           <InputField name="email" label="Email" required={true}/>
+          <InputField name="street" label="Street" required={true}/>
+          <InputField name="city" label="City"required={true}/>
+          <SelectField
+            name="state"
+            label="State"
+            options={states}
+          />
+          <InputField name="zipcode" label="Zipcode"required={true}/>
 
-          {values.isAppointmentForYou.toLowerCase() === "no" ? (
+          {/* {values.isAppointmentForYou.toLowerCase() === "no" ? (
             <SelectField
               name="patientRelationship"
               label="Relatonship with patient"
               options={patientRelationships}
             />
-          ): null}
+          ): null} */}
 
           <button
             className={buttonStyles}

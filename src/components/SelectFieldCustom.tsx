@@ -40,14 +40,12 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
 
   return (
     <div className="mb-5">
-      {/* <label className="block text-sm font-medium text-gray-700">{props.label}</label> */}
 
       <label className="custom-select">
         <select
           className="text-base font-Montserrat pt-8 pb-4"
           // disabled={disabled}
-          // readOnly={readonly}
-          defaultValue={props.options[0].value}
+          // defaultValue={props.options[0].value}
           {...field}
           onChange={
             (event: any) => {

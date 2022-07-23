@@ -15,31 +15,23 @@ import {
 export const initialValues = {
   // Appointment details
   isAppointmentForYou: "me",
-  // Reasons for visit
-  healthyEating: false,
-  weightManagement: false,
-  heartHealth: false,
-  hormonalDisorders: false,
-  diabetes: false,
-  fertilityNutrition: false,
-  sportsNutrition: false,
-  foodAllergies: false,
-  relationshipFood: false,
-  oncology: false,
-  gutLiverKidney: false,
-  otherReason: false,
-  goalSelection: "",
+  // Reason for visit
+  reasonForVisit: "healthy eating",
   // User details
   firstName: "",
   lastName: "",
   birthDate: "",
   email: "",
-  patientRelationship: "dependant",
+  street: "",
+  city: "",
+  state:"",
+  zipcode: "",
   // Patient details
   patientFirstName: "",
   patientLastName: "",
   patientBirthDate: "",
   patientEmail: "",
+  patientRelationship: "dependant",
   // Call details
   callDate: "",
   callTime: "",
@@ -55,7 +47,7 @@ export const initialValues = {
   policyHolderAddress: "",
   policyHolderCity: "",
   policyHolderState: "CA",
-  insuranceCompany: "Company A",
+  policyHolderZip: "",
   // Card info
   cardName: "",
   cardNumber: "",
@@ -151,22 +143,10 @@ export const appointmentSchema01 = Yup.object({
     otherwise: Yup.string().notRequired()
   }) 
 })
-// .atLeastOneOf(["weightloss", "sustainableHabits", "lowEnergy", "balancedDiet"])
-// .test('at-least-one-property', "you must provide at least one", (value) => {
-//   if (
-//     value.weightloss === false ||
-//     value.sustainableHabits === false ||
-//     value.lowEnergy === false ||
-//     value.balancedDiet === false
-//   ) {
-//     console.log("FALSE")
-//     return false;
-//   }
-//   return true;
-// })
 
 export const appointmentSchema = Yup.object({
   isAppointmentForYou: Yup.string().required(),
+  reasonForVisit: Yup.string().required(),
 });
 
 export const userSchema = Yup.object({
@@ -183,13 +163,17 @@ export const userSchema = Yup.object({
         return difference >= 120 ? false : true
       }
       return false;
-  })
+  }),
+  street: Yup.string().required("Street is required"),
+  city: Yup.string().required("City is required"),
+  state: Yup.string().required("State is required"),
+  zipcode: Yup.string().required("Zipcode is required"),
 });
 
 export const patientSchema = Yup.object({
   patientFirstName: Yup.string().required("First name is required"),
   patientLastName: Yup.string().required("Last name is required"),
-  patientEmail: Yup.string().email().required("Email is required"),
+  patientEmail: Yup.string().email().notRequired(),
   patientBirthDate: Yup.string()
     .test("validateDate", "Invalid date", (value) => {
       const date = moment(value, "DD-MM-YYYY");
@@ -199,7 +183,8 @@ export const patientSchema = Yup.object({
         return difference >= 120 ? false : true
       }
       return false;
-  })
+  }),
+  patientRelationship: Yup.string().required("Relationship is required"),
 });
 
 export const callDetailsSchema = Yup.object({
@@ -231,7 +216,7 @@ export const policyInfoSchema = Yup.object({
   policyHolderAddress: Yup.string().required("Address is required"),
   policyHolderCity: Yup.string().required("City is required"),
   policyHolderState: Yup.string(),
-  insuranceCompany: Yup.string(),
+  policyHolderZip: Yup.string().required("Zipcode is required"),
 });
 
 export const policyInfoSchema01 = Yup.object({

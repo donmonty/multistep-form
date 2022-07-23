@@ -4,6 +4,7 @@ import { useFormikContext } from "formik";
 import { useSchemaContext } from "../components/SchemaContext";
 import { handleNav } from "../lib/utils";
 import useUploadImages from "../lib/useUploadImages"
+import { uploadCardImage } from "../lib/utils";
 import { client } from "../lib/api"
 
 import { FormData } from "../types";
@@ -29,24 +30,28 @@ export default function InsuranceCard() {
 
   const customHook = useUploadImages();
 
+  /**
+   * Uploads the front and back card images to a S3 bucket
+   * @returns True if successful, false if not
+   */
   const uploadImages = async () => {
     console.log("Executing uploadImages...");
-    if (cardFrontImage && cardBackImage) {
+    if (cardFrontImage && cardBackImage) { // If both images have been successfully loaded on the image dropzone
       console.log("Card files OK!");
       setLoading(true);
-      // const cardFront = await uploadCardImage(cardFrontImage);
-      // const cardBack = await uploadCardImage(cardBackImage);
-      const cardFront = "fake-card-front-url";
-      const cardBack = "fake-card-back-url";
+      // const cardFront = await uploadCardImage(cardFrontImage); <-- Uncomment. This gets the real URL of uploaded the image.
+      // const cardBack = await uploadCardImage(cardBackImage); <-- Uncomment. This gets the real URL of the uploaded image.
+      const cardFront = "fake-card-front-url"; // <-- Comment after testing, this URL is fake
+      const cardBack = "fake-card-back-url"; // <-- Comment after testing, this URL is fake
 
       if (cardFront && cardBack) {
         console.log("Card images uploaded!");
         setFrontImageUrl(cardFront);
         setBackImageUrl(cardBack);
 
-        customHook.setFieldValue("insuranceCardFront", cardFront);
-        // setFieldValue("insuranceCardFront", cardFront);
-        setFieldValue("insuranceCardBack", cardBack);
+        // customHook.setFieldValue("insuranceCardFront", cardFront);
+        setFieldValue("insuranceCardFront", cardFront); // <-- store the URL in the formik state
+        setFieldValue("insuranceCardBack", cardBack); // <-- store the URL in the formik state
 
         setLoading(false);
         return true;
@@ -139,7 +144,7 @@ export default function InsuranceCard() {
             }
           }
         >
-          Print Secure URL
+          Print Secure S3 URL (for testing only)
         </button>
 
         {loading ? (

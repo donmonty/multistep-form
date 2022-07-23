@@ -54,7 +54,17 @@ export default function Insurance() {
               navigate("/policy-info");
             }}
           >
-            Yes
+            I have one of the insurances above
+          </button>
+          <button
+            type="submit"
+            className={buttonStyles}
+            onClick={() => {
+              setFieldValue("hasInsurance", "other");
+              navigate("/policy-info");
+            }}
+          >
+            I have another insurance
           </button>
           <button
             className={buttonStyles}
@@ -63,7 +73,7 @@ export default function Insurance() {
               navigate("/stripe-card");
             }}
           >
-            No
+            Continue without insurance
           </button>
         </div>
         

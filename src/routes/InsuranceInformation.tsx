@@ -13,7 +13,7 @@ import RadioGroup from "../components/RadioGroup";
 import InputField from "../components/InputField";
 import BirthdateField from "../components/BirthdateField";
 import { dateOfBirthMask } from "../components/masks";
-import SelectFieldCustom from "../components/SelectField";
+import SelectField from "../components/SelectField";
 import { handleNav } from "../lib/utils";
 import { ChevronLeftIcon } from "@heroicons/react/solid";
 
@@ -34,11 +34,11 @@ export default function PolicyInfo() {
     { key: "AZ", value: "AZ" },
     { key: "TX", value: "TX" },
   ];
-  // const insuranceCompanies = [
-  //   { key: "company a", value: "Company A"},
-  //   { key: "company b", value: "Company B"},
-  //   { key: "company c", value: "Company C"},
-  // ];
+  const insuranceCompanies = [
+    { key: "company a", value: "Company A"},
+    { key: "company b", value: "Company B"},
+    { key: "company c", value: "Company C"},
+  ];
 
   const nextStep = "/insurance-card";
 
@@ -102,21 +102,16 @@ export default function PolicyInfo() {
                 label="City"
                 required={true}
               />
-              <SelectFieldCustom
+              <SelectField
                 name="policyHolderState"
                 label="State"
                 options={states}
               />
-              <InputField
-                name="policyHolderZip"
-                label="Zip"
-                required={true}
-              />
-              {/* <SelectField
+              <SelectField
                 name="insuranceCompany"
                 label="Insurance company"
                 options={insuranceCompanies}
-              /> */}
+              />
             </div>
           ): null}
         </div>

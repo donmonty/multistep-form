@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 
 import InputField from "../components/InputField";
+import SelectFieldCustom from "../components/SelectFieldCustom";
 import { ChevronLeftIcon } from '@heroicons/react/solid';
 
 import {
@@ -15,6 +16,11 @@ import { FormData } from "../types";
 import { handleNav } from "../lib/utils";
 import BirthdateField from "../components/BirthdateField";
 
+const patientRelationships = [
+  { key: "dependant", value: "Dependant" },
+  { key: "other", value: "Other" },
+];
+
 
 export default function PatientDetails() {
 
@@ -23,24 +29,24 @@ export default function PatientDetails() {
 
   const { values, setFieldValue, validateForm, setTouched, errors } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const nextStep = "/user-details";
+  const nextStep = "/select-time";
 
-  const validateEmptyFields = () => {
-    if (
-      values.patientFirstName === "" ||
-      values.patientLastName === "" ||
-      values.patientEmail === "" ||
-      values.patientBirthDate === "" ||
-      errors.patientFirstName ||
-      errors.patientLastName ||
-      errors.patientEmail ||
-      errors.patientBirthDate
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  };
+  // const validateEmptyFields = () => {
+  //   if (
+  //     values.patientFirstName === "" ||
+  //     values.patientLastName === "" ||
+  //     values.patientEmail === "" ||
+  //     values.patientBirthDate === "" ||
+  //     errors.patientFirstName ||
+  //     errors.patientLastName ||
+  //     errors.patientEmail ||
+  //     errors.patientBirthDate
+  //   ) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // };
 
   useEffect(() => {
     loadPageSchema(location.pathname);
@@ -65,6 +71,11 @@ export default function PatientDetails() {
             mask={dateOfBirthMask}
           />
           <InputField name="patientEmail" label="Patient's email"required={true}/>
+          <SelectFieldCustom
+            name="patientRelationship"
+            label="Relatonship with patient"
+            options={patientRelationships}
+          />
         </div>
 
         <button

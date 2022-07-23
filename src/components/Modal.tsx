@@ -15,24 +15,25 @@ export default function Modal({handleIsModalVisible, isModalVisible, children }:
     return (
       <div className='relative'>
         <div
-          className="absolute top-0 inset-0 h-144 bg-black opacity-50 h-screen"
+          className="absolute top-0 inset-0 bg-black/50 h-screen"
           onClick={() => handleIsModalVisible(false)}
         >
-        </div>
-
-        <div className="absolute inset-6 bg-white z-40 h-fit pt-10 px-9 border-4 border-figOrange-700 drop-shadow-lg">
-          <div className="flex flex-col justify-between items-center h-full">
-            { children }
-            <div className='w-72 mt-5 mb-5'>
-              <button
-                onClick={() => handleIsModalVisible(false)}
-                className={primaryBtnStyles}
-              >
-                Ok
-              </button>
+          
+          <div className="absolute inset-6 bg-white z-40 h-fit pt-10 px-9 border-4 border-figOrange-700 drop-shadow-lg">
+            <div className="flex flex-col justify-between items-center">
+              { children }
+              <div className='w-72 mt-5 mb-5'>
+                <button
+                  onClick={() => handleIsModalVisible(false)}
+                  className={primaryBtnStyles}
+                >
+                  Ok
+                </button>
+              </div>
             </div>
           </div>
         </div>
+
 
       </div>
     );

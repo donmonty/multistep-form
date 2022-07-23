@@ -28,6 +28,9 @@ const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
 export default function App() {
 
   const { currentSchema } = useSchemaContext();
+
+  // This is the function that will be called when the user clicks the submit button
+  // in the last page of the form.
   const onSubmit = (values: any) => alert(JSON.stringify(values, null, 2))
 
   return (
