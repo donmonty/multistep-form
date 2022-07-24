@@ -13,7 +13,7 @@ function BirthdateField({ ...props }: OtherProps & FieldHookConfig<string>){
   const [field, meta, helpers] = useField(props);
 
   return (
-    <div className="flex flex-col mb-4">
+    <div className="flex flex-col">
       <label className="custom-field">
         <input
           { ...field }

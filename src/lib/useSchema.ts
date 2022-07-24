@@ -33,6 +33,9 @@ export default function useSchemaContext() {
         //   setCurrentSchema(appointmentSchema01);
         // }
         break;
+      case "/your-details":
+        setCurrentSchema(userSchema);
+        break;
       case "/reasons":
         setCurrentSchema(reasonsSchema);
         break;

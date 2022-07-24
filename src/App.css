@@ -37,12 +37,10 @@
   }
 }
 
-
-
 .custom-field {
   position: relative;
   font-size: 14px;
-  min-width: 300px;
+  /* min-width: 300px; */
   /* border-top: 20px solid transparent; */
   /* margin-bottom: 5px; */
   --field-padding: 12px;
@@ -70,7 +68,7 @@
   width: 100%;
   outline: none;
   font-size: 14px;
-  min-height: 45px;
+  min-height: 60px;
 }
 
 .custom-field .placeholder {
@@ -80,7 +78,8 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  top: 22px;
+  font-family: 'Montserrat', sans-serif;
+  top: 28px;
   line-height: 100%;
   transform: translateY(-50%);
   color: #aaa;
@@ -148,6 +147,13 @@ input:checked + span {
     background-size: 65% auto;
     background-position: right bottom;
   }
+
+  .couple-xs {
+    background-image: url("./images/couple-lg.png");
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    background-position: bottom;
+  }
 }
 
 @media (min-width: 640px) {
@@ -157,6 +163,14 @@ input:checked + span {
     background-size: 32% auto;
     background-position: right bottom;
   }
+
+  .couple-md {
+    background-image: url("./images/couple-lg.png");
+    background-repeat: no-repeat;
+    background-size: 32% auto;
+    background-position: right bottom;
+  }
+  
 }
 
 @media (min-width: 1024px) {
@@ -171,6 +185,17 @@ input:checked + span {
     background-size: 110% auto;
     /* background-size: contain; */
     background-position: center;
+  }
+
+  .couple-none {
+    background-image: none;
+  }
+
+  .couple-lg {
+    background-image: url("./images/couple-lg.png");
+    background-repeat: no-repeat;
+    background-size: 150% auto;
+    background-position: right -300px bottom 0px;
   }
 }
 

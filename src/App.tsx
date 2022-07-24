@@ -9,6 +9,7 @@ import { Elements } from "@stripe/react-stripe-js";
 import { Formik } from 'formik';
 
 import IsPatient from "./routes/IsPatient";
+import YourDetails from "./routes/YourDetails";
 import Reasons from "./routes/Reasons";
 import UserDetails from "./routes/UserDetails";
 import Page3 from "./routes/page3";
@@ -43,6 +44,7 @@ export default function App() {
         <BrowserRouter>
           <Routes>
             <Route path="is-patient" element={<IsPatient />} />
+            <Route path="your-details" element={<YourDetails />} />
             <Route path="reasons" element={<Reasons />} />
             <Route path="user-details" element={<UserDetails />} />
             <Route path="patient-details" element={<PatientDetails />} />

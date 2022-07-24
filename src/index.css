@@ -16,7 +16,9 @@
 }
 
 @layer base {
-  [type="text"],
+  [type="text"] {
+    @apply w-full border-figGray-200 bg-figGray-200 p-5 shadow-sm focus:border-figOrange-700 focus:ring-figOrange-700;
+  }
   [type="email"],
   [type="url"],
   [type="password"],

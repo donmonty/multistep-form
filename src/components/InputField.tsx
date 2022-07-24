@@ -11,9 +11,10 @@ type OtherProps = {
 function InputField({ ...props }: OtherProps & FieldHookConfig<string>) {
   const [field, meta, helpers] = useField(props);
   return (
-    <div className="flex flex-col mb-4" >
+    <div className="flex flex-col" >
       <label className="custom-field">
         <input
+          className="font-Montserrat"
           required={props.required ? props.required: false}
           {...field}
           onChange={(e) => {
