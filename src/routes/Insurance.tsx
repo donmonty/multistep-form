@@ -9,7 +9,6 @@ import {
   useNavigate,
   useLocation,
 } from "react-router-dom";
-import { ChevronLeftIcon } from "@heroicons/react/solid";
 
 export default function Insurance() {
   let navigate = useNavigate();
@@ -20,63 +19,70 @@ export default function Insurance() {
 
   useEffect(() => {
     loadPageSchema(location.pathname);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const buttonStyles = "flex mr-3 justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 mb-3";
-
-  const providerStyles = "w-32 h-16 rounded-md bg-slate-100 border-gray-300 border-2 mb-2 mr-2 text-center pt-4";
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   return (
-    <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
-        <div>
-          <button className="align-self-start" onClick={() => navigate(-1)}>
-            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-          </button>
-          <h1 className="text-3xl font-extrabold mb-3">We partner with insurance</h1>
-          <p className="mb-6 text-sm font-bold">Is any of the following your provider?</p>
-          <div className="flex flex-wrap mb-8">
-            <div className={providerStyles}> Provider 1</div>
-            <div className={providerStyles}>Provider 2</div>
-            <div className={providerStyles}> Provider 3</div>
-            <div className={providerStyles}> Provider 4</div>
-            <div className={providerStyles}> Provider 5</div>
-            <div className={providerStyles}> Provider 6</div>
+    <div className="relative bg-figGray-300 h-fit lg:h-screen">
+      <div className="w-full p-4 h-16 bg-white"></div>
+      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+
+        {/* Image container */}
+        <div className="lg:flex lg:flex-col lg:justify-end man-phone-lg lg:min-h-[640px] lg:min-w-[535px]"></div>
+
+        {/* White area */}
+        <div className="bg-white man-phone-xs man-phone-none lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px]">
+          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
+            <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 3 of 5</p>
+            <h1 className="text-4xl font-extrabold mb-7">We partner with insurance</h1>
+            <p className="md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Is any of the following your provider?</p>
+
+
+            {/* Form fields */}
+            <div className="grid grid-cols-3 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-2 place-items-stretch">
+
+              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200"></div>
+
+              <button
+                className={`${primaryBtnStyles} xs:py-2 xs:mt-40 leading-3 text-xs col-span-3 lg:col-span-4 lg:mt-14`}
+                onClick={() => {
+                  setFieldValue("hasInsurance", "yes");
+                  navigate("/insurance-information");
+                }}
+              >
+                I HAVE ONE OF THE INSURANCES ABOVE
+              </button>
+              <button
+                type="submit"
+                className={`${primaryBtnStyles} text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0`}
+                onClick={() => {
+                  setFieldValue("hasInsurance", "other");
+                  navigate("/insurance-information");
+                }}
+              >
+                I HAVE ANOTHER INSURANCE
+              </button>
+              <button
+                className={`${primaryBtnStyles} xs:py-2 leading-3 text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0`}
+                onClick={() => {
+                  setFieldValue("hasInsurance", "no");
+                  navigate("/stripe-card");
+                }}
+              >
+                CONTINUE WITHOUT INSURANCE
+              </button>
+            </div>
+
           </div>
         </div>
-        
-        <div>
-          <button
-            type="submit"
-            className={buttonStyles}
-            onClick={() => {
-              setFieldValue("hasInsurance", "yes");
-              navigate("/policy-info");
-            }}
-          >
-            I have one of the insurances above
-          </button>
-          <button
-            type="submit"
-            className={buttonStyles}
-            onClick={() => {
-              setFieldValue("hasInsurance", "other");
-              navigate("/policy-info");
-            }}
-          >
-            I have another insurance
-          </button>
-          <button
-            className={buttonStyles}
-            onClick={() => {
-              setFieldValue("hasInsurance", "no");
-              navigate("/stripe-card");
-            }}
-          >
-            Continue without insurance
-          </button>
-        </div>
-        
+
       </div>
     </div>
   );
