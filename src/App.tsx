@@ -16,6 +16,7 @@ import Page3 from "./routes/page3";
 import PatientDetails from "./routes/PatientDetails";
 import Calendar from "./routes/calendar";
 import Insurance from "./routes/Insurance";
+import InsuranceInformation from "./routes/InsuranceInformation";
 import PolicyInfo from "./routes/PolicyInfo";
 import CreditCard from "./routes/CreditCard";
 import InsuranceCard from "./routes/InsuranceCard";
@@ -50,6 +51,7 @@ export default function App() {
             <Route path="patient-details" element={<PatientDetails />} />
             <Route path="select-time" element={<Calendar />}/>
             <Route path="insurance-provider" element={<Insurance />}/>
+            <Route path="insurance-information" element={<InsuranceInformation />}/>
             <Route path="policy-info" element={<PolicyInfo />}/>
             <Route path="credit-card" element={<CreditCard />}/>
             <Route path="insurance-card" element={<InsuranceCard />}/>

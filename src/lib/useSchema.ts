@@ -51,6 +51,17 @@ export default function useSchemaContext() {
       case "/insurance-provider":
         setCurrentSchema(insuranceSchema);
         break;
+      case "/insurance-information":
+        if (option) {
+          if (option === "yes") {
+            setCurrentSchema(policyInfoSchema01);
+          } else {
+            setCurrentSchema(policyInfoSchema);
+          }
+        } else {
+          setCurrentSchema(policyInfoSchema01);
+        }
+        break;
       case "/policy-info":
         if (option) {
           if (option === "yes") {

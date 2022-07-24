@@ -13,9 +13,8 @@ import RadioGroup from "../components/RadioGroup";
 import InputField from "../components/InputField";
 import BirthdateField from "../components/BirthdateField";
 import { dateOfBirthMask } from "../components/masks";
-import SelectField from "../components/SelectField";
+import SelectFieldCustom from "../components/SelectFieldCustom";
 import { handleNav } from "../lib/utils";
-import { ChevronLeftIcon } from "@heroicons/react/solid";
 
 export default function PolicyInfo() {
   let navigate = useNavigate();
@@ -34,11 +33,6 @@ export default function PolicyInfo() {
     { key: "AZ", value: "AZ" },
     { key: "TX", value: "TX" },
   ];
-  const insuranceCompanies = [
-    { key: "company a", value: "Company A"},
-    { key: "company b", value: "Company B"},
-    { key: "company c", value: "Company C"},
-  ];
 
   const nextStep = "/insurance-card";
 
@@ -53,21 +47,29 @@ export default function PolicyInfo() {
     setFieldValue("isPolicyHolder", value.toLowerCase());
   };
 
-  const buttonStyles = "flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 mb-3 w-80";
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   useEffect(() => {
     loadPageSchema(location.pathname, values.isPolicyHolder.toLowerCase());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.isPolicyHolder]);
 
   return (
-    <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
-        <div className="mb-4">
-          <button className="align-self-start" onClick={() => navigate(-1)}>
-            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-          </button>
-          <h1 className="text-3xl font-extrabold mb-4">Policy info</h1>
-          <p className="mb-3 text-sm font-bold">Are you the policy holder?</p>
+    <div className="relative bg-figGray-300 h-fit lg:h-screen">
+      <div className="w-full p-4 h-16 bg-white"></div>
+      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+
+        {/* Image container */}
+        <div className="lg:flex lg:flex-col lg:justify-end insurance-card-lg lg:min-h-[640px] lg:min-w-[420px]"></div>
+
+        {/* White area */}
+        <div className="bg-white min-h-[500px]">
+          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
+          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <h1 className="text-4xl font-extrabold mb-7">Insurance Information</h1>
+
+          <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Are you the pooicy holder?</p>
+
           <RadioGroup
             name="isPolicyHolder"
             label="Are you the policy holder?"
@@ -75,52 +77,81 @@ export default function PolicyInfo() {
             options={isPolicyHolder}
             handleChange={handlePolicyHolderVisible}
           />
-          {isPolicyHolderVisible ? (
-            <div>
-              <InputField
-                name="policyHolderFirstName"
-                label="Policy holder's first name"
-                required={true}
-              />
-              <InputField
-                name="policyHolderLastName"
-                label="Policy holder's last name"
-                required={true}
-              />
-              <BirthdateField
-                name="policyHolderBirthDate"
-                label="Policy holder's DOB"
-                mask={dateOfBirthMask}
-              />
-              <InputField
-                name="policyHolderAddress"
-                label="Policy holder's address"
-                required={true}
-              />
-              <InputField
-                name="policyHolderCity"
-                label="City"
-                required={true}
-              />
-              <SelectField
-                name="policyHolderState"
-                label="State"
-                options={states}
-              />
-              <SelectField
-                name="insuranceCompany"
-                label="Insurance company"
-                options={insuranceCompanies}
-              />
-            </div>
-          ): null}
+
+          {/* Form fields */}
+          <div>
+
+            {isPolicyHolderVisible ? (
+              <div className="grid grid-cols-1 gap-y-4 gap-x-4 lg:grid-cols-8 lg:gap-x-2 place-items-stretch">
+
+                <div className="w-full pb-2 mb-2 border-b-2 border-figGray-300 lg:col-span-8">
+                  <p className="text-xl font-bold">About the Policy Holder</p>
+                </div>
+
+                <div className="lg:col-span-4">
+                  <InputField
+                    name="policyHolderFirstName"
+                    label="Policy holder's first name"
+                    required={true}
+                  />
+                </div>
+                <div className="lg:col-span-4">
+                  <InputField
+                    name="policyHolderLastName"
+                    label="Policy holder's last name"
+                    required={true}
+                  />
+                </div>
+                <div className="lg:col-span-3">
+                  <BirthdateField
+                    name="policyHolderBirthDate"
+                    label="Policy holder's DOB"
+                    mask={dateOfBirthMask}
+                  />
+                </div>
+                <div className="lg:col-span-5">
+                  <InputField
+                    name="policyHolderAddress"
+                    label="Policy holder's address"
+                    required={true}
+                  />
+                </div>
+                <div className="lg:col-span-4">
+                  <InputField
+                    name="policyHolderCity"
+                    label="City"
+                    required={true}
+                  />
+                </div>
+                <div className="lg:col-span-2">
+                  <SelectFieldCustom
+                    name="policyHolderState"
+                    label="State"
+                    options={states}
+                  />
+                </div>
+                <div className="lg:col-span-2">
+                  <InputField
+                    name="policyHolderZip"
+                    label="Zip"
+                    required={true}
+                  />
+                </div>
+              </div>
+            ): null}
+
+            <button
+              className={`${primaryBtnStyles} lg:col-span-8 lg:mt-2`}
+              onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
+            >
+              Next
+            </button>
+
+          </div>
+
+          </div>
         </div>
-        <button
-          className={buttonStyles}
-          onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
-        >
-          Next
-        </button>
+
       </div>
     </div>
   );

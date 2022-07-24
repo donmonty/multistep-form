@@ -204,6 +204,12 @@ input:checked + span {
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .insurance-card-lg {
+    background-image: url("./images/insurance-card.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 
