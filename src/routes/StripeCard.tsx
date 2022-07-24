@@ -15,22 +15,24 @@ import {
 } from "@stripe/react-stripe-js";
 
 import { useNavigate } from "react-router-dom";
-import { ChevronLeftIcon } from '@heroicons/react/solid';
 
 const inputStyle = {
-  color: "rgb(75 85 99)",
+  color: "black",
+  // color: "rgb(75 85 99)",
   fontWeight: '500',
-  fontSize: '14px',
+  fontSize: '20px',
 }
 
 const tailwindStyles = {
   borderWidth: "2px",
-  borderColor: "rgb(209 213 219)",
-  borderRadius: "0.5rem",
+  // borderColor: "rgb(209 213 219)",
+  // borderRadius: "0.5rem",
   borderStyle: "solid",
   boxShadow: "0 1px 2px 0 rgb(0 0 0 / 0.05)",
   padding: "0.5rem",
-  marginBottom: "0.75rem"
+  height: "60px",
+  backgroundColor: "#e5e5e5"
+  // marginBottom: "0.75rem"
 }
 
 
@@ -47,9 +49,9 @@ export default function StripeCard() {
   const errorMsgCard = "There was a problem with your credit card number. Make sure you entered it correctly.";
   const errorMsgGeneric = "Something went wrong. Please try again later.";
 
-  const buttonStyles = "flex justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 mb-3 mt-4 w-80";
+  const primaryBtnStyles = "flex mt-2 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-figOrange-700 w-full disabled:bg-gray-300 self-center";
 
-  const loaderStyles = "flex justify-center py-2 px-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 mb-3 mt-4 w-80";
+  const loaderStyles = "flex justify-center py-2 px-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-figOrange-700 mb-3 mt-4 w-80";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -87,57 +89,87 @@ export default function StripeCard() {
   }
 
   return (
-    <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full">
-        <button className="align-self-start" onClick={() => navigate(-1)}>
-          <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-        </button>
-        <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit} >
-          <div>
-            <h1 className="text-3xl font-extrabold mb-4">Credit card info</h1>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Card number</label>
-            <div style={tailwindStyles}>
-              <CardNumberElement
-                options={{
-                  style: {
-                    base: inputStyle,
-                  }
-                }}
-              />
-            </div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Expiration date</label>
-            <div style={tailwindStyles}>
-              <CardExpiryElement/>
-            </div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">CVC</label>
-            <div style={tailwindStyles}>
-              <CardCvcElement/>
-            </div>
-          </div>
-          <div>
-            {error && (
-              <span  className="block mt-2 mb-4 text-sm font-medium text-red-600">
-                {errorMessage}
-              </span>
-            )}
-            {loading ? (
-              <div className={loaderStyles}>
-                <Oval
-                  ariaLabel="loading-indicator"
-                  height={24}
-                  width={24}
-                  strokeWidth={4}
-                  color="white"
-                  secondaryColor="blue"
+    <div className="relative bg-figGray-300 h-screen lg:h-screen">
+      <div className="w-full p-4 h-16 bg-white"></div>
+      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+
+        {/* White area */}
+        <div className="bg-white min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
+          <div className="flex flex-col py-14 px-10 lg:py-12 lg:px-16">
+          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <h1 className="text-4xl font-extrabold mb-7">Credit card info</h1>
+
+          <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p>
+
+          {/* Form fields */}
+          <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit} >
+            <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:grid-cols-2 lg:gap-x-2 place-items-stretch">
+
+              <div className="lg:col-span-2 text-base font-Montserrat" style={tailwindStyles}>
+                <label className="block text-sm text-figGray-600 mb-1">Card number</label>
+                <CardNumberElement
+                  options={{
+                    style: {
+                      base: inputStyle,
+                    }
+                  }}
                 />
               </div>
-            ): (
-              <button className={buttonStyles} disabled={!stripe}>
-                Next
-              </button>
-            )}
+
+              <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
+                <label className="block text-sm font-medium text-figGray-600 mb-1">Expiration date</label>
+                <CardExpiryElement
+                  options={{
+                    style: {
+                      base: inputStyle,
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
+                <label className="block text-sm font-medium text-figGray-600 mb-1">CVC</label>
+                <CardCvcElement
+                  options={{
+                    style: {
+                      base: inputStyle,
+                    }
+                  }}
+                />
+              </div>
+
+              <div className="lg:col-span-2 mt-0">
+                {error && (
+                  <span  className="block mt-2 mb-4 text-sm font-medium text-red-600">
+                    {errorMessage}
+                  </span>
+                )}
+                {loading ? (
+                  <div className={loaderStyles}>
+                    <Oval
+                      ariaLabel="loading-indicator"
+                      height={24}
+                      width={24}
+                      strokeWidth={4}
+                      color="white"
+                      secondaryColor="blue"
+                    />
+                  </div>
+                ): (
+                  <button className={primaryBtnStyles} disabled={!stripe}>
+                    Next
+                  </button>
+                )}
+              </div>
+
+            </div>
+          </form>
+
           </div>
-        </form>
+        </div>
+
+        {/* Image container */}
+        <div className="lg:flex lg:flex-col lg:justify-end credit-card-lg lg:min-h-[640px] lg:min-w-[440px] lg:max-w-[440px]"></div>
 
       </div>
     </div>

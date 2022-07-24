@@ -250,6 +250,12 @@ input:checked + span {
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .credit-card-lg {
+    background-image: url("./images/credit-card.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 
