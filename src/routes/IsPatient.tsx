@@ -23,7 +23,7 @@ export default function IsPatient() {
 
   const { loadPageSchema, currentSchema } = useSchemaContext();
   const { values, setFieldValue, validateForm, setTouched } = useFormikContext<FormData>();
-  const reasons = "/user-details";
+  const nextStep = "/your-details";
   // const userDetails = "/user-details";
   // const patientDetails = "/patient-details";
 
@@ -186,7 +186,7 @@ export default function IsPatient() {
               className={primaryBtnStyles}
               // disabled={setButtonState()}
               onClick={() => {
-                handleNav({ nextStep: reasons, validateForm, setTouched, navigate, currentSchema });
+                handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema });
                 // if (values.isAppointmentForYou.toLowerCase() === "yes") {
                 //   handleNav({ nextStep: userDetails, validateForm, setTouched, navigate, currentSchema });
                 // } else {
