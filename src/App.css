@@ -163,6 +163,14 @@ input:checked + span {
     background-position: bottom;
   }
 
+  .woman-phone-xs {
+    background-image: url("./images/woman-phone.png");
+    background-repeat: no-repeat;
+    background-size: 80% auto;
+    /* background-size: contain; */
+    background-position: bottom right -100px;
+  }
+
 }
 
 @media (min-width: 640px) {
@@ -205,6 +213,18 @@ input:checked + span {
   }
 
   .man-phone-none {
+    background-image: none;
+  }
+
+  .woman-phone-lg {
+    background-image: url("./images/woman-phone.png");
+    background-repeat: no-repeat;
+    background-size: 86% auto;
+    /* background-size: contain; */
+    background-position: bottom;
+  }
+
+  .woman-phone-none {
     background-image: none;
   }
 
