@@ -154,6 +154,7 @@ input:checked + span {
     background-size: 60% auto;
     background-position: bottom;
   }
+
 }
 
 @media (min-width: 640px) {
@@ -196,6 +197,12 @@ input:checked + span {
     background-repeat: no-repeat;
     background-size: 150% auto;
     background-position: right -300px bottom 0px;
+  }
+
+  .hands-lg {
+    background-image: url("./images/hands.png");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 }
 

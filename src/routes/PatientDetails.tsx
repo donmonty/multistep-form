@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 import InputField from "../components/InputField";
 import SelectFieldCustom from "../components/SelectFieldCustom";
-import { ChevronLeftIcon } from '@heroicons/react/solid';
 
 import {
   useNavigate,
@@ -20,7 +19,6 @@ const patientRelationships = [
   { key: "dependant", value: "Dependant" },
   { key: "other", value: "Other" },
 ];
-
 
 export default function PatientDetails() {
 
@@ -52,42 +50,55 @@ export default function PatientDetails() {
     loadPageSchema(location.pathname);
   }, []);
 
-  const buttonStyles = "flex mr-3 justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300";
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
   
   return (
-    <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
-        <div>
-          <button className="align-self-start" onClick={() => navigate(-1)}>
-            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-          </button>
-          <h1 className="text-3xl font-extrabold mb-8">Patient details</h1>
+    <div className="relative bg-figGray-300 h-screen">
+      <div className="w-full p-4 h-16 bg-white"></div>
+      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-8 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
-          <InputField name="patientFirstName" label="Patient's first name" required={true}/>
-          <InputField name="patientLastName" label="Patient's last name" required={true}/>
-          <BirthdateField
-            name="patientBirthDate"
-            label="Patient's date of birth"
-            mask={dateOfBirthMask}
-          />
-          <InputField name="patientEmail" label="Patient's email"required={true}/>
-          <SelectFieldCustom
-            name="patientRelationship"
-            label="Relatonship with patient"
-            options={patientRelationships}
-          />
+        {/* Image container */}
+        <div className="lg:flex lg:flex-col lg:justify-end hands-lg lg:min-h-[640px] lg:min-w-[540px]"></div>
+
+        {/* White area */}
+        <div className="bg-white">
+          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
+          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <h1 className="text-4xl font-extrabold mb-7">Patient details</h1>
+
+          <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Please give us a few details about the patient</p>
+
+          {/* Form fields */}
+          <div className="grid grid-cols-1 gap-y-4 gap-x-4 lg:grid-cols-2 place-items-stretch">
+
+            <InputField name="patientFirstName" label="Patient's first name" required={true}/>
+            <InputField name="patientLastName" label="Patient's last name" required={true}/>
+            <BirthdateField
+              name="patientBirthDate"
+              label="Patient's date of birth"
+              mask={dateOfBirthMask}
+            />
+            <InputField name="patientEmail" label="Patient's email"required={true}/>
+
+            <div className="lg:col-span-2">
+              <SelectFieldCustom
+                name="patientRelationship"
+                label="Relatonship with patient"
+                options={patientRelationships}
+              />
+            </div>
+
+            <button
+              className={`${primaryBtnStyles} lg:col-span-2`}
+              onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
+            >
+              Next
+            </button>
+          </div>
+
+          </div>
         </div>
 
-        <button
-          className={buttonStyles}
-          onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
-          // disabled={validateEmptyFields()}
-          // onClick={() => {
-          //   navigate("/user-details");
-          // }}
-        >
-          Next
-        </button>
       </div>
     </div>
   );
