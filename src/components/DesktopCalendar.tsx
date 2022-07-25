@@ -89,21 +89,21 @@ export default function DesktopCalendar(props: DesktopCalendarProps) {
         ): (
           <div>
               <div className="grid grid-cols-7 mt-10 text-sm leading-6 text-center text-gray-500">
-                <div>Sun</div>
-                <div>Mon</div>
-                <div>Tue</div>
-                <div>Wed</div>
-                <div>Thu</div>
-                <div>Fri</div>
-                <div>Sat</div>
+                <div className="font-Montserrat">Mon</div>
+                <div className="font-Montserrat">Tue</div>
+                <div className="font-Montserrat">Wed</div>
+                <div className="font-Montserrat">Thu</div>
+                <div className="font-Montserrat">Fri</div>
+                <div className="font-Montserrat">Sat</div>
+                <div className="font-Montserrat">Sun</div>
               </div>
-              <div className="grid grid-cols-7 mt-2 text-sm">
+              <div className="grid grid-cols-7 mt-2 text-base">
                 {props.days.map((day: Date, dayIdx: number) => (
                   <div
                     key={day.toString()}
                     className={classNames(
                       dayIdx === 0 && colStartClasses[getDay(day)],
-                      'py-1.5'
+                      'py-1.5 border border-figGray-400 m-0'
                     )}
                   >
                     <button
@@ -116,7 +116,7 @@ export default function DesktopCalendar(props: DesktopCalendarProps) {
                         isEqual(day, selectedDay) && 'text-white',
                         !isEqual(day, selectedDay) &&
                           isToday(day) &&
-                          'text-red-500',
+                          'text-figOrange-700',
                         !isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           isSameMonth(day, firstDayCurrentMonth) &&
@@ -125,14 +125,14 @@ export default function DesktopCalendar(props: DesktopCalendarProps) {
                           !isToday(day) &&
                           !isSameMonth(day, firstDayCurrentMonth) &&
                           'text-gray-400',
-                        isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
+                        isEqual(day, selectedDay) && isToday(day) && 'bg-figOrange-700',
                         isEqual(day, selectedDay) &&
                           !isToday(day) &&
                           'bg-gray-900',
                         !isEqual(day, selectedDay) && 'hover:bg-gray-200',
                         (isEqual(day, selectedDay) || isToday(day)) &&
                           'font-semibold',
-                        "mx-auto flex h-8 w-8 items-center justify-center rounded-full"
+                        "mx-auto flex h-8 w-8 items-center justify-center rounded-full font-Montserrat",
                       )}
                     >
                       <time dateTime={format(day, 'yyyy-MM-dd')}>

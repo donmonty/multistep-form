@@ -5,19 +5,16 @@ import { Slot } from "../types";
 
 import { FormData } from "../types";
 import { useFormikContext } from "formik";
-import { Oval } from "react-loader-spinner";
 
 export type TimeSlotsProps = {
   handleChange?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function TimeSlots(props: TimeSlotsProps) {
-  const { amSlots, pmSlots, selectedDay, loadingCalendar } = useDateUtilsContext();
+  const { amSlots, pmSlots, selectedDay } = useDateUtilsContext();
   const [isAM, setIsAM] = useState<boolean>(true);
   const [selectedSlot, setSelectedSlot] = useState<Slot | Record<string, number | string>>({});
   const { setFieldValue } = useFormikContext<FormData>();
-
-  const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent rounded-xl text-indigo-600 mb-3 mt-4 w-full h-96";
 
   // console.log("callTime", values.callTime);
   // console.log("practitionerId", values.practitionerId);
@@ -58,33 +55,34 @@ export default function TimeSlots(props: TimeSlotsProps) {
 
   return (
     <div className="flex flex-col">
-      <h3 className="text-base font-extrabold mb-2 ml-2">Available times</h3>
-      <div className="flex mb-4">
+      <h3 className="text-lg font-bold font-Montserrat mb-6 ml-2">Available times</h3>
+      
+      <div className="grid place-items-stretch gap-2 grid-cols-6 lg:grid-cols-4 grid-flow-row">
+
         <button
           className={classNames(
-            isAM && "bg-indigo-600 text-white",
-            !isAM && "bg-slate-200",
-            "w-36 p-2 m-2 rounded-md text-xs"
+            isAM && "bg-figGray-600 text-white",
+            !isAM && "bg-white border border-figGray-400 text-figGray-500",
+            "col-span-3 lg:col-span-2 py-2 mb-3"
           )}
           // className="w-36 p-2 m-2 rounded-md bg-slate-200 text-xs"
           onClick={() => setIsAM(true)}
         >
           AM
         </button>
+
         <button
           className={classNames(
-            isAM && "bg-slate-200",
-            !isAM && "bg-indigo-600 text-white",
-            "w-36 p-2 m-2 rounded-md text-xs"
+            isAM && "bg-white border border-figGray-400 text-figGray-500",
+            !isAM && "bg-figGray-600 text-white",
+            "col-span-3 lg:col-span-2 py-2 mb-3"
           )}
           // className="w-36 p-2 m-2 rounded-md bg-slate-200 text-xs"
           onClick={() => setIsAM(false)}
         >
           PM
         </button>
-      </div>
-      
-      <div className="grid-cols-3 max-w-[320px]">
+        
         {isAM ? (
           amSlots.length > 0 ? (
             amSlots.map((slot: Slot) => (
@@ -95,13 +93,13 @@ export default function TimeSlots(props: TimeSlotsProps) {
                 }}
                 key={slot.time}
                 className={classNames(
-                  (slot.time === selectedSlot?.time) && 'bg-indigo-600 text-white',
+                  (slot.time === selectedSlot?.time) && 'bg-figOrange-700 text-white',
                   (slot.time !== selectedSlot?.time) && "bg-slate-200",
-                  "p-3 m-1 w-24 rounded-full text-sm"
+                  "col-span-2 lg:col-span-1 p-2 m-0 rounded-lg text-sm"
                 )}
                 // className="p-3 m-1 w-24 bg-slate-200 rounded-full text-sm"
               >
-                {`${slot.time}am`}
+                {`${slot.time}`}
               </button>
             ))
           ): (<span>No time slots available.</span>)
@@ -116,13 +114,13 @@ export default function TimeSlots(props: TimeSlotsProps) {
                   handleSlotChange(slot);
                 }}
                 className={classNames(
-                  (slot.time === selectedSlot?.time) && 'bg-indigo-600 text-white',
+                  (slot.time === selectedSlot?.time) && 'bg-figOrange-700 text-white',
                   (slot.time !== selectedSlot?.time) && "bg-slate-200",
-                  "p-3 m-1 w-24 rounded-full text-sm"
+                  "col-span-2 lg:col-span-1 p-2 m-0 rounded-lg text-sm"
                 )}
                 // className="p-3 m-1 w-24 bg-slate-200 rounded-full text-sm"
               >
-                {`${slot.time}pm`}
+                {`${slot.time}`}
               </button>
             ))
           ): (<span>No time slots available.</span>)

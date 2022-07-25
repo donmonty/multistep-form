@@ -58,91 +58,107 @@ export default function Calendar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const buttonStyles = "flex mr-3 justify-center py-4 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 md:w-72 md:mx-auto";
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-figOrange-700 self-center";
+
   const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent rounded-xl text-indigo-600 mb-3 mt-4 w-full h-96";
 
   return (
-    <main className="h-screen bg-gray- flex-col items-center py-12 px-6 lg:px-24 xl:px-64">
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-full min-h-full flex flex-col justify-between md:justify-start">
-        
-        <div className="grid grid-cols-1 gap-x-0 sm:gap-4 sm:grid-cols-2">
-          <div className="col-span-2">
-            <button className="align-self-start" onClick={() => navigate(-1)}>
-              <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-            </button>
-          </div>
-          <div className="col-span-2">
-            <h1 className="text-3xl font-extrabold mb-2 md:text-center">Book a discovery call</h1>
-            <h3 className="text-lg font-extrabold mb-6 sm:text-center">15 mins</h3>
-          </div>
+    <main className="w-full h-fit lg:pb-6 bg-figGray-300">
+      {/* Logo */}
+      <div className="w-full p-4 h-16 bg-white"></div>
+
+      <div className="flex flex-col items-center w-full lg:px-7 lg:h-fit">
+
+        <div className=" bg-white py-12 lg:pb-6 px-6 lg:px-48 xl:px-48 mt-8 sm:mx-auto sm:w-full sm:max-w-full min-h-full flex flex-col justify-between md:justify-start">
           
-          {loadingCalendar ? (null
-          ): (
-            <div className="col-span-2 mb-1 flex justify-between sm:justify-start items-center sm:mb-1 sm:ml-4">
-              <h2 className="inline mr-4 font-semibold text-gray-900">
-                {format(firstDay, 'MMMM yyyy')}
-              </h2>
-              <div className="flex">
+          {/* Desktop Calendar Grid */}
+          <div className="grid grid-cols-1 sm:gap-4 sm:grid-cols-2 lg:gap-x-16">
+            
+            <div className="col-span-2">
+              <p className="mb-4 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+              <h1 className=" text-3xl lg:text-4xl font-extrabold mb-2 md:text-left">Select a time</h1>
+            </div>
+            
+            {loadingCalendar ? (null
+            ): (
+              <div className="col-span-2 mb-1 flex justify-between sm:justify-start items-center sm:mb-1">
+                <h2 className="inline mr-4 font-semibold text-black text-xl font-Montserrat">
+                  {format(firstDay, 'MMMM yyyy')}
+                </h2>
+                <div className="flex">
+                  <button
+                    type="button"
+                    onClick={previousMonth}
+                    className="my-0 flex items-center justify-center p-1 text-gray-400 hover:text-gray-500 border border-figGray-500 h-8"
+                  >
+                    <span className="sr-only">Previous month</span>
+                    <ChevronLeftIcon className="w-6 h-6" aria-hidden="true" />
+                  </button>
+                  <button
+                    onClick={() => nextMonth()}
+                    type="button"
+                    className="my-0 ml-1 flex items-center justify-center p-1 text-gray-400 hover:text-gray-500 border border-figGray-500 h-8"
+                  >
+                    <span className="sr-only">Next month</span>
+                    <ChevronRightIcon className="w-6 h-6" aria-hidden="true" />
+                  </button>
+                </div>
+              </div>
+            )}
+
+            <div className="col-span-2 sm:col-span-1">
+              <div className="block mb-2 min-w-[326px]">
+              {/* <div className="xs:hidden sm:block mb-6 min-w-[360px]"> */}
+                <DesktopCalendar days={calendarDaysDesktop} />
+              </div>
+              {/* <div className="block sm:hidden">
+                <Carousel2 days={calendarDays} initialPosition={initialPosition()}/>
+              </div> */}
+            </div>
+            
+            {loadingCalendar ? (
+              <div className={loaderStyles}>
+                <Oval
+                  ariaLabel="loading-indicator"
+                  height={48}
+                  width={48}
+                  strokeWidth={6}
+                  color="white"
+                  secondaryColor="blue"
+                />
+              </div>
+            ): (
+
+              <div className="col-span-1 ">
+                <TimeSlots handleChange={setIsSlotSelected} />
+              </div>
+            )}
+            
+            {/* Calendar footer */}
+            <div className="col-span-2 my-0">
+              <div className="xs:mt-8 flex justify-between bg-figGray-200 lg:mt-0 lg:p-6">
+                <div className="xs:hidden lg:flex flex-col">
+                  <p className="font-Montserrat text-xl">15 min | Free</p>
+                  <p className="font-Montserrat text-lg text-figGray-600">Discovery call</p>
+                </div>
                 <button
-                  type="button"
-                  onClick={previousMonth}
-                  className="-my-1 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
+                  className={`${primaryBtnStyles} lg:w-64 mt-0`}
+                  disabled={!isSlotSelected || loading}
+                  onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
                 >
-                  <span className="sr-only">Previous month</span>
-                  <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
-                </button>
-                <button
-                  onClick={() => nextMonth()}
-                  type="button"
-                  className="-my-1 flex flex-none items-center justify-center p-1.5 text-gray-400 hover:text-gray-500"
-                >
-                  <span className="sr-only">Next month</span>
-                  <ChevronRightIcon className="w-8 h-8" aria-hidden="true" />
+                  Next
                 </button>
               </div>
+              
             </div>
-          )}
 
-          <div className="col-span-2 sm:col-span-1">
-            <div className="block mb-2 min-w-[326px]">
-            {/* <div className="xs:hidden sm:block mb-6 min-w-[360px]"> */}
-              <DesktopCalendar days={calendarDaysDesktop} />
-            </div>
-            {/* <div className="block sm:hidden">
-              <Carousel2 days={calendarDays} initialPosition={initialPosition()}/>
-            </div> */}
           </div>
-          
-          {loadingCalendar ? (
-            <div className={loaderStyles}>
-              <Oval
-                ariaLabel="loading-indicator"
-                height={48}
-                width={48}
-                strokeWidth={6}
-                color="white"
-                secondaryColor="blue"
-              />
-            </div>
-          ): (
-
-            <div className="col-span-1 sm:justify-self-end">
-              <TimeSlots handleChange={setIsSlotSelected} />
-            </div>
-          )}
 
         </div>
 
-        <div className="w-full mt-8">
-          <button
-            className={buttonStyles}
-            disabled={!isSlotSelected || loading}
-            onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
-          >
-            Next
-          </button>
-        </div>
       </div>
+
+
     </main>
   );
 }
