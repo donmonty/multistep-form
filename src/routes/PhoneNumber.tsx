@@ -19,12 +19,12 @@ export default function PhoneNumber() {
   let navigate = useNavigate();
   let location = useLocation();
 
-  const { validateForm, setTouched, submitForm } = useFormikContext<FormData>();
+  const { validateForm, setTouched } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const nextStep = "/confirmation";
+  const nextStep = "/confirmation-code";
 
   const handleSubmission = async () => {
-    await handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema, submitForm });
+    await handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema });
     // await submitForm();
     // navigate("/confirmation");
   };

@@ -12,6 +12,7 @@ import {
   creditCardSchema,
   insuranceCardSchema,
   phoneNumberSchema,
+  confirmationCodeSchema,
 } from "./schemas"
 
 
@@ -81,6 +82,9 @@ export default function useSchemaContext() {
         break;
       case "/phone-number":
         setCurrentSchema(phoneNumberSchema);
+        break;
+      case "/confirmation-code":
+        setCurrentSchema(confirmationCodeSchema);
         break;
       default:
         setCurrentSchema({});

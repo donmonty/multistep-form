@@ -259,3 +259,7 @@ export const phoneNumberSchema = Yup.object({
     .required("Phone number is required"),
   aboutUs: Yup.string().required("Please select an option"),
 });
+
+export const confirmationCodeSchema = Yup.object({
+  confirmationCode: Yup.string().required("Confirmation code is required"),
+});

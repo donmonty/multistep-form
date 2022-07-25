@@ -23,6 +23,7 @@ import InsuranceCard from "./routes/InsuranceCard";
 import PhoneNumber from "./routes/PhoneNumber";
 import Confirmation from "./routes/Confirmation";
 import StripeCard from "./routes/StripeCard";
+import ConfirmationCode from "./routes/ConfirmationCode";
 
 // const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
 const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
@@ -59,6 +60,7 @@ export default function App() {
             <Route path="confirmation" element={<Confirmation />}/>
             <Route path="stripe-card" element={<StripeCard />}/>
             <Route path="page3" element={<Page3 />} />
+            <Route path="confirmation-code" element={<ConfirmationCode />} />
           </Routes>
         </BrowserRouter>
       </Elements>

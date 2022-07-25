@@ -96,4 +96,5 @@ export interface FormData {
   insuranceCardBack: string;
   phoneNumber: string;
   aboutUs: string;
+  confirmationCode: string;
 }

@@ -5,12 +5,13 @@ import { client } from "./api";
 import { dummyDates } from "../mocks/dummyDates";
 
 export type HandleNavProps = {
-  nextStep: string; // next page to navigate to
+  nextStep?: string; // next page to navigate to
   validateForm: (values?: any) => Promise<FormikErrors<FormData>>; // validation function
   setTouched: (touched: FormikTouched<FormData>, shouldValidate?: boolean | undefined) => void // set touched values
-  navigate: NavigateFunction; // navigate function from React Router
+  navigate?: NavigateFunction; // navigate function from React Router
   currentSchema: any; // the schema to use for validation in the current page
   submitForm?: (() => Promise<void>) & (() => Promise<any>); // submit function
+  validateOnly?: boolean; // if true, only validate, don't submit
 }; 
 
 /**
@@ -26,6 +27,7 @@ export async function handleNav({
   navigate,
   currentSchema,
   submitForm,
+  validateOnly
 }: HandleNavProps ) {
   const errors = await validateForm();
   console.log("errors:", errors);
@@ -40,11 +42,15 @@ export async function handleNav({
     }
     setTouched(touchedObject);
   } else {
+    if (validateOnly) return true;
     // Calls the submit function if it exists.
     // Check out onSubmit() at App.tsx to see the actual onSumit() function!
     submitForm && await submitForm();
     // Navigate to the next step.
-    navigate(nextStep);
+    if (navigate && nextStep) {
+      navigate(nextStep);
+    }
+    
   }
 }
 
