@@ -145,7 +145,7 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
     <div>
       <img
         src={files[0]?.url ? files[0].url : ""}
-        className="block h-32 w-60"
+        className="block h-32 w-full rounded-lg"
         // Revoke data uri after image is loaded
         onLoad={() => {files[0].url && URL.revokeObjectURL(files[0].url)}}
       />
@@ -161,10 +161,10 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
   }, []);
 
   const imagePlaceholder = (
-    <div className="w-60 h-32 bg-slate-100 rounded-lg border-2 border-dashed border-slate-500">
+    <div className="w-full h-32 bg-figGray-200 rounded-lg border border-dashed border-figBlue-900">
       <div className='flex flex-col justify-center items-center pt-6'>
-        <PhotographIcon className="block m-auto w-14 h-14 self-center" />
-        <p className='m-auto text-center text-sm'>{props.label}</p>
+        <PhotographIcon className="block m-auto w-14 h-14 self-center text-figBlue-900" />
+        <p className='m-auto text-center text-sm font-Montserrat'>{props.label}</p>
       </div>
     </div>
   );
@@ -173,7 +173,7 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
     <>
       <div {...getRootProps({ className: "max-w-xs"})}>
         <input {...getInputProps()}/>
-        <div className="flex flex-wrap mt-4">
+        <div className="flex flex-wrap">
           {files[0] && files[0]?.url ? (
             imagePreview
           ): imagePlaceholder}

@@ -108,91 +108,65 @@ export default function InsuranceCard() {
 
   useEffect(() => {
     loadPageSchema(location.pathname);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
-
   return (
-    <div className="relative bg-figGray-300 h-fit lg:h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
-
-        {/* Image container */}
-        <div className="lg:flex lg:flex-col lg:justify-end insurance-card-lg lg:min-h-[640px] lg:min-w-[420px]"></div>
-
-        {/* White area */}
-        <div className="bg-white min-h-[500px] max-w-[640px]">
-          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
-          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
-          <h1 className="text-4xl font-extrabold mb-7">Insurance Information</h1>
-
-          <p className="md:inline-block pl-2 mb-8 font-Montserrat text-sm text-figGray-600 lg:ml-0">Upload a photo of the front and back of your insurance card so we can verify your number of covered sessions.</p>
-
-          {/* Form fields */}
-          <div>
-
-            <div className="grid gap-4 grid-cols-1 lg:grid-cols-2 place-items-stretch">
-
-              <div className="col-span-1">
-                <ImageUploadField
-                  label="Upload front of the card"
-                  name="insuranceCardFront"
-                  handleFile={setCardFrontImage}
-                />
-              </div>
-
-              <div className="col-span-1">
-                <ImageUploadField
-                  label="Upload back of the card"
-                  name="insuranceCardBack"
-                  handleFile={setCardBackImage}
-                />
-              </div>
-
-              <button
-                className={`${buttonStyles} my-0 col-span-1 lg:col-span-2`}
-                onClick={
-                  async () => {
-                    const response = await client.get("/s3Url");
-                    console.log("response.data:", response.data);
-                  }
-                }
-              >
-                Print Secure S3 URL (for testing only)
-              </button>
-
-              {loading ? (
-                <div className={`${loaderStyles} col-span-1 lg:col-span-2`}>
-                  <Oval
-                    ariaLabel="loading-indicator"
-                    height={24}
-                    width={24}
-                    strokeWidth={4}
-                    color="white"
-                    secondaryColor="blue"
-                  />
-                </div>
-              ): (  
-                <button
-                  className={`${primaryBtnStyles} mt-0 col-span-1 lg:col-span-2`}
-                  disabled={loading}
-                  onClick={() => handleClick()}
-                >
-                  Next
-                </button>
-              )}
-
-            </div>
-
-            {imageUploadError && (
-              <span className="block mt-2 text-sm font-medium text-red-600">{imageUploadError}</span>
-            )}
-
-          </div>
-
-          </div>
+    <div className="h-screen bg-gray-100 flex justify-center py-12 px-6 lg:px-8">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md min-h-full flex flex-col justify-between">
+        <div>
+          <button className="align-self-start" onClick={() => navigate(-1)}>
+            <ChevronLeftIcon className="w-8 h-8" aria-hidden="true" />
+          </button>
+          <h1 className="text-3xl font-extrabold mb-4">Your insurance card</h1>
+          <p className="mb-3 text-sm">Upload the front and the back of your insurance card so your insurance verifies how many free sessions you have covered.</p>
+          <ImageUploadField
+            label="Front of the card"
+            name="insuranceCardFront"
+            handleFile={setCardFrontImage}
+          />
+          <ImageUploadField
+            label="Back of the card"
+            name="insuranceCardBack"
+            handleFile={setCardBackImage}
+          />
         </div>
+
+        {imageUploadError && (
+          <span className="block mt-2 text-sm font-medium text-red-600">{imageUploadError}</span>
+        )}
+
+        <button
+          className={buttonStyles}
+          onClick={
+            async () => {
+              const response = await client.get("/s3Url");
+              console.log("response.data:", response.data);
+            }
+          }
+        >
+          Print Secure S3 URL (for testing only)
+        </button>
+
+        {loading ? (
+          <div className={loaderStyles}>
+            <Oval
+              ariaLabel="loading-indicator"
+              height={24}
+              width={24}
+              strokeWidth={4}
+              color="white"
+              secondaryColor="blue"
+            />
+          </div>
+        ): (  
+          <button
+            className={buttonStyles}
+            disabled={loading}
+            onClick={() => handleClick()}
+          >
+            Next
+        </button>
+        )}
 
       </div>
     </div>
