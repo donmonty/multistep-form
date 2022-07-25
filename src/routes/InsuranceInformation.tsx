@@ -68,7 +68,7 @@ export default function PolicyInfo() {
           <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
           <h1 className="text-4xl font-extrabold mb-7">Insurance Information</h1>
 
-          <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Are you the pooicy holder?</p>
+          <p className="2md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Are you the pooicy holder?</p>
 
           <RadioGroup
             name="isPolicyHolder"

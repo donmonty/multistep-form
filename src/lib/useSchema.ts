@@ -36,6 +36,7 @@ export default function useSchemaContext() {
         break;
       case "/your-details":
         setCurrentSchema(userSchema);
+        
         break;
       case "/reasons":
         setCurrentSchema(reasonsSchema);

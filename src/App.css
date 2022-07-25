@@ -149,9 +149,9 @@ input:checked + span {
   }
 
   .couple-xs {
-    background-image: url("./images/couple-lg.png");
+    background-image: url("./images/couple-xs.png");
     background-repeat: no-repeat;
-    background-size: 60% auto;
+    background-size: 90% auto;
     background-position: bottom;
   }
 
@@ -186,6 +186,13 @@ input:checked + span {
     background-repeat: no-repeat;
     background-size: 32% auto;
     background-position: right bottom;
+  }
+
+  .woman-phone-md {
+    background-image: url("./images/woman-phone.png");
+    background-repeat: no-repeat;
+    background-size: 60% auto;
+    background-position: bottom right -100px;
   }
   
 }
@@ -235,8 +242,9 @@ input:checked + span {
   .couple-lg {
     background-image: url("./images/couple-lg.png");
     background-repeat: no-repeat;
-    background-size: 150% auto;
-    background-position: right -300px bottom 0px;
+    background-size: 120% auto;
+    /* background-position: right -300px bottom 0px; */
+    background-position: right -120px bottom;
   }
 
   .hands-lg {

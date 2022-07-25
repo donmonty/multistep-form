@@ -44,8 +44,6 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
       <label className="custom-select">
         <select
           className="text-base font-Montserrat pt-8 pb-4"
-          // disabled={disabled}
-          // defaultValue={props.options[0].value}
           {...field}
           onChange={
             (event: any) => {
@@ -64,30 +62,7 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
           })}
         </select>
         <span className="placeholder">{props.label}</span>
-        <span  className="block mt-2 text-sm font-medium text-red-600">{meta.error}</span>
       </label>
-
-
-      {/* <Field
-        as="select"
-        className="mt-2"
-        {...field}
-        onChange={
-          (event: any) => {
-            helpers.setValue(event.target.value)
-            if (props.transitions && props.getNextStep && props.setNextStep) {
-              const transition = props.getNextStep(event, props.transitions);
-              transition && props.setNextStep(transition);
-            }
-          }
-        }
-      >
-        {props.options.map((item) => {
-          return (
-            <option key={item.key} value={item.value}>{item.value}</option>
-          )
-        })}
-      </Field> */}
 
     </div>
     

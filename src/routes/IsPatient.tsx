@@ -142,7 +142,7 @@ export default function IsPatient() {
         <div className="lg:flex lg:flex-col lg:justify-end serious-man-full lg:min-h-[640px]">
           <div className="lg:ml-16 lg:pb-5">
             {/* Info Window */}
-            <div className="flex justify-between items-center bg-white border-2 border-figOrange-700 p-4 mb-4 lg:w-[490px] lg:mr-5 mt-0">
+            <div className="flex justify-between items-center bg-white border-2 border-figOrange-700 p-4 mb-4 lg:mb-20 lg:w-[490px] lg:mr-5 mt-0">
               <div className="pr-8">
                 <p className="font-bold font-Montserrat text-figOrange-700">What's a discovery call?</p>
                 <p className="text-sm text-black font-Montserrat">There is no cost associated with discovery calls.</p>
@@ -172,16 +172,22 @@ export default function IsPatient() {
 
             <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:mx-auto">Tell us, what's the reason for your visit?</p>
             
-            <SelectFieldCustom
-              name="reasonForVisit"
-              label="Reason for visit"
-              options={reasonOptions}
-            />
-            <SelectFieldCustom
-              name="isAppointmentForYou"
-              label="The appointment is for"
-              options={options}
-            />
+            <div className="w-full mb-4">
+              <SelectFieldCustom
+                name="reasonForVisit"
+                label="Reason for visit"
+                options={reasonOptions}
+              />
+            </div>
+
+            <div className="w-full mb-4">
+              <SelectFieldCustom
+                name="isAppointmentForYou"
+                label="The appointment is for"
+                options={options}
+              />
+            </div>
+
             <button
               className={primaryBtnStyles}
               // disabled={setButtonState()}

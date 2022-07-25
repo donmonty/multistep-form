@@ -57,7 +57,7 @@ export default function PhoneNumber() {
         <div className="lg:flex lg:flex-col lg:justify-end woman-phone-lg lg:min-h-[640px] lg:min-w-[525px]"></div>
 
         {/* White area */}
-        <div className="bg-white woman-phone-xs woman-phone-none lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
+        <div className="bg-white woman-phone-xs woman-phone-md woman-phone-none lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col py-20 px-10 lg:py-12 lg:px-20">
             <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Lastly!</p>
             <h1 className="text-4xl font-extrabold mb-7">Phone number for your discovery call</h1>
