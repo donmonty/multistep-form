@@ -52,7 +52,7 @@ export default function StripeCard() {
 
   const primaryBtnStyles = "flex mt-2 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-figOrange-700 w-full disabled:bg-gray-300 self-center";
 
-  const loaderStyles = "flex justify-center py-2 px-2 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-figOrange-700 mb-3 mt-4 w-80";
+  const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent shadow-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 mb-3 mt-4 w-full";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -153,7 +153,7 @@ export default function StripeCard() {
                       width={24}
                       strokeWidth={4}
                       color="white"
-                      secondaryColor="blue"
+                      secondaryColor="#BD240A"
                     />
                   </div>
                 ): (

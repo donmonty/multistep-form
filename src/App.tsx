@@ -25,8 +25,8 @@ import Confirmation from "./routes/Confirmation";
 import StripeCard from "./routes/StripeCard";
 import ConfirmationCode from "./routes/ConfirmationCode";
 
-// const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
-const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
+const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ"); // Replace with your own test key!
+// const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY_TEST as string);
 
 export default function App() {
 
