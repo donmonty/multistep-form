@@ -38,7 +38,7 @@ export default function YourDetails() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const primaryBtnStyles = "flex mt-0 lg:mt-0 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
+  const primaryBtnStyles = "flex mt-0 lg:mt-0 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   return (
     <div className="relative bg-figGray-300 h-fit md:h-screen">
@@ -48,9 +48,9 @@ export default function YourDetails() {
         {/* White area */}
         <div className="bg-white couple-xs couple-none lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col pt-14 pb-60 px-10 lg:pt-12 lg:pb-12 lg:px-20">
-            <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 2 of 5</p>
-            <h1 className="text-4xl font-extrabold mb-7">Your details</h1>
-            <p className="md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Please give us a few details about you.</p>
+            <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 2 of 5</p>
+            <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Your details</h1>
+            <p className="md:inline-block mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Please give us a few details about you.</p>
 
 
             {/* Form fields */}
@@ -100,7 +100,7 @@ export default function YourDetails() {
                 className={`${primaryBtnStyles} md:col-span-6`}
                 onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
               >
-                Next
+                NEXT
               </button>
             </div>
 

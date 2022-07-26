@@ -36,9 +36,9 @@ export default function Insurance() {
         {/* White area */}
         <div className="bg-white man-phone-xs man-phone-none lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px]">
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
-            <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 3 of 5</p>
-            <h1 className="text-4xl font-extrabold mb-7">We partner with insurance</h1>
-            <p className="md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Is any of the following your provider?</p>
+            <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl lg:text-center">Step 3 of 5</p>
+            <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7 lg:text-center">We partner with insurance</h1>
+            <p className="md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0 lg:text-center">Is any of the following your provider?</p>
 
 
             {/* Form fields */}
@@ -48,11 +48,11 @@ export default function Insurance() {
               <div className="p-6 bg-figGray-200"></div>
               <div className="p-6 bg-figGray-200"></div>
               <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200"></div>
+              <div className="p-6 bg-figGray-200 lg:col-start-2 lg:col-end-3"></div>
+              <div className="p-6 bg-figGray-200 lg:col-start-3 lg:col-end-4"></div>
 
               <button
-                className={`${primaryBtnStyles} xs:py-2 xs:mt-40 leading-3 text-xs col-span-3 lg:col-span-4 lg:mt-14`}
+                className={`${primaryBtnStyles} xs:py-1 xs:mt-40 leading-4 text-xs col-span-3 lg:col-span-4 lg:mt-14 lg:h-[44px] lg:py-3`}
                 onClick={() => {
                   setFieldValue("hasInsurance", "yes");
                   navigate("/insurance-information");
@@ -62,16 +62,19 @@ export default function Insurance() {
               </button>
               <button
                 type="submit"
-                className={`${primaryBtnStyles} text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0`}
+                className={`${primaryBtnStyles} xs:py-2 text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0 h-[44px] lg:py-1`}
                 onClick={() => {
                   setFieldValue("hasInsurance", "other");
                   navigate("/insurance-information");
                 }}
               >
-                I HAVE ANOTHER INSURANCE
+                <div>
+                  <span>I HAVE AN INSURANCE NOT LISTED</span>
+                  <span className="xs:hidden lg:block font-Montserrat font-normal text-xs">*check if you're out of network benefits</span>
+                </div>
               </button>
               <button
-                className={`${primaryBtnStyles} xs:py-2 leading-3 text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0`}
+                className={`${primaryBtnStyles} xs:py-1 leading-4 text-xs mt-0 col-span-3 lg:col-span-4 lg:mt-0 lg:h-[44px] lg:py-3`}
                 onClick={() => {
                   setFieldValue("hasInsurance", "no");
                   navigate("/stripe-card");
