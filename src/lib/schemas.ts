@@ -55,6 +55,8 @@ export const initialValues = {
   // Phone number
   phoneNumber: "",
   aboutUs: "social media",
+  // Confirmation code
+  confirmationCode: "",
 };
 
 export const reasonsSchema = Yup.object({

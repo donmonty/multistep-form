@@ -34,7 +34,11 @@ app.get("/api/s3Url", async (req, res) => {
     console.log("Error:", error);
     return res.status(500).json({ error });
   }
-})
+});
+
+app.post("/api/confirmation-code", async (req, res) => {
+  return res.status(200).json({ data: { success: "OK" } });
+});
 
 app.listen(3001, () => {
   console.log(`Server running on port 3001`);

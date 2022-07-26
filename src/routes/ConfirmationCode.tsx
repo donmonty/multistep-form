@@ -71,12 +71,13 @@ export default function ConfirmationCode() {
     if (response.data as any) {
       const data: any = response.data;
       // If we get a successful response, navigate to the next step.
-      if (data.success as string === "success") {
-        await handleNav({ validateForm, setTouched, navigate, currentSchema });
+      if (data.data.success as string === "OK") {
+        await handleNav({nextStep, validateForm, setTouched, navigate, currentSchema });
+      } else {
+        // If we get an error, set the error code to true.
+        setCodeError(true);
+        setLoading(false);
       }
-      // If we get an error, set the error code to true.
-      setCodeError(true);
-      setLoading(false);
     } else {
       // If we get here, something went wrong with the API
       setServerError(true);
