@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import SelectFieldCustom from "../components/SelectFieldCustom";
 import { InformationCircleIcon } from "@heroicons/react/solid";
 import Modal from "react-modal";
+import Header from "../components/Header";
 
 import {
   useNavigate,
@@ -22,10 +23,8 @@ export default function IsPatient() {
   let location = useLocation();
 
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const { values, setFieldValue, validateForm, setTouched } = useFormikContext<FormData>();
+  const { values, validateForm, setTouched } = useFormikContext<FormData>();
   const nextStep = "/your-details";
-  // const userDetails = "/user-details";
-  // const patientDetails = "/patient-details";
 
   const openModal = () => {
     setIsModalVisible(true);
@@ -71,15 +70,12 @@ export default function IsPatient() {
     { key: "otherReason", value: "Other" },
   ];
 
-  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
-
-  const overlayStyles = {
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-  }
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
   
   return (
     <div className="relative bg-figGray-300 h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
+
+      <Header/>
 
       <Modal
         style={{
@@ -158,28 +154,13 @@ export default function IsPatient() {
         <div
           id="serious-man"
           className="bg-white sm:mx-auto lg:mx-0 sm:w-full sm:max-w-2xl flex flex-col justify-between lg:items-stretch h-fit lg:h-fit lg:max-w-[630px] serious-man-xs serious-man-md serious-man-lg"
-          // style={{
-          //   backgroundImage: `url(${blackMan})`,
-          //   backgroundRepeat: "no-repeat",
-          //   // backgroundSize: "cover",
-          //   backgroundSize: "65% auto",
-          //   backgroundPosition: "right",
-          // }}
         >
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
-            <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 1 of 5</p>
-            <h1 className="text-4xl font-extrabold mb-7">Let's book your discovery call!</h1>
+            <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">Step 1 of 5</p>
+            <h1 className="text-3xl lg:text-4xl tracking-wide font-Playfair font-semibold mb-7">Let's book your free discovery call.</h1>
 
-            <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:mx-auto">Tell us, what's the reason for your visit?</p>
+            <p className="xs:hidden md:inline-block mb-8 font-CapriSans text-black tracking-widest">A 15 minute call with a registered dietitian</p>
             
-            <div className="w-full mb-4">
-              <SelectFieldCustom
-                name="reasonForVisit"
-                label="Reason for visit"
-                options={reasonOptions}
-              />
-            </div>
-
             <div className="w-full mb-4">
               <SelectFieldCustom
                 name="isAppointmentForYou"
@@ -188,19 +169,22 @@ export default function IsPatient() {
               />
             </div>
 
+            <div className="w-full mb-4">
+              <SelectFieldCustom
+                name="reasonForVisit"
+                label="Reason for visit"
+                options={reasonOptions}
+              />
+            </div>
+
             <button
               className={primaryBtnStyles}
               // disabled={setButtonState()}
               onClick={() => {
                 handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema });
-                // if (values.isAppointmentForYou.toLowerCase() === "yes") {
-                //   handleNav({ nextStep: userDetails, validateForm, setTouched, navigate, currentSchema });
-                // } else {
-                //   handleNav({ nextStep: patientDetails, validateForm, setTouched, navigate, currentSchema });
-                // }
               }}
             >
-              Next
+              NEXT
             </button>
           </div>
         </div>

@@ -30,7 +30,7 @@ module.exports = {
       fontFamily: {
         Montserrat: ["Montserrat", "sans-serif"],
         CapriSans: ['"Capri Sans"', "sans-serif"],
-        Osaka: ["Osaka\\ Regular", "sans-serif"],
+        Playfair: ["Playfair\\ Display", "serif"],
       }
     },
     screens: {

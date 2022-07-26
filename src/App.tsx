@@ -45,7 +45,7 @@ export default function App() {
       <Elements stripe={stripePromise}>
         <BrowserRouter>
           <Routes>
-            <Route path="is-patient" element={<IsPatient />} />
+            <Route path="/" element={<IsPatient />} />
             <Route path="your-details" element={<YourDetails />} />
             <Route path="reasons" element={<Reasons />} />
             <Route path="user-details" element={<UserDetails />} />

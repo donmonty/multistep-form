@@ -5,6 +5,7 @@ import TimeSlots from "../components/TimeSlots";
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid';
 import { FormData } from "../types";
 import { Oval } from "react-loader-spinner";
+import Header from "../components/Header";
 
 import { format, isEqual, parse } from 'date-fns';
 
@@ -65,7 +66,7 @@ export default function Calendar() {
   return (
     <main className="w-full h-fit lg:pb-6 bg-figGray-300">
       {/* Logo */}
-      <div className="w-full p-4 h-16 bg-white"></div>
+      <Header/>
 
       <div className="flex flex-col items-center w-full lg:px-7 lg:h-fit">
 

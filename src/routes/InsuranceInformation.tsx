@@ -4,6 +4,7 @@ import { useFormikContext } from "formik";
 import { useSchemaContext } from "../components/SchemaContext";
 
 import { FormData } from "../types";
+import Header from "../components/Header";
 
 import {
   useNavigate,
@@ -56,7 +57,7 @@ export default function PolicyInfo() {
 
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
+      <Header />
       <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* Image container */}
