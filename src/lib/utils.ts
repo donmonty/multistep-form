@@ -57,7 +57,7 @@ export async function handleNav({
 /**
  * Uploads an image to a secure S3 URL
  * @param file - File object
- * @returns the image url
+ * @returns the image url at the S3 bucket
  */
 export async function uploadCardImage(file: File) {
 
