@@ -135,7 +135,7 @@ export default function useDateUtils() {
   };
 
   /**
-   * Loads the time slots for a given day
+   * Loads the time slots for a given day (deprecated method!)
    * @param dayString - the day as a string in the format "yyy/MM/dd"
    * @returns Time slots for a given day
    */
@@ -144,7 +144,7 @@ export default function useDateUtils() {
     // const dates = await getAvailableSlots();
     // if (!dates) setAvailableSlots([]);
     // const dateRows = dates.dates_rows;
-    const dateRows: DateRows = dummyDates.dates_rows; // <-- Delete when real API is ready
+    const dateRows: DateRows = dummyDates.dates_rows;
     if (dateRows.hasOwnProperty(dayString)) {
       // setAvailableSlots(dateRows[dayString]);
       return dateRows[dayString];

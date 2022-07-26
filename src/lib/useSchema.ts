@@ -22,7 +22,7 @@ export default function useSchemaContext() {
 
   const loadPageSchema = (page: string, option?: string) => {
     switch (page) {
-      case "/is-patient":
+      case "/":
         setCurrentSchema(appointmentSchema);
         // if (option) {
         //   if (option === "yes") {

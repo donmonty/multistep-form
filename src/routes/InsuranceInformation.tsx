@@ -46,7 +46,7 @@ export default function PolicyInfo() {
     { key: "TX", value: "TX" },
   ];
 
-  const nextStep = "/insurance-card";
+  const nextStep = "/phone-number";
 
   const handlePolicyHolderVisible = (e: any) => {
     const value = e.target.value;

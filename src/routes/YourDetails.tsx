@@ -31,8 +31,6 @@ export default function YourDetails() {
   const { loadPageSchema, currentSchema } = useSchemaContext();
   const nextStep = values.isAppointmentForYou.toLowerCase() === "me" ? "/select-time" : "/patient-details";
 
-  console.log("nextStep",nextStep);
-
   useEffect(() => {
     loadPageSchema(location.pathname, values.isAppointmentForYou.toLowerCase());
     // eslint-disable-next-line react-hooks/exhaustive-deps
