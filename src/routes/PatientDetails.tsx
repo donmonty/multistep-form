@@ -14,6 +14,7 @@ import { dateOfBirthMask } from "../components/masks";
 import { FormData } from "../types";
 import { handleNav } from "../lib/utils";
 import BirthdateField from "../components/BirthdateField";
+import Header from "../components/Header";
 
 const patientRelationships = [
   { key: "dependant", value: "Dependant" },
@@ -54,7 +55,7 @@ export default function PatientDetails() {
   
   return (
     <div className="relative bg-figGray-300 h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
+      <Header />
       <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-8 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* Image container */}
@@ -63,8 +64,8 @@ export default function PatientDetails() {
         {/* White area */}
         <div className="bg-white">
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
-          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
-          <h1 className="text-4xl font-extrabold mb-7">Patient details</h1>
+          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Patient details</h1>
 
           <p className="xs:hidden md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Please give us a few details about the patient</p>
 
@@ -92,7 +93,7 @@ export default function PatientDetails() {
               className={`${primaryBtnStyles} lg:col-span-2`}
               onClick={() => handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema })}
             >
-              Next
+              NEXT
             </button>
           </div>
 

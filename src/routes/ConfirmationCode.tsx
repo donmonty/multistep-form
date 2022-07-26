@@ -6,6 +6,7 @@ import { handleNav } from "../lib/utils";
 import { client } from "../lib/api";
 import { FormData } from "../types";
 import { Oval } from "react-loader-spinner";
+import Header from "../components/Header";
 
 import {
   useNavigate,
@@ -70,12 +71,13 @@ export default function ConfirmationCode() {
     if (response.data as any) {
       const data: any = response.data;
       // If we get a successful response, navigate to the next step.
-      if (data.success as string === "success") {
-        await handleNav({ validateForm, setTouched, navigate, currentSchema });
+      if (data.data.success as string === "OK") {
+        await handleNav({nextStep, validateForm, setTouched, navigate, currentSchema });
+      } else {
+        // If we get an error, set the error code to true.
+        setCodeError(true);
+        setLoading(false);
       }
-      // If we get an error, set the error code to true.
-      setCodeError(true);
-      setLoading(false);
     } else {
       // If we get here, something went wrong with the API
       setServerError(true);
@@ -85,7 +87,7 @@ export default function ConfirmationCode() {
 
   return (
     <div className="relative bg-figGray-300 h-screen lg:h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
+      <Header/>
       <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* Image container */}

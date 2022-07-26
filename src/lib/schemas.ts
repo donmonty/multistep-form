@@ -15,16 +15,15 @@ import {
 export const initialValues = {
   // Appointment details
   isAppointmentForYou: "me",
-  // Reason for visit
   reasonForVisit: "healthy eating",
-  // User details
+  // Your details
   firstName: "",
   lastName: "",
   birthDate: "",
   email: "",
   street: "",
   city: "",
-  state:"",
+  state:"CA",
   zipcode: "",
   // Patient details
   patientFirstName: "",
@@ -37,9 +36,9 @@ export const initialValues = {
   callTime: "",
   practitionerId: "",
   callSlotId: "",
-  // Insurance
+  // Insurance provider
   hasInsurance: "yes",
-  // Policy info
+  // Insurance Information
   isPolicyHolder: "yes",
   policyHolderFirstName: "",
   policyHolderLastName: "",
@@ -48,19 +47,16 @@ export const initialValues = {
   policyHolderCity: "",
   policyHolderState: "CA",
   policyHolderZip: "",
-  // Card info
-  cardName: "",
-  cardNumber: "",
-  cardExpirationDate: "",
-  cardCvc: "",
-  paymentMethidId: "",
-  stripeCustomerId: "",
-  // Insurance card data
   insuranceCardFront: "",
   insuranceCardBack: "",
+  // Credit card info (Stripe info)
+  paymentMethodId: "",
+  stripeCustomerId: "",
   // Phone number
   phoneNumber: "",
   aboutUs: "social media",
+  // Confirmation code
+  confirmationCode: "",
 };
 
 export const reasonsSchema = Yup.object({
@@ -217,10 +213,14 @@ export const policyInfoSchema = Yup.object({
   policyHolderCity: Yup.string().required("City is required"),
   policyHolderState: Yup.string(),
   policyHolderZip: Yup.string().required("Zipcode is required"),
+  insuranceCardFront: Yup.string().required("Insurance card front is required"),
+  insuranceCardBack: Yup.string().required("Insurance card back is required"),
 });
 
 export const policyInfoSchema01 = Yup.object({
   isPolicyHolder: Yup.string().required("Please select an option"),
+  insuranceCardFront: Yup.string().required("Insurance card front is required"),
+  insuranceCardBack: Yup.string().required("Insurance card back is required"),
 });
 
 export const creditCardSchema = Yup.object({

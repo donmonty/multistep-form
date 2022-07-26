@@ -3,7 +3,8 @@ dotenv.config();
 const express = require("express");
 const Stripe = require("stripe");
 // const stripe = new Stripe(process.env.STRIPE_SECRET_KEY_TEST);
-const stripe = new Stripe("sk_test_UQycUqp83YWelcE62E0h6bx3008y0RVoyV");
+const stripe = new Stripe("sk_test_UQycUqp83YWelcE62E0h6bx3008y0RVoyV"); // replace with your own secret test key!
+
 const cors = require("cors");
 const generateUploadURL = require("./s3");
 
@@ -33,7 +34,11 @@ app.get("/api/s3Url", async (req, res) => {
     console.log("Error:", error);
     return res.status(500).json({ error });
   }
-})
+});
+
+app.post("/api/confirmation-code", async (req, res) => {
+  return res.status(200).json({ data: { success: "OK" } });
+});
 
 app.listen(3001, () => {
   console.log(`Server running on port 3001`);

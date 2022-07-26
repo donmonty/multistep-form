@@ -142,10 +142,11 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
   // ));
 
   const imagePreview = (
-    <div>
+    <div className="w-full h-40 bg-figGray-200 rounded-lg">
       <img
         src={files[0]?.url ? files[0].url : ""}
-        className="block h-32 w-full rounded-lg"
+        className="block h-40 w-full rounded-lg"
+        alt="insurance card"
         // Revoke data uri after image is loaded
         onLoad={() => {files[0].url && URL.revokeObjectURL(files[0].url)}}
       />
@@ -161,8 +162,8 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
   }, []);
 
   const imagePlaceholder = (
-    <div className="w-full h-32 bg-figGray-200 rounded-lg border border-dashed border-figBlue-900">
-      <div className='flex flex-col justify-center items-center pt-6'>
+    <div className="w-full flex justify-center items-center h-40 bg-figGray-200 rounded-lg border border-dashed border-figBlue-900">
+      <div className='flex flex-col justify-center items-center'>
         <PhotographIcon className="block m-auto w-14 h-14 self-center text-figBlue-900" />
         <p className='m-auto text-center text-sm font-Montserrat'>{props.label}</p>
       </div>

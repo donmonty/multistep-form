@@ -26,8 +26,8 @@ import StripeCard from "./routes/StripeCard";
 import ConfirmationCode from "./routes/ConfirmationCode";
 import Booked from "./routes/Booked";
 
-// const stripePromise = loadStripe(process.env.REACT_APP_PUBLIC_KEY_TEST as string);
-const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ");
+const stripePromise = loadStripe("pk_test_6ZxeR0AeamejAOzO0lMj8yqq003hfE7WoQ"); // Replace with your own test key!
+// const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY_TEST as string);
 
 export default function App() {
   const { currentSchema } = useSchemaContext();
@@ -45,7 +45,7 @@ export default function App() {
       <Elements stripe={stripePromise}>
         <BrowserRouter>
           <Routes>
-            <Route path="is-patient" element={<IsPatient />} />
+            <Route path="/" element={<IsPatient />} />
             <Route path="your-details" element={<YourDetails />} />
             <Route path="reasons" element={<Reasons />} />
             <Route path="user-details" element={<UserDetails />} />

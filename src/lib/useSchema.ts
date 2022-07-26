@@ -22,7 +22,7 @@ export default function useSchemaContext() {
 
   const loadPageSchema = (page: string, option?: string) => {
     switch (page) {
-      case "/is-patient":
+      case "/":
         setCurrentSchema(appointmentSchema);
         // if (option) {
         //   if (option === "yes") {
@@ -34,25 +34,31 @@ export default function useSchemaContext() {
         //   setCurrentSchema(appointmentSchema01);
         // }
         break;
+
       case "/your-details":
         setCurrentSchema(userSchema);
-        
         break;
+        
       case "/reasons":
         setCurrentSchema(reasonsSchema);
         break;
+
       case "/user-details":
         setCurrentSchema(userSchema);
         break;
+
       case "/patient-details":
         setCurrentSchema(patientSchema);
         break;
+
       case "select-time":
         setCurrentSchema(callDetailsSchema);
         break;
+
       case "/insurance-provider":
         setCurrentSchema(insuranceSchema);
         break;
+
       case "/insurance-information":
         if (option) {
           if (option === "yes") {
@@ -64,6 +70,7 @@ export default function useSchemaContext() {
           setCurrentSchema(policyInfoSchema01);
         }
         break;
+
       case "/policy-info":
         if (option) {
           if (option === "yes") {
@@ -75,18 +82,23 @@ export default function useSchemaContext() {
           setCurrentSchema(policyInfoSchema01);
         }
         break;
+
       case "/credit-card":
         setCurrentSchema(creditCardSchema);
         break;
+
       case "/insurance-card":
         setCurrentSchema(insuranceCardSchema);
         break;
+
       case "/phone-number":
         setCurrentSchema(phoneNumberSchema);
         break;
+
       case "/confirmation-code":
         setCurrentSchema(confirmationCodeSchema);
         break;
+
       default:
         setCurrentSchema({});
         break;
