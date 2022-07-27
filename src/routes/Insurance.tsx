@@ -26,7 +26,7 @@ export default function Insurance() {
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
       <Header />
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+      <div className="h-full bg-image-insurance lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end">
         {/* Image container */}
         {/* <div className="lg:flex lg:flex-col lg:justify-end man-phone-lg lg:min-h-[640px] lg:min-w-[535px]"></div> */}
 
