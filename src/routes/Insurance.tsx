@@ -8,6 +8,12 @@ import Header from "../components/Header";
 
 import { useNavigate, useLocation } from "react-router-dom";
 import ImageInsuranceProvider from "../images/man-phone.png";
+import ImageAetna from "../images/insurance/aetna.png";
+import ImageBcb from "../images/insurance/bcb.png";
+import ImageCigna from "../images/insurance/cigna.png";
+import ImageEmpire from "../images/insurance/empire.png";
+import ImageHorizon from "../images/insurance/horizon.png";
+import ImageUnitedHealthcare from "../images/insurance/united-healthcare.png";
 
 export default function Insurance() {
   let navigate = useNavigate();
@@ -46,13 +52,24 @@ export default function Insurance() {
 
             {/* Form fields */}
             <div className="grid grid-cols-3 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-2 place-items-stretch grid-insurance">
-              <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200"></div>
-              <div className="p-6 bg-figGray-200 lg:col-start-2 lg:col-end-3"></div>
-              <div className="p-6 bg-figGray-200 lg:col-start-3 lg:col-end-4"></div>
-
+              <div className="p-4 m-auto">
+                <img src={ImageAetna} alt="" />
+              </div>
+              <div className="p-4 m-auto">
+                <img src={ImageBcb} alt="" />
+              </div>
+              <div className="p-4 m-auto">
+                <img src={ImageCigna} alt="" />
+              </div>
+              <div className="p-4 m-auto">
+                <img src={ImageEmpire} alt="" />
+              </div>
+              <div className="p-4 lg:col-start-2 lg:col-end-3 m-auto">
+                <img src={ImageHorizon} alt="" />
+              </div>
+              <div className="p-4 lg:col-start-3 lg:col-end-4 m-auto">
+                <img src={ImageUnitedHealthcare} alt="" />
+              </div>
               <button
                 className={`${primaryBtnStyles} xs:py-1 xs:mt-40 leading-4 text-xs col-span-3 lg:col-span-4 lg:mt-14 lg:h-[44px] lg:py-3`}
                 onClick={() => {
