@@ -7,6 +7,7 @@ import { FormData } from "../types";
 import Header from "../components/Header";
 
 import { useNavigate, useLocation } from "react-router-dom";
+import ImageInsuranceProvider from "../images/man-phone.png";
 
 export default function Insurance() {
   let navigate = useNavigate();
@@ -44,7 +45,7 @@ export default function Insurance() {
             </p>
 
             {/* Form fields */}
-            <div className="grid grid-cols-3 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-2 place-items-stretch">
+            <div className="grid grid-cols-3 gap-y-4 gap-x-2 lg:grid-cols-4 lg:gap-x-2 place-items-stretch grid-insurance">
               <div className="p-6 bg-figGray-200"></div>
               <div className="p-6 bg-figGray-200"></div>
               <div className="p-6 bg-figGray-200"></div>
@@ -86,6 +87,14 @@ export default function Insurance() {
                 CONTINUE WITHOUT INSURANCE
               </button>
             </div>
+          </div>
+          {/* Image container */}
+          <div>
+            <img
+              className="image-insurance"
+              src={ImageInsuranceProvider}
+              alt=""
+            />
           </div>
         </div>
       </div>

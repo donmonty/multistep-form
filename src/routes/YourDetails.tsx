@@ -10,6 +10,7 @@ import SelectFieldCustom from "../components/SelectFieldCustom";
 import { FormData } from "../types";
 import { handleNav } from "../lib/utils";
 import Header from "../components/Header";
+import ImageCouple from "../images/image-couple.png";
 
 import { dateOfBirthMask } from "../components/masks";
 import BirthdateField from "../components/BirthdateField";
@@ -42,10 +43,10 @@ export default function YourDetails() {
   return (
     <div className="relative bg-figGray-300 h-fit md:h-screen">
       <Header />
-      <div className="h-full bg-image lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-left">
+      <div className="h-full bg-image-couple lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-left">
         {/* White area */}
         <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[720px] lg:max-w-[720px] form-content">
-          <div className="flex flex-col pt-14 pb-60 px-10 lg:pt-12 lg:pb-12 lg:px-20">
+          <div className="flex flex-col pt-14  px-10 lg:pt-12 lg:pb-12 lg:px-20">
             <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">
               Step 2 of 5
             </p>
@@ -118,11 +119,11 @@ export default function YourDetails() {
               </button>
             </div>
           </div>
+          {/* Image container */}
+          <div>
+            <img className="image-couple" src={ImageCouple} alt="" />
+          </div>
         </div>
-
-        {/* Image container */}
-        <div></div>
-        {/* <div className="lg:flex lg:flex-col lg:justify-end couple-lg lg:min-h-[640px] lg:min-w-[525px]"></div> */}
       </div>
     </div>
   );

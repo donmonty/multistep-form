@@ -77,7 +77,6 @@ export default function IsPatient() {
   return (
     <div className="relative bg-figGray-300 h-screen">
       <Header />
-
       <Modal
         style={{
           overlay: {
@@ -93,10 +92,10 @@ export default function IsPatient() {
             // position: "relative",
             borderWidth: "4px",
             borderColor: "#E74D33",
-            padding: "3.5rem 5rem",
-            maxWidth: "calc(100vw - 600px)",
+            maxWidth: "800px",
+            padding: "2em",
             margin: "auto",
-            height: "82vh",
+            height: "700px",
           },
         }}
         isOpen={isModalVisible}
@@ -152,9 +151,9 @@ export default function IsPatient() {
             Remember, there are no costs associated with this initial first
             step.{" "}
           </p>
-          <div className="w-72 mt-5 mb-5 mx-auto">
+          <div className="lg:w-72 mt-5 mb-5 mx-auto">
             <button onClick={closeModal} className={primaryBtnStyles}>
-              NEXT
+              CLOSE
             </button>
           </div>
         </div>
