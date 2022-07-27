@@ -53,9 +53,6 @@ export default function YourDetails() {
             <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">
               Your details
             </h1>
-            <p className="md:inline-block mb-8 font-CapriSans text-black tracking-widest lg:ml-0">
-              Please give us a few details about you.
-            </p>
 
             {/* Form fields */}
             <div className="grid grid-cols-1 gap-y-4 gap-x-4 md:grid-cols-6 place-items-stretch">
