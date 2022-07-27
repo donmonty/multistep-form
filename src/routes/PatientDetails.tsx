@@ -28,7 +28,7 @@ export default function PatientDetails() {
 
   const { values, setFieldValue, validateForm, setTouched, errors } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const nextStep = "/select-time";
+  const nextStep = "/your-details";
 
   // const validateEmptyFields = () => {
   //   if (

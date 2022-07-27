@@ -4,6 +4,7 @@ import { useFormikContext } from "formik";
 import { useSchemaContext } from "../components/SchemaContext";
 
 import { FormData } from "../types";
+import Header from "../components/Header";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -24,9 +25,10 @@ export default function Booked() {
 
   const secondaryBtnStyles =
     "flex mt-5 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-figOrange tracking-widest hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
+    
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
-      <div className="w-full p-4 h-16 bg-white"></div>
+      <Header />
       <div className="h-full bg-image-booked lg:h-fit bg-figGray-300 flex flex-col justify-start py-3 px-3 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end">
         {/* Image container */}
         {/* <div className="lg:flex lg:flex-col lg:justify-end man-phone-lg lg:min-h-[640px] lg:min-w-[535px]"></div> */}
@@ -34,7 +36,7 @@ export default function Booked() {
         {/* White area */}
         <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] form-content-booked">
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
-            <h1 className="text-4xl mb-7 font-Osaka">
+            <h1 className="text-4xl mb-7 tracking-wide font-Playfair">
               Your discovery call has been booked
             </h1>
             <p className="md:inline-block pl-2 lg:ml-0 booked-date font-Montserrat">
@@ -53,10 +55,7 @@ export default function Booked() {
                 <div className="md:mr-6">
                   <button
                     className={`${secondaryBtnStyles}`}
-                    onClick={() => {
-                      setFieldValue("hasInsurance", "yes");
-                      navigate("/insurance-information");
-                    }}
+                    onClick={() => {}}
                   >
                     CHANGE PHONE
                   </button>
@@ -65,10 +64,7 @@ export default function Booked() {
                   <button
                     type="submit"
                     className={`${secondaryBtnStyles}`}
-                    onClick={() => {
-                      setFieldValue("hasInsurance", "other");
-                      navigate("/insurance-information");
-                    }}
+                    onClick={() => {}}
                   >
                     RESCHEDULE
                   </button>
@@ -76,10 +72,7 @@ export default function Booked() {
               </div>
               <button
                 className={`${primaryBtnStyles}`}
-                onClick={() => {
-                  setFieldValue("hasInsurance", "no");
-                  navigate("/stripe-card");
-                }}
+                onClick={() => {}}
               >
                 ADD TO MY CALENDAR
               </button>

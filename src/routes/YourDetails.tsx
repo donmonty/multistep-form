@@ -27,10 +27,8 @@ export default function YourDetails() {
 
   const { validateForm, setTouched, values } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const nextStep =
-    values.isAppointmentForYou.toLowerCase() === "me"
-      ? "/select-time"
-      : "/patient-details";
+
+  const nextStep = "/select-time";
 
   useEffect(() => {
     loadPageSchema(location.pathname, values.isAppointmentForYou.toLowerCase());

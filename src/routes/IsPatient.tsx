@@ -19,7 +19,10 @@ export default function IsPatient() {
 
   const { loadPageSchema, currentSchema } = useSchemaContext();
   const { values, validateForm, setTouched } = useFormikContext<FormData>();
-  const nextStep = "/your-details";
+  console.log("Who", values.isAppointmentForYou);
+  const nextStep = values.isAppointmentForYou.toLowerCase() === "me"
+    ? "/your-details"
+    : "/patient-details";
 
   const openModal = () => {
     setIsModalVisible(true);
