@@ -23,7 +23,7 @@ export const initialValues = {
   email: "",
   street: "",
   city: "",
-  state:"CA",
+  state:"AL",
   zipcode: "",
   // Patient details
   patientFirstName: "",
@@ -45,7 +45,7 @@ export const initialValues = {
   policyHolderBirthDate: "",
   policyHolderAddress: "",
   policyHolderCity: "",
-  policyHolderState: "CA",
+  policyHolderState: "AL",
   policyHolderZip: "",
   insuranceCardFront: "",
   insuranceCardBack: "",

@@ -14,12 +14,8 @@ import ImageCouple from "../images/image-couple.png";
 
 import { dateOfBirthMask } from "../components/masks";
 import BirthdateField from "../components/BirthdateField";
+import { usStates } from "../lib/constants";
 
-const states = [
-  { key: "CA", value: "CA" },
-  { key: "AZ", value: "AZ" },
-  { key: "TX", value: "TX" },
-];
 
 export default function YourDetails() {
   let navigate = useNavigate();
@@ -90,7 +86,7 @@ export default function YourDetails() {
                 <SelectFieldCustom
                   name="state"
                   label="State"
-                  options={states}
+                  options={usStates}
                 />
               </div>
 

@@ -27,7 +27,7 @@ export default function ConfirmationCode() {
 
   const { validateForm, setTouched, submitForm, values } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
-  const nextStep = "/confirmation";
+  const nextStep = "/booked";
 
   const handleSubmission = async () => {
     await handleNav({ nextStep, validateForm, setTouched, navigate, currentSchema, submitForm });
