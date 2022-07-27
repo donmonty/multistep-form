@@ -88,7 +88,7 @@ export default function DesktopCalendar(props: DesktopCalendarProps) {
           </div>
         ): (
           <div>
-              <div className="grid grid-cols-7 mt-10 text-sm leading-6 text-center text-gray-500">
+              <div className="grid grid-cols-7 mt-10 lg:mt-0 text-sm leading-6 text-center text-gray-500">
                 <div className="font-Montserrat">Mon</div>
                 <div className="font-Montserrat">Tue</div>
                 <div className="font-Montserrat">Wed</div>
