@@ -43,7 +43,7 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
 
       <label className="custom-select">
         <select
-          className="text-base font-Montserrat pt-8 pb-4"
+          className="text-base font-Montserrat pt-8 pb-4 text-black"
           // disabled={disabled}
           // defaultValue={props.options[0].value}
           {...field}

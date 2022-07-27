@@ -50,7 +50,6 @@ export default function PolicyInfo() {
 
   const handlePolicyHolderVisible = (e: any) => {
     const value = e.target.value;
-    console.log(value);
     if (value.toLowerCase() === "yes") {
       setIsPolicyHolderVisible(false);
     } else {
@@ -110,7 +109,7 @@ export default function PolicyInfo() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [values.isPolicyHolder]);
 
-  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
+  const primaryBtnStyles = "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent shadow-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 mb-3 mt-4 w-full";
 
@@ -281,7 +280,7 @@ export default function PolicyInfo() {
                 disabled={loading}
                 onClick={() => handleClick()}
               >
-                Next
+                NEXT
               </button>
             )}
 

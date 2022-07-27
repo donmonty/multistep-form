@@ -26,9 +26,9 @@ function RadioGroup({ ...props }: OtherProps & FieldHookConfig<string>) {
 
   const style = () => {
     if (props.align === "vertical") {
-      return "block mt-3"
+      return "block mt-3 font-Montserrat"
     }
-    return "mr-6"
+    return "mr-6 font-Montserrat"
   };
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import {
   eachDayOfInterval,
   endOfMonth,
   format,
+  isEqual,
   // getDay,
   // isEqual,
   // isSameDay,
@@ -193,6 +194,16 @@ export default function useDateUtils() {
     setPmSlots([...afternoonSlots]);
   };
 
+  const getFirstDayWithOpenSlots = () => {
+    console.log("Executing getFirstDayWithOpenSlots");
+    if (availableDates.length > 0) {
+      const firstDate = parse(availableDates[0], 'yyyy/MM/dd', new Date());
+      return firstDate;
+    } else {
+      return startOfToday();
+    }
+  };
+
   const handleAllDates = async () => {
     setLoadingCalendar(true);
     await getAllDatesData();
@@ -201,17 +212,20 @@ export default function useDateUtils() {
   };
 
   useEffect(() => {
-    // handleAllDates();
     getDates();
-    getAmSlots(selectedDay);
-    getPmSlots(selectedDay);
+    const firstDay = getFirstDayWithOpenSlots();
+    if(!isEqual(firstDay, selectedDay)) {
+      setSelectedDay(firstDay);
+    } else {
+      getAmSlots(selectedDay);
+      getPmSlots(selectedDay);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDay, availableDates, currentMonth]);
 
   useEffect(() => {
     handleAllDates();
-    // await getAllDatesData();
-    // getDates();
-    // getCalendarDays();
+    getFirstDayWithOpenSlots();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentMonth])
 

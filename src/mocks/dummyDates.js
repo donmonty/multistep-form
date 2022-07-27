@@ -1,53 +1,53 @@
 export const dummyDates = {
   "dates": [
-    "2022/07/26", 
+    // "2022/07/26", 
     "2022/07/27", 
     "2022/07/28", 
     "2022/07/29"
   ], 
   "dates_rows": {
-    "2022/07/26": [
-      {
-        "practitioner_id": 1, 
-        "slots_id": 163, 
-        "time": "09:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 164, 
-        "time": "11:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 165, 
-        "time": "12:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 166, 
-        "time": "13:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 167, 
-        "time": "14:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 168, 
-        "time": "15:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 169, 
-        "time": "17:00:00"
-      }, 
-      {
-        "practitioner_id": 1, 
-        "slots_id": 170, 
-        "time": "18:00:00"
-      }
-    ], 
+    // "2022/07/26": [
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 163, 
+    //     "time": "09:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 164, 
+    //     "time": "11:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 165, 
+    //     "time": "12:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 166, 
+    //     "time": "13:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 167, 
+    //     "time": "14:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 168, 
+    //     "time": "15:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 169, 
+    //     "time": "17:00:00"
+    //   }, 
+    //   {
+    //     "practitioner_id": 1, 
+    //     "slots_id": 170, 
+    //     "time": "18:00:00"
+    //   }
+    // ], 
     "2022/07/27": [
       {
         "practitioner_id": 1, 

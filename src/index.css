@@ -39,6 +39,6 @@
   }
   [type="checkbox"],
   [type="radio"] {
-    @apply border-gray-700 rounded-full text-black;
+    @apply border-gray-700 rounded-full text-black  checked:ring-0 accent-black;
   }
 }

@@ -50,7 +50,7 @@ export default function StripeCard() {
   const errorMsgCard = "There was a problem with your credit card number. Make sure you entered it correctly.";
   const errorMsgGeneric = "Something went wrong. Please try again later.";
 
-  const primaryBtnStyles = "flex mt-2 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-figOrange-700 w-full disabled:bg-gray-300 self-center";
+  const primaryBtnStyles = "flex mt-2 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-figOrange-700 w-full disabled:bg-gray-300 self-center";
 
   const loaderStyles = "flex justify-center items-center py-2 px-2 border border-transparent shadow-sm font-Montserrat font-bold text-white tracking-widest bg-figOrange-700 mb-3 mt-4 w-full";
 
@@ -97,10 +97,10 @@ export default function StripeCard() {
         {/* White area */}
         <div className="bg-white min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col py-14 px-10 lg:py-12 lg:px-16">
-          <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
-          <h1 className="text-4xl font-extrabold mb-7">Credit card info</h1>
+          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Credit card info</h1>
 
-          <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p>
+          {/* <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p> */}
 
           {/* Form fields */}
           <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit} >
@@ -139,6 +139,10 @@ export default function StripeCard() {
                 />
               </div>
 
+              <div className="lg:col-span-2 pt-6 text-base font-Montserrat text-black">
+                <p>All costs associated with Culina Health services are communicated to you first. NO SURPRISES!</p>
+              </div>
+
               <div className="lg:col-span-2 mt-0">
                 {error && (
                   <span  className="block mt-2 mb-4 text-sm font-medium text-red-600">
@@ -158,7 +162,7 @@ export default function StripeCard() {
                   </div>
                 ): (
                   <button className={primaryBtnStyles} disabled={!stripe}>
-                    Next
+                    NEXT
                   </button>
                 )}
               </div>

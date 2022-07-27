@@ -145,6 +145,7 @@ export const appointmentSchema = Yup.object({
   reasonForVisit: Yup.string().required(),
 });
 
+const isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/;
 export const userSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
   lastName: Yup.string().required("Last name is required"),
@@ -163,7 +164,7 @@ export const userSchema = Yup.object({
   street: Yup.string().required("Street is required"),
   city: Yup.string().required("City is required"),
   state: Yup.string().required("State is required"),
-  zipcode: Yup.string().required("Zipcode is required"),
+  zipcode: Yup.string().matches(isValidZip, "Invalid zip code").required("Zip code is required"),
 });
 
 export const patientSchema = Yup.object({
@@ -212,7 +213,7 @@ export const policyInfoSchema = Yup.object({
   policyHolderAddress: Yup.string().required("Address is required"),
   policyHolderCity: Yup.string().required("City is required"),
   policyHolderState: Yup.string(),
-  policyHolderZip: Yup.string().required("Zipcode is required"),
+  policyHolderZip: Yup.string().matches(isValidZip, "Invalid zip code").required("Zip code is required"),
   insuranceCardFront: Yup.string().required("Insurance card front is required"),
   insuranceCardBack: Yup.string().required("Insurance card back is required"),
 });
