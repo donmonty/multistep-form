@@ -97,7 +97,7 @@ export default function ConfirmationCode() {
         <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col py-20 px-10 lg:py-12 lg:px-20">
             <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl">Lastly!</p>
-            <h1 className="text-4xl font-extrabold mb-7">Your confirmation code.</h1>
+            <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Your confirmation code.</h1>
             <p className="md:inline-block pl-2 mb-8 font-Montserrat text-sm text-figGray-600 lg:ml-0">Please enter the confirmation code we sent to your phone in order to confirm it's you.</p>
 
             {/* Form fields */}
