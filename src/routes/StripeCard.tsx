@@ -92,83 +92,83 @@ export default function StripeCard() {
   return (
     <div className="relative bg-figGray-300 h-screen lg:h-screen">
       <Header />
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+      <div className="h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* White area */}
         <div className="bg-white min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
-          <div className="flex flex-col py-14 px-10 lg:py-12 lg:px-16">
-          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 5 of 5</p>
-          <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Credit card info</h1>
+          <div className="flex flex-col py-14 lg:py-12 px-0 md:px-16">
+            <p className="xs:px-10 md:px-0 mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 5 of 5</p>
+            <h1 className="xs:px-10 md:px-0 text-4xl tracking-wide font-Playfair font-semibold mb-7">Credit card info</h1>
 
-          {/* <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p> */}
+            {/* <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p> */}
 
-          {/* Form fields */}
-          <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit} >
-            <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:grid-cols-2 lg:gap-x-2 place-items-stretch">
+            {/* Form fields */}
+            <form className="flex flex-col justify-between min-h-full credit-card-xs xs:p-10 md:px-0" onSubmit={handleSubmit} >
+              <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:grid-cols-2 lg:gap-x-2 place-items-stretch">
 
-              <div className="lg:col-span-2 text-base font-Montserrat" style={tailwindStyles}>
-                <label className="block text-sm text-figGray-600 mb-1">Card number</label>
-                <CardNumberElement
-                  options={{
-                    style: {
-                      base: inputStyle,
-                    }
-                  }}
-                />
+                <div className="lg:col-span-2 text-base font-Montserrat" style={tailwindStyles}>
+                  <label className="block text-sm text-figGray-600 mb-1">Card number</label>
+                  <CardNumberElement
+                    options={{
+                      style: {
+                        base: inputStyle,
+                      }
+                    }}
+                  />
+                </div>
+
+                <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
+                  <label className="block text-sm font-medium text-figGray-600 mb-1">Expiration date</label>
+                  <CardExpiryElement
+                    options={{
+                      style: {
+                        base: inputStyle,
+                      }
+                    }}
+                  />
+                </div>
+
+                <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
+                  <label className="block text-sm font-medium text-figGray-600 mb-1">CVC</label>
+                  <CardCvcElement
+                    options={{
+                      style: {
+                        base: inputStyle,
+                      }
+                    }}
+                  />
+                </div>
+
+                <div className="xs:text-white xs:text-sm lg:col-span-2 pt-6 md:text-base font-Montserrat md: text-black">
+                  <p>All costs associated with Culina Health services are communicated to you first. NO SURPRISES!</p>
+                </div>
+
+                <div className="lg:col-span-2 mt-0">
+                  {error && (
+                    <span  className="block mt-2 mb-4 text-sm font-medium text-red-600">
+                      {errorMessage}
+                    </span>
+                  )}
+                  {loading ? (
+                    <div className={loaderStyles}>
+                      <Oval
+                        ariaLabel="loading-indicator"
+                        height={24}
+                        width={24}
+                        strokeWidth={4}
+                        color="white"
+                        secondaryColor="#BD240A"
+                      />
+                    </div>
+                  ): (
+                    <button className={primaryBtnStyles} disabled={!stripe}>
+                      NEXT
+                    </button>
+                  )}
+                </div>
+
               </div>
-
-              <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
-                <label className="block text-sm font-medium text-figGray-600 mb-1">Expiration date</label>
-                <CardExpiryElement
-                  options={{
-                    style: {
-                      base: inputStyle,
-                    }
-                  }}
-                />
-              </div>
-
-              <div className="lg:col-span-1 text-base font-Montserrat" style={tailwindStyles}>
-                <label className="block text-sm font-medium text-figGray-600 mb-1">CVC</label>
-                <CardCvcElement
-                  options={{
-                    style: {
-                      base: inputStyle,
-                    }
-                  }}
-                />
-              </div>
-
-              <div className="lg:col-span-2 pt-6 text-base font-Montserrat text-black">
-                <p>All costs associated with Culina Health services are communicated to you first. NO SURPRISES!</p>
-              </div>
-
-              <div className="lg:col-span-2 mt-0">
-                {error && (
-                  <span  className="block mt-2 mb-4 text-sm font-medium text-red-600">
-                    {errorMessage}
-                  </span>
-                )}
-                {loading ? (
-                  <div className={loaderStyles}>
-                    <Oval
-                      ariaLabel="loading-indicator"
-                      height={24}
-                      width={24}
-                      strokeWidth={4}
-                      color="white"
-                      secondaryColor="#BD240A"
-                    />
-                  </div>
-                ): (
-                  <button className={primaryBtnStyles} disabled={!stripe}>
-                    NEXT
-                  </button>
-                )}
-              </div>
-
-            </div>
-          </form>
+            </form>
 
           </div>
         </div>

@@ -314,10 +314,12 @@ input:checked + span {
     background-position: bottom right -420px;
   }
 
-  /* .form-content-xs {
-    height: 77vh;
-    margin-left: 3.5em;
-  } */
+  .credit-card-xs {
+    background-image: url("./images/credit-card.png");
+    background-repeat: no-repeat;
+    background-size: 210% auto;
+    background-position: bottom -300px right -350px;
+  }
 
 }
 
