@@ -72,7 +72,7 @@ export default function Calendar() {
           <div className="grid grid-cols-1 gap-2 sm:gap-4 sm:grid-cols-2 lg:gap-x-9 xl:gap-x-32">
             
             <div className="col-span-2">
-              <p className="mb-4 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+              <p className="mb-4 font-CapriSans text-figGray-600 lg:text-xl">step 4 of 5</p>
               <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Select a time</h1>
             </div>
             

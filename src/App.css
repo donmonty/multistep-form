@@ -24,11 +24,9 @@
 }
 
 .bg-image-booked {
-  background-image: url("./images/man-phone.png");
+  background-image: url("./images/booked-women.png");
   background-repeat: no-repeat;
-  background-size: 47% auto;
-  background-position: left 0px bottom;
-  height: 100vh;
+  background-size: cover;
 }
 
 .form-content {
@@ -309,12 +307,18 @@ input:checked + span {
   }
 
   .woman-phone-xs {
-    background-image: url("./images/woman-phone.png");
+    background-image: url("./images/woman-phone-transparent.png");
     background-repeat: no-repeat;
-    background-size: 80% auto;
+    background-size: 176% auto;
     /* background-size: contain; */
-    background-position: bottom right -100px;
+    background-position: bottom right -420px;
   }
+
+  /* .form-content-xs {
+    height: 77vh;
+    margin-left: 3.5em;
+  } */
+
 }
 
 @media (min-width: 640px) {
@@ -333,10 +337,10 @@ input:checked + span {
   }
 
   .woman-phone-md {
-    background-image: url("./images/woman-phone.png");
+    background-image: url("./images/woman-phone-transparent.png");
     background-repeat: no-repeat;
-    background-size: 60% auto;
-    background-position: bottom right -100px;
+    background-size: 120% auto;
+    background-position: bottom right -520px;
   }
 }
 

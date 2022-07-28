@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import InputField from "../components/InputField";
 
@@ -23,11 +23,19 @@ export default function YourDetails() {
 
   const { validateForm, setTouched, values } = useFormikContext<FormData>();
   const { loadPageSchema, currentSchema } = useSchemaContext();
+  const [stepNumber, setStepNumber] = useState<string>("2");
 
   const nextStep = "/select-time";
 
+  const getStepNumber = () => {
+    if (values.isAppointmentForYou !== "me") {
+      setStepNumber("3");
+    }
+  };
+
   useEffect(() => {
     loadPageSchema(location.pathname, values.isAppointmentForYou.toLowerCase());
+    getStepNumber();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -42,7 +50,7 @@ export default function YourDetails() {
         <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[720px] lg:max-w-[720px] form-content">
           <div className="flex flex-col pt-14  px-10 lg:pt-12 lg:pb-12 lg:px-20">
             <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">
-              Step 2 of 5
+              {`Step ${stepNumber} of 5`}
             </p>
             <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">
               Your details

@@ -124,7 +124,7 @@ export default function PolicyInfo() {
         {/* White area */}
         <div className="bg-white min-h-[500px] lg:min-w-[680px] lg:max-w-[680px]">
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-20">
-          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 5 of 5</p>
           <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Insurance Information</h1>
 
           {!loading && (

@@ -34,7 +34,7 @@ export default function Booked() {
         {/* <div className="lg:flex lg:flex-col lg:justify-end man-phone-lg lg:min-h-[640px] lg:min-w-[535px]"></div> */}
 
         {/* White area */}
-        <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] form-content-booked">
+        <div className="bg-white/95 md:bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] form-content-booked">
           <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
             <h1 className="text-4xl mb-7 tracking-wide font-Playfair">
               Your discovery call has been booked

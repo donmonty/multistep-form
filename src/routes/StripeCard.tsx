@@ -97,7 +97,7 @@ export default function StripeCard() {
         {/* White area */}
         <div className="bg-white min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col py-14 px-10 lg:py-12 lg:px-16">
-          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 3 of 5</p>
+          <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">step 5 of 5</p>
           <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-7">Credit card info</h1>
 
           {/* <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p> */}
