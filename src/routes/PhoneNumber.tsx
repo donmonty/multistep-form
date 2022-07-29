@@ -5,6 +5,7 @@ import { useSchemaContext } from "../components/SchemaContext";
 import { handleNav } from "../lib/utils";
 import { FormData } from "../types";
 import Header from "../components/Header";
+import WomanPhone from "../images/woman-phone-half.png";
 
 import {
   useNavigate,
@@ -52,21 +53,21 @@ export default function PhoneNumber() {
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
       <Header />
-      <div className="woman-phone-lg h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end ">
+      <div className="woman-phone-lg h-fit lg:h-fit bg-none flex flex-col justify-start pb-3 pt-3 px-2 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end ">
 
         {/* Image container */}
         {/* <div className="lg:flex lg:flex-col lg:justify-end woman-phone-lg lg:min-h-[640px] lg:min-w-[525px]"></div> */}
 
         {/* White area */}
-        <div className="bg-white woman-phone-xs woman-phone-md woman-phone-none lg:h-[77vh] lg:ml-14 lg:mr-20 lg:mt-16 lg:mb-16 lg:max-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
+        <div className="bg-white  woman-phone-md woman-phone-none lg:h-[77vh] lg:ml-14 lg:mr-20 lg:mt-16 lg:mb-16 lg:max-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
           <div className="flex flex-col py-20 px-10 lg:py-12 lg:px-20">
             <p className="pl-2 mb-5 font-CapriSans text-figGray-600 lg:text-xl xs:text-left lg:text-center">Step 5 of 5</p>
             <h1 className="text-4xl tracking-wide font-Playfair font-semibold mb-4 md:mb-7 xs:text-left lg:text-center">We're almost done</h1>
-            <p className="md:inline-block md:max-w-[400px] pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0 xs:text-left lg:text-center">Provide the best mobile phone number to reach you. You will get a confirmation code via SMS.</p>
+            <p className="md:inline-block md:max-w-[400px] pr-10 md:pr-0 mb-8 font-CapriSans text-black tracking-wider lg:ml-0 xs:text-left lg:text-center">Provide the best mobile phone number to reach you. You will get a confirmation code via SMS.</p>
 
 
             {/* Form fields */}
-            <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:gap-x-2 place-items-stretch">
+            <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:gap-x-2 place-items-stretch z-10">
 
               <InputField
                 name="phoneNumber"
@@ -92,8 +93,16 @@ export default function PhoneNumber() {
             </div>
 
           </div>
+
         </div>
 
+        <div>
+          <img
+            src={WomanPhone}
+            alt=""
+            className="woman-phone-xs-bg"
+          />
+        </div>     
       </div>
     </div>
   );

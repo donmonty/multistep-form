@@ -37,6 +37,10 @@ module.exports = {
       'xs': '375px',
       ...defaultTheme.screens,
     },
+    letterSpacing: {
+      ...defaultTheme.letterSpacing,
+      "widest": ".20em"
+    }
   },
   
   plugins: [require("@tailwindcss/forms")],

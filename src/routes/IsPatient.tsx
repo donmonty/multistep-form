@@ -3,6 +3,7 @@ import SelectFieldCustom from "../components/SelectFieldCustom";
 import { InformationCircleIcon } from "@heroicons/react/solid";
 import Modal from "react-modal";
 import Header from "../components/Header";
+import SeriousMan from "../images/serious-black-man.png";
 
 import { useNavigate, useLocation } from "react-router-dom";
 
@@ -13,18 +14,20 @@ import { FormData } from "../types";
 
 export default function IsPatient() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const [modalSize, setModalSize] = useState<string>("sm");
 
   let navigate = useNavigate();
   let location = useLocation();
 
   const { loadPageSchema, currentSchema } = useSchemaContext();
   const { values, validateForm, setTouched } = useFormikContext<FormData>();
-  console.log("Who", values.isAppointmentForYou);
+  
   const nextStep = values.isAppointmentForYou.toLowerCase() === "me"
     ? "/your-details"
     : "/patient-details";
 
-  const openModal = () => {
+  const openModal = (size: string) => {
+    setModalSize(size);
     setIsModalVisible(true);
   };
   const closeModal = () => {
@@ -75,30 +78,42 @@ export default function IsPatient() {
   ];
 
   const primaryBtnStyles =
-    "flex mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
+    "flex xs:mt-4 md:mt-10 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   return (
-    <div className="relative bg-figGray-300 h-screen">
+    <div className="relative bg-figGray-300 h-fit serious-man-bg">
       <Header />
+      <div className="absolute top-[68px] bg-figGray-200 h-6 w-[375px] z-0 md:hidden"></div>
+
       <Modal
         style={{
           overlay: {
             position: "fixed",
             top: 0,
             left: 0,
-            width: "100%",
-            height: "100%",
+            right: 0,
+            bottom: 0,
+            // width: "100%",
+            // height: "100%",
             backgroundColor: "rgba(0, 0, 0, 0.5)",
-            zIndex: 2,
+            zIndex: 12,
           },
           content: {
-            // position: "relative",
+            position: "absolute",
+            // top: '40px',
+            // left: '300px',
+            // right: '40px',
+            // bottom: '40px',
             borderWidth: "4px",
             borderColor: "#E74D33",
-            maxWidth: "800px",
-            padding: "2em",
+            overflow: 'auto',
+            // WebkitOverflowScrolling: 'touch',
+            // maxWidth: "800px",
+            width: modalSize === "sm" ? "349px" : "669px",
+            padding: modalSize === "sm" ? "40px" : "60px",
+            inset: modalSize === "sm" ? "10px" : "40px",
             margin: "auto",
-            height: "700px",
+            // height: "650px",
           },
         }}
         isOpen={isModalVisible}
@@ -110,14 +125,12 @@ export default function IsPatient() {
             What's a discovery call?
           </p>
           <p className="text-base leading-5 my-3 font-Montserrat text-black">
-            This is an opportunity for our care delivery team to learn about you
-            and match you with the right dietitian.
+            Discovery calls help you get atched with the right dietitian at Culina Health.
           </p>
           <p className="text-base leading-5 mt-3 mb-6 font-Montserrat text-black">
-            This important first step will provide you comfort that your needs
-            have been heard and are being addressed.
+            This important first step for you as a Culina Health patient to receive personalized care.
           </p>
-          <p className="text-base leading-5 mt-3 mb-6 font-Montserrat text-black">
+          <p className="text-base leading-5 mt-3 mb-3 font-Montserrat text-black">
             During the discovery call you will:.
           </p>
           <div className="wrapper-grid-3">
@@ -126,7 +139,7 @@ export default function IsPatient() {
                 1.
               </p>
               <p className="font-Montserrat text-sm text-figGray-600">
-                Share your health concerns and your reason for reaching out.
+                Share your health concerns and your reason health goals.
               </p>
             </div>
 
@@ -135,8 +148,7 @@ export default function IsPatient() {
                 2.
               </p>
               <p className="font-Montserrat text-sm text-figGray-600">
-                Learn about our team at Culina and work with your Care
-                Coordinator to find the best match for you.
+                Learn about how we deliver clinical nutrition and how your dietitian will support you.
               </p>
             </div>
 
@@ -145,16 +157,15 @@ export default function IsPatient() {
                 3.
               </p>
               <p className="font-Montserrat text-sm text-figGray-600">
-                Have the opportunity to ask any other questions about the way we
-                work.
+                Build a personalized plan for reaching your health goals.
               </p>
             </div>
           </div>
-          <p className="text-base leading-5 mt-9 mb-9 font-Montserrat text-black text-center">
+          <p className="text-sm leading-5 mt-8 mb-8 font-Montserrat text-black text-center">
             Remember, there are no costs associated with this initial first
             step.{" "}
           </p>
-          <div className="lg:w-72 mt-5 mb-5 mx-auto">
+          <div className="lg:w-72 mt-5 mb-0 mx-auto">
             <button onClick={closeModal} className={primaryBtnStyles}>
               CLOSE
             </button>
@@ -162,12 +173,14 @@ export default function IsPatient() {
         </div>
       </Modal>
 
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-12 lg:px-8 lg:pb-0 lg:mt-16 lg:flex-row lg:justify-center">
+
+      <div className="h-full lg:h-fit bg-none  flex flex-col justify-start pt-3 pb-5 px-2 md:mt-12 lg:mt-0 lg:px-8 lg:pt-20 lg:pb-0 lg:flex-row lg:justify-center">
+
         {/* Serious man container (large displays) */}
-        <div className="lg:flex lg:flex-col lg:justify-end serious-man-full lg:min-h-[640px]">
-          <div className="lg:ml-16 lg:pb-5">
+        <div className="lg:flex lg:flex-col lg:justify-end  lg:min-h-[640px] z-10 md:z-0">
+          <div className="lg:ml-16 lg:pb-10">
             {/* Info Window */}
-            <div className="flex justify-between items-center bg-white border-2 border-figOrange-700 p-4 mb-4 lg:mb-20 lg:w-[490px] lg:mr-5 mt-0">
+            <div className="flex justify-between items-center bg-white border-2 border-figOrange-700 p-4 mb-3 lg:mb-0 lg:w-[490px] lg:mr-5 mt-0">
               <div className="pr-8">
                 <p className="font-bold font-Montserrat text-figOrange-700">
                   What's a discovery call?
@@ -176,7 +189,10 @@ export default function IsPatient() {
                   There is no cost associated with discovery calls.
                 </p>
               </div>
-              <button className="self-start" onClick={openModal}>
+              <button className="self-start lg:hidden" onClick={() => openModal("sm")}>
+                <InformationCircleIcon className="w-8 h-8 self-start text-figOrange-700" />
+              </button>
+              <button className="xs:hidden md:block self-start" onClick={() => openModal("lg")}>
                 <InformationCircleIcon className="w-8 h-8 self-start text-figOrange-700" />
               </button>
             </div>
@@ -186,18 +202,18 @@ export default function IsPatient() {
         {/* White area */}
         <div
           id="serious-man"
-          className="bg-white sm:mx-auto lg:mx-0 sm:w-full sm:max-w-2xl flex flex-col justify-between lg:items-stretch h-fit lg:h-fit lg:max-w-[630px] serious-man-xs serious-man-md serious-man-lg"
+          className="bg-white sm:mx-auto lg:mx-0 sm:w-full sm:max-w-2xl flex flex-col justify-between lg:items-stretch h-fit lg:h-fit lg:max-w-[630px]  serious-man-md serious-man-lg"
         >
-          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
+          <div className="flex flex-col pt-10 pb-20 px-10 lg:py-12 lg:px-16 z-10 md:z-0">
             <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">
               Step 1 of 5
             </p>
-            <h1 className="text-3xl lg:text-4xl tracking-wide font-Playfair font-semibold mb-7">
+            <h1 className="text-3xl lg:text-4xl tracking-wide font-Playfair font-semibold xs:mb-4  md:mb-7">
               Let's book your free discovery call.
             </h1>
 
-            <p className="xs:hidden md:inline-block mb-8 font-CapriSans text-black tracking-widest">
-              A 15 minute call with a registered dietitian
+            <p className="xs:mb-6 md:mb-8 font-CapriSans text-black tracking-wider">
+              A 15 minute phone consultation with a registered dietitian
             </p>
 
             <div className="w-full mb-4">
@@ -208,7 +224,7 @@ export default function IsPatient() {
               />
             </div>
 
-            <div className="w-full mb-4">
+            <div className="w-full">
               <SelectFieldCustom
                 name="reasonForVisit"
                 label="Reason for visit"
@@ -232,7 +248,19 @@ export default function IsPatient() {
               NEXT
             </button>
           </div>
+
+
+        <div>
+          <img
+            className="serious-man-xs-bg"
+            src={SeriousMan}
+            alt=""
+          />
+        </div>      
         </div>
+
+
+
       </div>
     </div>
   );

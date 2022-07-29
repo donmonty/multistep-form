@@ -56,7 +56,7 @@ export default function PatientDetails() {
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
       <Header />
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-8 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+      <div className="h-full lg:h-fit bg-none flex flex-col justify-start py-3 px-2 md:mt-8 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* Image container */}
         <div className="lg:flex lg:flex-col lg:justify-end hands-lg lg:min-h-[640px] lg:min-w-[540px]"></div>

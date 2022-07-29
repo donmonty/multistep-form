@@ -162,7 +162,7 @@ function ImageUploadField({ ...props }: OtherProps & FieldHookConfig<string>) {
   }, []);
 
   const imagePlaceholder = (
-    <div className="w-full flex justify-center items-center h-40 bg-figGray-200 rounded-lg border border-dashed border-figBlue-900">
+    <div className="w-full flex justify-center items-center h-36 bg-figGray-200 rounded-lg border border-dashed border-figGray-500">
       <div className='flex flex-col justify-center items-center'>
         <PhotographIcon className="block m-auto w-14 h-14 self-center text-figBlue-900" />
         <p className='m-auto text-center text-sm font-Montserrat'>{props.label}</p>

@@ -6,6 +6,7 @@ import { useFormikContext } from "formik";
 
 import { Oval } from "react-loader-spinner";
 import Header from "../components/Header";
+import CreditCardImage from "../images/credit-card-sm.png";
 
 import {
   CardNumberElement,
@@ -92,7 +93,7 @@ export default function StripeCard() {
   return (
     <div className="relative bg-figGray-300 h-screen lg:h-screen">
       <Header />
-      <div className="h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
+      <div className="h-fit bg-figGray-300 flex flex-col justify-start pt-3 px-2 pb-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-center">
 
         {/* White area */}
         <div className="bg-white min-h-[500px] lg:min-w-[630px] lg:max-w-[630px]">
@@ -103,8 +104,8 @@ export default function StripeCard() {
             {/* <p className="md:inline-block pl-2 mb-12 font-CapriSans text-black tracking-widest lg:ml-0">You won't be charged</p> */}
 
             {/* Form fields */}
-            <form className="flex flex-col justify-between min-h-full credit-card-xs xs:p-10 md:px-0" onSubmit={handleSubmit} >
-              <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:grid-cols-2 lg:gap-x-2 place-items-stretch">
+            <form className="flex flex-col justify-between min-h-full  xs:p-10 md:px-0" onSubmit={handleSubmit} >
+              <div className="grid grid-cols-1 gap-y-4 gap-x-2 lg:grid-cols-2 lg:gap-x-2 place-items-stretch z-10">
 
                 <div className="lg:col-span-2 text-base font-Montserrat" style={tailwindStyles}>
                   <label className="block text-sm text-figGray-600 mb-1">Card number</label>
@@ -170,6 +171,14 @@ export default function StripeCard() {
               </div>
             </form>
 
+          </div>
+
+          <div>
+          <img
+              className="credit-card-xs-bg"
+              src={CreditCardImage}
+              alt=""
+            />
           </div>
         </div>
 

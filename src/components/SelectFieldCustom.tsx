@@ -14,6 +14,7 @@ type Transition = {
 
 type OtherProps = {
   label: string;
+  small?: boolean;
   options: Array<Option>;
   transitions?: Array<Transition>; // In case the next step to navigate to is determined by the value selected by the user
   setNextStep?: React.Dispatch<React.SetStateAction<string>>; // In case the next step to navigate to is determined by the value selected by the user
@@ -38,12 +39,15 @@ function SelectField({ ...props }: OtherProps & FieldHookConfig<string>) {
     getDefaultNextStep();
   }, []);
 
+  const regularStyle = "text-base font-Montserrat pt-8 pb-4 text-figGray-900 appearance-none";
+  const smallStyle = `${regularStyle} pb-2 pt-[26px]`;
+
   return (
     <div className="mb-0">
 
-      <label className="custom-select">
+      <label className={props.small ? "custom-select-small" : "custom-select"}>
         <select
-          className="text-base font-Montserrat pt-8 pb-4 text-black"
+          className={props.small ? smallStyle : regularStyle}
           // disabled={disabled}
           // defaultValue={props.options[0].value}
           {...field}

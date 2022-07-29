@@ -7,6 +7,48 @@
   pointer-events: none;
 }
 
+.insurance-logo-aetna {
+  background-image: url("./images/insurance/aetna.png");
+  background-repeat: no-repeat;
+  background-size: 50px auto;
+  background-position: center;
+}
+
+.insurance-logo-bluecross {
+  background-image: url("./images/insurance/bcb.png");
+  background-repeat: no-repeat;
+  background-size: 32px auto;
+  background-position: center;
+}
+
+.insurance-logo-cigna {
+  background-image: url("./images/insurance/cigna.png");
+  background-repeat: no-repeat;
+  background-size: 25px auto;
+  background-position: center;
+}
+
+.insurance-logo-empire {
+  background-image: url("./images/insurance/empire.png");
+  background-repeat: no-repeat;
+  background-size: 62px auto;
+  background-position: center;
+}
+
+.insurance-logo-horizon {
+  background-image: url("./images/insurance/horizon.png");
+  background-repeat: no-repeat;
+  background-size: 62px auto;
+  background-position: center;
+}
+
+.insurance-logo-united {
+  background-image: url("./images/insurance/united-healthcare.png");
+  background-repeat: no-repeat;
+  background-size: 56px auto;
+  background-position: center;
+}
+
 .wrapper-grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -79,11 +121,15 @@
   display: none;
 }
 
-select {
+/* select {
   height: 59px;
   padding-bottom: 0 !important;
   padding-top: 25px !important;
-}
+  -webkit-appearance: none;
+  -ms-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+} */
 
 .test {
   position: fixed;
@@ -111,15 +157,17 @@ select {
 }
 
 @media screen and (max-width: 768px) {
-  .image-couple {
+  /* .image-couple {
     display: block;
     padding: 33px 33px 0;
-  }
+    z-index: 2;
+  } */
   .image-insurance {
+    width: 100%;
     display: block;
     padding: 0;
     position: absolute;
-    bottom: 0;
+    bottom: -60px;
     left: 0;
     right: 0;
   }
@@ -139,7 +187,7 @@ select {
     margin-right: 0;
   }
   .form-content-booked {
-    padding: 10px 10px;
+    /* padding: 10px 10px; */
     background: #ffffff85;
     width: auto;
     margin: 0;
@@ -196,6 +244,27 @@ select {
   /* border-top: 20px solid transparent; */
   /* margin-bottom: 5px; */
   --field-padding: 12px;
+}
+
+.custom-select-small {
+  position: relative;
+  font-size: 13px;
+  min-width: 200px;
+  --field-padding: 12px;
+}
+
+.custom-select-small .placeholder {
+  position: absolute;
+  left: 20px;
+  width: calc(100% - (var(--field-padding) * 2));
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-family: "Montserrat", sans-serif;
+  top: -20px;
+  line-height: 100%;
+  color: #74777f;
+  transition: top 0.3s ease, color 0.3s ease, font-size 0.3s ease;
 }
 
 .custom-field input {
@@ -294,9 +363,31 @@ input:checked + span {
   .couple-xs {
     background-image: url("./images/couple-xs.png");
     background-repeat: no-repeat;
-    background-size: 90% auto;
+    background-size: 85% auto;
     background-position: bottom;
+    z-index: 10;
   }
+
+  .image-couple {
+    width: 80%;
+    display: block;
+    padding: 0;
+    position: absolute;
+    bottom: 0px;
+    left: 40px;
+    right: 0;
+    /* display: block;
+    padding: 33px 33px 0;
+    z-index: 2; */
+  }
+
+  /* .bg-image-couple {
+    background-image: url("./images/couple-lg.png");
+    background-repeat: no-repeat;
+    background-size: 47% auto;
+    background-position: right 0px bottom;
+    height: 100vh;
+  } */
 
   .man-phone-xs {
     background-image: url("./images/man-phone.png");
@@ -319,6 +410,47 @@ input:checked + span {
     background-repeat: no-repeat;
     background-size: 210% auto;
     background-position: bottom -300px right -350px;
+  }
+
+  .credit-card-xs-bg {
+    width: 100%;
+    display: block;
+    padding: 0;
+    position: absolute;
+    bottom: -36px;
+    left: 0;
+    right: 0;
+  }
+
+  .woman-phone-xs-bg {
+    /* width: 100%; */
+    /* height: 50%; */
+    width: 57%;
+    display: block;
+    padding: 0;
+    position: absolute;
+    bottom: 0px;
+    /* left: 0; */
+    right: -10px;
+  }
+
+  .serious-man-xs-bg {
+    /* width: 100%; */
+    /* height: 50%; */
+    width: 62%;
+    display: block;
+    padding: 0;
+    position: absolute;
+    bottom: 20px;
+    /* left: 0; */
+    right: 0px;
+  }
+
+  .bg-image-booked {
+    background-image: url("./images/booked-women.png");
+    background-repeat: no-repeat;
+    background-size: auto 80%;
+    background-position: right -400px bottom 200px;
   }
 
 }
@@ -347,6 +479,18 @@ input:checked + span {
 }
 
 @media (min-width: 1024px) {
+
+  .serious-man-xs-bg {
+    display: none;
+  }
+
+  .serious-man-bg {
+    background-image: url("./images/serious-black-man-lg.png");
+    background-repeat: no-repeat;
+    background-size: 50% auto;
+    background-position: bottom left 20px;
+  }
+
   .serious-man-lg {
     background-image: none;
   }

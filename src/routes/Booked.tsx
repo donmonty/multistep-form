@@ -29,13 +29,13 @@ export default function Booked() {
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-screen">
       <Header />
-      <div className="h-full bg-image-booked lg:h-fit bg-figGray-300 flex flex-col justify-start py-3 px-3 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end">
+      <div className="h-full bg-image-booked lg:h-fit bg-figGray-300 flex flex-col justify-start py-3 px-2 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-end">
         {/* Image container */}
         {/* <div className="lg:flex lg:flex-col lg:justify-end man-phone-lg lg:min-h-[640px] lg:min-w-[535px]"></div> */}
 
         {/* White area */}
-        <div className="bg-white/95 md:bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] form-content-booked">
-          <div className="flex flex-col py-10 px-10 lg:py-12 lg:px-16">
+        <div className="bg-white/95 p-0 md:bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[630px] form-content-booked">
+          <div className="flex flex-col pt-20 pb-10 px-10 lg:py-12 lg:px-16">
             <h1 className="text-4xl mb-7 tracking-wide font-Playfair">
               Your discovery call has been booked
             </h1>

@@ -116,7 +116,7 @@ export default function PolicyInfo() {
   return (
     <div className="relative bg-figGray-300 h-fit lg:h-fit">
       <Header />
-      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-10 lg:flex-row lg:justify-center">
+      <div className="h-full lg:h-fit bg-figGray-300 flex flex-col justify-start py-3 px-2 md:mt-4 lg:px-8 lg:pb-10 lg:flex-row lg:justify-center">
 
         {/* Image container */}
         <div className="lg:flex lg:flex-col lg:justify-end insurance-card-lg lg:min-h-[640px] lg:min-w-[420px]"></div>
@@ -129,7 +129,7 @@ export default function PolicyInfo() {
 
           {!loading && (
             <>
-              <p className="md:inline-block pl-2 mb-8 font-CapriSans text-black tracking-widest lg:ml-0">Are you the policy holder?</p>
+              <p className="md:inline-block mb-4 font-CapriSans text-black tracking-wider lg:ml-0">Are you the policy holder?</p>
               <RadioGroup
                 name="isPolicyHolder"
                 label="Are you the policy holder?"
@@ -146,8 +146,8 @@ export default function PolicyInfo() {
             {isPolicyHolderVisible ? (
               <div className="grid grid-cols-1 gap-y-4 gap-x-4 lg:grid-cols-8 lg:gap-x-2 place-items-stretch">
 
-                <div className="w-full pb-2 mb-2 border-b border-figGray-300 lg:col-span-8">
-                  <p className="text-xl font-bold font-Montserrat">About the Policy Holder</p>
+                <div className="xs:hidden md:block w-full pb-2 mb-2 border-b border-figGray-300 lg:col-span-8">
+                  <p className="xs:hidden md:block text-xl font-bold font-Montserrat">About the Policy Holder</p>
                 </div>
 
                 <div className="lg:col-span-4">
@@ -206,7 +206,7 @@ export default function PolicyInfo() {
                     <span>Uploading image...</span>
                   </div>
                 ): (
-                  <div className="lg:col-span-4">
+                  <div className="lg:col-span-4 mt-2">
                     <ImageUploadField
                       label="Upload front of the card"
                       name="insuranceCardFront"

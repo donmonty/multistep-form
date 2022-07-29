@@ -43,12 +43,17 @@ export default function YourDetails() {
     "flex mt-0 lg:mt-0 justify-center py-3 px-4 border-2 border-figOrange-700 shadow-sm text-sm font-Montserrat font-semibold text-white tracking-widest bg-figOrange-700 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full disabled:bg-gray-300 self-center";
 
   return (
-    <div className="relative bg-figGray-300 h-fit md:h-screen">
+    <div className="relative bg-figGray-300 h-fit md:h-screen md:pb-0">
+
+      {/* Couple overlay - mobile */}
+      <div className="w-full h-full couple-xs"></div>
+
       <Header />
-      <div className="h-full bg-image-couple lg:h-fit bg-figGray-300 flex flex-col justify-start py-5 px-5 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-left">
+      <div className="h-full bg-image-couple lg:h-fit bg-none flex flex-col justify-start pt-3 pb-4 px-2 md:mt-4 lg:px-8 lg:pb-0 lg:flex-row lg:justify-left">
+
         {/* White area */}
         <div className="bg-white lg:mt-16 lg:mb-16 min-h-[500px] lg:min-w-[720px] lg:max-w-[720px] form-content">
-          <div className="flex flex-col pt-14  px-10 lg:pt-12 lg:pb-12 lg:px-20">
+          <div className="flex flex-col pt-14 pb-56  px-10 lg:pt-12 lg:pb-12 lg:px-20">
             <p className="mb-5 font-CapriSans text-figGray-600 lg:text-xl">
               {`Step ${stepNumber} of 5`}
             </p>
@@ -118,12 +123,19 @@ export default function YourDetails() {
               </button>
             </div>
           </div>
+
           {/* Image container */}
           <div>
             <img className="image-couple" src={ImageCouple} alt="" />
           </div>
+
         </div>
       </div>
+
+      {/* <div className="fixed bottom-0">
+        <img className="image-couple" src={ImageCouple} alt="" />
+      </div> */}
+
     </div>
   );
 }
